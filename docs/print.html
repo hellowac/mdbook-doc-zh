@@ -221,7 +221,7 @@ cargo build --release
 <p>它将尝试解析您的<code>SUMMARY.md</code>文件以了解您的书的结构并获取相应的文件。
 请注意，在 <code>SUMMARY.md</code> 中提到但不存在的文件将会自动创建。</p>
 <p>为方便起见，渲染的输出将保持与源相同的目录结构。 大量的books在渲染时将保持结构化。</p>
-<h2 id="指定一个目录"><a class="header" href="#指定一个目录">指定一个目录</a></h2>
+<h2 id="指定目录-1"><a class="header" href="#指定目录-1">指定目录</a></h2>
 <p><code>build</code> 命令可以将目录作为参数用作书的根目录而不是当前工作目录。</p>
 <pre><code class="language-bash">mdbook build path/to/book
 </code></pre>
@@ -229,140 +229,81 @@ cargo build --release
 <p>当您使用 <code>--open</code> (<code>-o</code>) 标志时，mdbook 在构建后, 将在你默认的 Web 浏览器中打开渲染的books。</p>
 <h2 id="--dest-dir"><a class="header" href="#--dest-dir">--dest-dir</a></h2>
 <p><code>--dest-dir</code> (<code>-d</code>) 选项允许您更改书籍的输出目录。 相对路径是相对于书的根目录解释的。 如果未指定，它将默认为 <code>book.toml</code> 中 <code>build.build-dir</code> 键的值，或为 <code>./book</code>。</p>
-<p>The <code>--dest-dir</code> (<code>-d</code>) option allows you to change the output directory for the
-book. Relative paths are interpreted relative to the book's root directory. If
-not specified it will default to the value of the <code>build.build-dir</code> key in
-<code>book.toml</code>, or to <code>./book</code>.</p>
 <hr />
-<p><em><strong>Note:</strong></em> <em>The build command copies all files (excluding files with <code>.md</code> extension) from the source directory
-into the build directory.</em></p>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="the-watch-command"><a class="header" href="#the-watch-command">The watch command</a></h1>
-<p>The <code>watch</code> command is useful when you want your book to be rendered on every
-file change. You could repeatedly issue <code>mdbook build</code> every time a file is
-changed. But using <code>mdbook watch</code> once will watch your files and will trigger a
-build automatically whenever you modify a file; this includes re-creating
-deleted files still mentioned in <code>SUMMARY.md</code>!</p>
-<h4 id="specify-a-directory"><a class="header" href="#specify-a-directory">Specify a directory</a></h4>
-<p>The <code>watch</code> command can take a directory as an argument to use as the book's
-root instead of the current working directory.</p>
+<p><em><strong>注意:</strong></em> <em>build 命令将所有文件（不包括扩展名为 <code>.md</code> 的文件）从源目录复制到 <code>build</code> 目录中。</em></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="watch-命令"><a class="header" href="#watch-命令">watch 命令</a></h1>
+<p>当您希望在每次文件更改时呈现您的书时， <code>watch</code> 命令很有用。 每次更改文件时，您都可以重复发出 <code>mdbook build</code>。 但是使用 <code>mdbook watch</code> 将监视您的文件，并在您修改文件时自动触发构建； 这包括重新创建已删除的但在<code>SUMMARY.md</code>中但仍然提到的文件！</p>
+<h2 id="指定目录-2"><a class="header" href="#指定目录-2">指定目录</a></h2>
+<p><code>watch</code> 命令可以将目录作为参数用作书的根目录而不是当前工作目录。</p>
 <pre><code class="language-bash">mdbook watch path/to/book
 </code></pre>
-<h4 id="--open-1"><a class="header" href="#--open-1">--open</a></h4>
-<p>When you use the <code>--open</code> (<code>-o</code>) option, mdbook will open the rendered book in
-your default web browser.</p>
-<h4 id="--dest-dir-1"><a class="header" href="#--dest-dir-1">--dest-dir</a></h4>
-<p>The <code>--dest-dir</code> (<code>-d</code>) option allows you to change the output directory for the
-book. Relative paths are interpreted relative to the book's root directory. If
-not specified it will default to the value of the <code>build.build-dir</code> key in
-<code>book.toml</code>, or to <code>./book</code>.</p>
-<h4 id="specify-exclude-patterns"><a class="header" href="#specify-exclude-patterns">Specify exclude patterns</a></h4>
-<p>The <code>watch</code> command will not automatically trigger a build for files listed in
-the <code>.gitignore</code> file in the book root directory. The <code>.gitignore</code> file may
-contain file patterns described in the <a href="https://git-scm.com/docs/gitignore">gitignore
-documentation</a>. This can be useful for
-ignoring temporary files created by some editors.</p>
-<p><em>Note: Only <code>.gitignore</code> from book root directory is used. Global
-<code>$HOME/.gitignore</code> or <code>.gitignore</code> files in parent directories are not used.</em></p>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="the-serve-command"><a class="header" href="#the-serve-command">The serve command</a></h1>
-<p>The serve command is used to preview a book by serving it via HTTP at
-<code>localhost:3000</code> by default: </p>
+<h2 id="--open-1"><a class="header" href="#--open-1">--open</a></h2>
+<p>当您使用 <code>--open</code> (<code>-o</code>) 选项时，mdbook 将在您的默认 Web 浏览器中打开渲染的书籍。</p>
+<h2 id="--dest-dir-1"><a class="header" href="#--dest-dir-1">--dest-dir</a></h2>
+<p><code>--dest-dir</code> (<code>-d</code>) 选项允许您更改书籍的输出目录。 相对路径是相对于书的根目录解释的。 如果未指定，它将默认为 <code>book.toml</code> 中 <code>build.build-dir</code> 键的值，或为 <code>./book</code>。</p>
+<h2 id="指定排除模式"><a class="header" href="#指定排除模式">指定排除模式</a></h2>
+<p><code>watch</code> 命令不会自动为 <code>book</code> 根目录中的 <code>.gitignore</code> 文件中列出的文件触发构建。 <code>.gitignore</code> 文件可能包含 <a href="https://git-scm.com/docs/gitignore">gitignore
+文档</a> 文档中描述的文件模式。 这对于忽略某些编辑器创建的临时文件很有用。</p>
+<p><em><strong>注意</strong>: 仅使用书籍根目录中的 <code>.gitignore</code>文件。 全局的 <code>$HOME/.gitignore</code> 或 父目录中的<code>.gitignore</code> 文件则不会被使用。</em></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="serve-命令"><a class="header" href="#serve-命令">serve 命令</a></h1>
+<p>默认情况下， <code>serve</code> 命令用于通过 HTTP 在 <code>localhost:3000</code> 提供服务来预览一本书：</p>
 <pre><code class="language-bash">mdbook serve
 </code></pre>
-<p>The <code>serve</code> command  watches the book's <code>src</code> directory for
-changes, rebuilding the book and refreshing clients for each change; this includes
-re-creating deleted files still mentioned in <code>SUMMARY.md</code>! A websocket
-connection is used to trigger the client-side refresh.</p>
-<p><em><strong>Note:</strong></em> <em>The <code>serve</code> command is for testing a book's HTML output, and is not
-intended to be a complete HTTP server for a website.</em></p>
-<h4 id="specify-a-directory-1"><a class="header" href="#specify-a-directory-1">Specify a directory</a></h4>
-<p>The <code>serve</code> command can take a directory as an argument to use as the book's
-root instead of the current working directory.</p>
+<p><code>serve</code> 命令监视书的 <code>src</code> 目录的变化，为每次变化重建书和刷新客户端； 这包括重新创建已删除但仍然在SUMMARY.md中提到的文件！ <code>websocket</code> 连接用于触发客户端刷新。</p>
+<p><em><strong>注意:</strong></em> <em><code>serve</code> 命令用于测试一本书的 HTML 输出，并不打算成为网站的完整 HTTP 服务器。</em></p>
+<h2 id="指定目录-3"><a class="header" href="#指定目录-3">指定目录</a></h2>
+<p><code>serve</code> 命令可以将目录作为参数用作书的根目录而不是当前工作目录。</p>
 <pre><code class="language-bash">mdbook serve path/to/book
 </code></pre>
-<h3 id="server-options"><a class="header" href="#server-options">Server options</a></h3>
-<p>The <code>serve</code> hostname defaults to <code>localhost</code>, and the port defaults to <code>3000</code>. Either option can be specified on the command line:</p>
+<h3 id="server-可选项"><a class="header" href="#server-可选项">Server 可选项</a></h3>
+<p><code>serve</code> 主机名默认为 <code>localhost</code>，端口默认为 <code>3000</code>。 可以在命令行上指定任一选项：</p>
 <pre><code class="language-bash">mdbook serve path/to/book -p 8000 -n 127.0.0.1 
 </code></pre>
 <h4 id="--open-2"><a class="header" href="#--open-2">--open</a></h4>
-<p>When you use the <code>--open</code> (<code>-o</code>) flag, mdbook will open the book in your
-default web browser after starting the server.</p>
+<p>当您使用 <code>--open</code> (<code>-o</code>) 标志时，mdbook 将在启动服务器后在您的默认 Web 浏览器中打开该书。</p>
 <h4 id="--dest-dir-2"><a class="header" href="#--dest-dir-2">--dest-dir</a></h4>
-<p>The <code>--dest-dir</code> (<code>-d</code>) option allows you to change the output directory for the
-book. Relative paths are interpreted relative to the book's root directory. If
-not specified it will default to the value of the <code>build.build-dir</code> key in
-<code>book.toml</code>, or to <code>./book</code>.</p>
-<h4 id="specify-exclude-patterns-1"><a class="header" href="#specify-exclude-patterns-1">Specify exclude patterns</a></h4>
-<p>The <code>serve</code> command will not automatically trigger a build for files listed in
-the <code>.gitignore</code> file in the book root directory. The <code>.gitignore</code> file may
-contain file patterns described in the <a href="https://git-scm.com/docs/gitignore">gitignore
-documentation</a>. This can be useful for
-ignoring temporary files created by some editors.</p>
-<p><em><strong>Note:</strong></em> <em>Only the <code>.gitignore</code> from the book root directory is used. Global
-<code>$HOME/.gitignore</code> or <code>.gitignore</code> files in parent directories are not used.</em></p>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="the-test-command"><a class="header" href="#the-test-command">The test command</a></h1>
-<p>When writing a book, you sometimes need to automate some tests. For example,
-<a href="https://doc.rust-lang.org/stable/book/">The Rust Programming Book</a> uses a lot
-of code examples that could get outdated. Therefore it is very important for
-them to be able to automatically test these code examples.</p>
-<p>mdBook supports a <code>test</code> command that will run all available tests in a book. At
-the moment, only rustdoc tests are supported, but this may be expanded upon in
-the future.</p>
-<h4 id="disable-tests-on-a-code-block"><a class="header" href="#disable-tests-on-a-code-block">Disable tests on a code block</a></h4>
-<p>rustdoc doesn't test code blocks which contain the <code>ignore</code> attribute:</p>
-<pre><code>```rust,ignore
-fn main() {}
-```
+<p><code>--dest-dir</code> (<code>-d</code>) 选项允许您更改书籍的输出目录。 相对路径是相对于书的根目录解释的。 如果未指定，它将默认为 <code>book.toml</code> 中 <code>build.build-dir</code> 键的值，或为 <code>./book</code>。</p>
+<h4 id="指定排除模式-1"><a class="header" href="#指定排除模式-1">指定排除模式</a></h4>
+<p><code>watch</code> 命令不会自动为 <code>book</code> 根目录中的 <code>.gitignore</code> 文件中列出的文件触发构建。 <code>.gitignore</code> 文件可能包含 <a href="https://git-scm.com/docs/gitignore">gitignore
+文档</a> 文档中描述的文件模式。 这对于忽略某些编辑器创建的临时文件很有用。</p>
+<p><em><strong>注意</strong>: 仅使用书籍根目录中的 <code>.gitignore</code>文件。 全局的 <code>$HOME/.gitignore</code> 或 父目录中的<code>.gitignore</code> 文件则不会被使用。</em></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="test-命令"><a class="header" href="#test-命令">test 命令</a></h1>
+<p>写书时，有时需要自动化一些测试。 例如，<a href="https://doc.rust-lang.org/stable/book/">The Rust Programming Book</a> 使用了许多可能会过时的代码示例。 因此，能够自动测试这些代码示例对他们来说非常重要。</p>
+<p>mdBook 支持一个<code>test</code>命令，该命令将运行书中所有可用的测试。 目前，仅支持 rustdoc 测试，但将来可能会扩展。</p>
+<h2 id="在一个代码块上禁用测试"><a class="header" href="#在一个代码块上禁用测试">在一个代码块上禁用测试</a></h2>
+<p>rustdoc 不测试包含 <code>ignore</code> 属性的代码块：</p>
+<pre><code class="language-rust ignore">fn main() {}
 </code></pre>
-<p>rustdoc also doesn't test code blocks which specify a language other than Rust:</p>
-<pre><code>```markdown
-**Foo**: _bar_
-```
+<p>指定非 Rust 语言的代码块 rustdoc 也不测试：</p>
+<pre><code class="language-markdown">**Foo**: _bar_
 </code></pre>
-<p>rustdoc <em>does</em> test code blocks which have no language specified:</p>
-<pre><code>```
-This is going to cause an error!
-```
+<p>rustdoc 会测试没有指定语言的代码块：</p>
+<pre><code>This is going to cause an error!
 </code></pre>
-<h4 id="specify-a-directory-2"><a class="header" href="#specify-a-directory-2">Specify a directory</a></h4>
-<p>The <code>test</code> command can take a directory as an argument to use as the book's root
-instead of the current working directory.</p>
+<h2 id="指定目录-4"><a class="header" href="#指定目录-4">指定目录</a></h2>
+<p><code>test</code> 命令可以将目录作为参数用作书的根目录而不是当前工作目录。</p>
 <pre><code class="language-bash">mdbook test path/to/book
 </code></pre>
-<h4 id="--library-path"><a class="header" href="#--library-path">--library-path</a></h4>
-<p>The <code>--library-path</code> (<code>-L</code>) option allows you to add directories to the library
-search path used by <code>rustdoc</code> when it builds and tests the examples. Multiple
-directories can be specified with multiple options (<code>-L foo -L bar</code>) or with a
-comma-delimited list (<code>-L foo,bar</code>). The path should point to the Cargo 
-<a href="https://doc.rust-lang.org/cargo/guide/build-cache.html">build cache</a> <code>deps</code> directory that
-contains the build output of your project. For example, if your Rust project's book is in a directory
-named <code>my-book</code>, the following command would include the crate's dependencies when running <code>test</code>:</p>
+<h2 id="--library-path"><a class="header" href="#--library-path">--library-path</a></h2>
+<p><code>--library-path</code> (<code>-L</code>) 选项允许您将目录添加到 <code>rustdoc</code> 在构建和测试示例时使用的库搜索路径。 可以使用多个选项 (<code>-L foo -L bar</code>) 或逗号分隔列表 (<code>-L foo,bar</code>) 指定多个目录。 该路径应指向包含项目构建输出的 Cargo <a href="https://doc.rust-lang.org/cargo/guide/build-cache.html" title="build cache">构建缓存</a> deps 目录。 例如，如果您的 Rust 项目的 book 位于名为 <code>my-book</code> 的目录中，则以下命令将在运行<code>test</code>时包含 crate 的依赖项：</p>
 <pre><code class="language-shell">mdbook test my-book -L target/debug/deps/
 </code></pre>
-<p>See the <code>rustdoc</code> command-line <a href="https://doc.rust-lang.org/rustdoc/command-line-arguments.html#-l--library-path-where-to-look-for-dependencies">documentation</a>
-for more information.</p>
-<h4 id="--dest-dir-3"><a class="header" href="#--dest-dir-3">--dest-dir</a></h4>
-<p>The <code>--dest-dir</code> (<code>-d</code>) option allows you to change the output directory for the
-book. Relative paths are interpreted relative to the book's root directory. If
-not specified it will default to the value of the <code>build.build-dir</code> key in
-<code>book.toml</code>, or to <code>./book</code>.</p>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="the-clean-command"><a class="header" href="#the-clean-command">The clean command</a></h1>
-<p>The clean command is used to delete the generated book and any other build
-artifacts.</p>
+<p>有关更多信息，请参阅 <code>rustdoc</code> 命令行<a href="https://doc.rust-lang.org/rustdoc/command-line-arguments.html#-l--library-path-where-to-look-for-dependencies" title="rustdoc 命令行文档">文档</a>。</p>
+<h2 id="--dest-dir-3"><a class="header" href="#--dest-dir-3">--dest-dir</a></h2>
+<p><code>--dest-dir</code> (<code>-d</code>) 选项允许您更改书籍的输出目录。 相对路径是相对于书的根目录解释的。 如果未指定，它将默认为 <code>book.toml</code> 中 <code>build.build-dir</code> 键的值，或为 <code>./book</code>。</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="clean-命令"><a class="header" href="#clean-命令">clean 命令</a></h1>
+<p>clean 命令用于删除生成的书和任何其他构建工件。</p>
 <pre><code class="language-bash">mdbook clean
 </code></pre>
-<h4 id="specify-a-directory-3"><a class="header" href="#specify-a-directory-3">Specify a directory</a></h4>
-<p>The <code>clean</code> command can take a directory as an argument to use as the book's
-root instead of the current working directory.</p>
+<h2 id="指定目录-5"><a class="header" href="#指定目录-5">指定目录</a></h2>
+<p><code>clean</code> 命令可以将目录作为参数用作书的根目录而不是当前工作目录。</p>
 <pre><code class="language-bash">mdbook clean path/to/book
 </code></pre>
-<h4 id="--dest-dir-4"><a class="header" href="#--dest-dir-4">--dest-dir</a></h4>
-<p>The <code>--dest-dir</code> (<code>-d</code>) option allows you to override the book's output
-directory, which will be deleted by this command. Relative paths are interpreted
-relative to the book's root directory. If not specified it will default to the
-value of the <code>build.build-dir</code> key in <code>book.toml</code>, or to <code>./book</code>.</p>
+<h2 id="--dest-dir-4"><a class="header" href="#--dest-dir-4">--dest-dir</a></h2>
+<p><code>--dest-dir</code> (<code>-d</code>) 选项允许您更改书籍的输出目录。 相对路径是相对于书的根目录解释的。 如果未指定，它将默认为 <code>book.toml</code> 中 <code>build.build-dir</code> 键的值，或为 <code>./book</code>。</p>
 <pre><code class="language-bash">mdbook clean --dest-dir=path/to/book
 </code></pre>
-<p><code>path/to/book</code> could be absolute or relative.</p>
+<p><code>path/to/book</code> 可以是绝对路径或相对路径。</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="format"><a class="header" href="#format">Format</a></h1>
 <p>In this section you will learn how to:</p>
 <ul>
@@ -2189,7 +2130,7 @@ chapter</a>.</p>
 and generate the missing files according to the paths used in the <code>SUMMARY.md</code>.
 This allows you to think and create the whole structure of your book and then
 let mdBook generate it for you.</p>
-<h4 id="specify-a-directory-4"><a class="header" href="#specify-a-directory-4">Specify a directory</a></h4>
+<h4 id="specify-a-directory"><a class="header" href="#specify-a-directory">Specify a directory</a></h4>
 <p>The <code>init</code> command can take a directory as an argument to use as the book's root
 instead of the current working directory.</p>
 <pre><code class="language-bash">mdbook init path/to/book
@@ -2216,7 +2157,7 @@ book and fetch the corresponding files. Note that files mentioned in <code>SUMMA
 but not present will be created.</p>
 <p>The rendered output will maintain the same directory structure as the source for
 convenience. Large books will therefore remain structured when rendered.</p>
-<h4 id="specify-a-directory-5"><a class="header" href="#specify-a-directory-5">Specify a directory</a></h4>
+<h4 id="specify-a-directory-1"><a class="header" href="#specify-a-directory-1">Specify a directory</a></h4>
 <p>The <code>build</code> command can take a directory as an argument to use as the book's
 root instead of the current working directory.</p>
 <pre><code class="language-bash">mdbook build path/to/book
@@ -2232,13 +2173,13 @@ not specified it will default to the value of the <code>build.build-dir</code> k
 <hr />
 <p><em><strong>Note:</strong></em> <em>The build command copies all files (excluding files with <code>.md</code> extension) from the source directory
 into the build directory.</em></p>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="the-watch-command-1"><a class="header" href="#the-watch-command-1">The watch command</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="the-watch-command"><a class="header" href="#the-watch-command">The watch command</a></h1>
 <p>The <code>watch</code> command is useful when you want your book to be rendered on every
 file change. You could repeatedly issue <code>mdbook build</code> every time a file is
 changed. But using <code>mdbook watch</code> once will watch your files and will trigger a
 build automatically whenever you modify a file; this includes re-creating
 deleted files still mentioned in <code>SUMMARY.md</code>!</p>
-<h4 id="specify-a-directory-6"><a class="header" href="#specify-a-directory-6">Specify a directory</a></h4>
+<h4 id="specify-a-directory-2"><a class="header" href="#specify-a-directory-2">Specify a directory</a></h4>
 <p>The <code>watch</code> command can take a directory as an argument to use as the book's
 root instead of the current working directory.</p>
 <pre><code class="language-bash">mdbook watch path/to/book
@@ -2251,7 +2192,7 @@ your default web browser.</p>
 book. Relative paths are interpreted relative to the book's root directory. If
 not specified it will default to the value of the <code>build.build-dir</code> key in
 <code>book.toml</code>, or to <code>./book</code>.</p>
-<h4 id="specify-exclude-patterns-2"><a class="header" href="#specify-exclude-patterns-2">Specify exclude patterns</a></h4>
+<h4 id="specify-exclude-patterns"><a class="header" href="#specify-exclude-patterns">Specify exclude patterns</a></h4>
 <p>The <code>watch</code> command will not automatically trigger a build for files listed in
 the <code>.gitignore</code> file in the book root directory. The <code>.gitignore</code> file may
 contain file patterns described in the <a href="https://git-scm.com/docs/gitignore">gitignore
@@ -2259,7 +2200,7 @@ documentation</a>. This can be useful for
 ignoring temporary files created by some editors.</p>
 <p><em>Note: Only <code>.gitignore</code> from book root directory is used. Global
 <code>$HOME/.gitignore</code> or <code>.gitignore</code> files in parent directories are not used.</em></p>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="the-serve-command-1"><a class="header" href="#the-serve-command-1">The serve command</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="the-serve-command"><a class="header" href="#the-serve-command">The serve command</a></h1>
 <p>The serve command is used to preview a book by serving it via HTTP at
 <code>localhost:3000</code> by default: </p>
 <pre><code class="language-bash">mdbook serve
@@ -2270,12 +2211,12 @@ re-creating deleted files still mentioned in <code>SUMMARY.md</code>! A websocke
 connection is used to trigger the client-side refresh.</p>
 <p><em><strong>Note:</strong></em> <em>The <code>serve</code> command is for testing a book's HTML output, and is not
 intended to be a complete HTTP server for a website.</em></p>
-<h4 id="specify-a-directory-7"><a class="header" href="#specify-a-directory-7">Specify a directory</a></h4>
+<h4 id="specify-a-directory-3"><a class="header" href="#specify-a-directory-3">Specify a directory</a></h4>
 <p>The <code>serve</code> command can take a directory as an argument to use as the book's
 root instead of the current working directory.</p>
 <pre><code class="language-bash">mdbook serve path/to/book
 </code></pre>
-<h3 id="server-options-1"><a class="header" href="#server-options-1">Server options</a></h3>
+<h3 id="server-options"><a class="header" href="#server-options">Server options</a></h3>
 <p>The <code>serve</code> hostname defaults to <code>localhost</code>, and the port defaults to <code>3000</code>. Either option can be specified on the command line:</p>
 <pre><code class="language-bash">mdbook serve path/to/book -p 8000 -n 127.0.0.1 
 </code></pre>
@@ -2287,7 +2228,7 @@ default web browser after starting the server.</p>
 book. Relative paths are interpreted relative to the book's root directory. If
 not specified it will default to the value of the <code>build.build-dir</code> key in
 <code>book.toml</code>, or to <code>./book</code>.</p>
-<h4 id="specify-exclude-patterns-3"><a class="header" href="#specify-exclude-patterns-3">Specify exclude patterns</a></h4>
+<h4 id="specify-exclude-patterns-1"><a class="header" href="#specify-exclude-patterns-1">Specify exclude patterns</a></h4>
 <p>The <code>serve</code> command will not automatically trigger a build for files listed in
 the <code>.gitignore</code> file in the book root directory. The <code>.gitignore</code> file may
 contain file patterns described in the <a href="https://git-scm.com/docs/gitignore">gitignore
@@ -2295,7 +2236,7 @@ documentation</a>. This can be useful for
 ignoring temporary files created by some editors.</p>
 <p><em><strong>Note:</strong></em> <em>Only the <code>.gitignore</code> from the book root directory is used. Global
 <code>$HOME/.gitignore</code> or <code>.gitignore</code> files in parent directories are not used.</em></p>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="the-test-command-1"><a class="header" href="#the-test-command-1">The test command</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="the-test-command"><a class="header" href="#the-test-command">The test command</a></h1>
 <p>When writing a book, you sometimes need to automate some tests. For example,
 <a href="https://doc.rust-lang.org/stable/book/">The Rust Programming Book</a> uses a lot
 of code examples that could get outdated. Therefore it is very important for
@@ -2303,7 +2244,7 @@ them to be able to automatically test these code examples.</p>
 <p>mdBook supports a <code>test</code> command that will run all available tests in a book. At
 the moment, only rustdoc tests are supported, but this may be expanded upon in
 the future.</p>
-<h4 id="disable-tests-on-a-code-block-1"><a class="header" href="#disable-tests-on-a-code-block-1">Disable tests on a code block</a></h4>
+<h4 id="disable-tests-on-a-code-block"><a class="header" href="#disable-tests-on-a-code-block">Disable tests on a code block</a></h4>
 <p>rustdoc doesn't test code blocks which contain the <code>ignore</code> attribute:</p>
 <pre><code>```rust,ignore
 fn main() {}
@@ -2319,7 +2260,7 @@ fn main() {}
 This is going to cause an error!
 ```
 </code></pre>
-<h4 id="specify-a-directory-8"><a class="header" href="#specify-a-directory-8">Specify a directory</a></h4>
+<h4 id="specify-a-directory-4"><a class="header" href="#specify-a-directory-4">Specify a directory</a></h4>
 <p>The <code>test</code> command can take a directory as an argument to use as the book's root
 instead of the current working directory.</p>
 <pre><code class="language-bash">mdbook test path/to/book
@@ -2341,12 +2282,12 @@ for more information.</p>
 book. Relative paths are interpreted relative to the book's root directory. If
 not specified it will default to the value of the <code>build.build-dir</code> key in
 <code>book.toml</code>, or to <code>./book</code>.</p>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="the-clean-command-1"><a class="header" href="#the-clean-command-1">The clean command</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="the-clean-command"><a class="header" href="#the-clean-command">The clean command</a></h1>
 <p>The clean command is used to delete the generated book and any other build
 artifacts.</p>
 <pre><code class="language-bash">mdbook clean
 </code></pre>
-<h4 id="specify-a-directory-9"><a class="header" href="#specify-a-directory-9">Specify a directory</a></h4>
+<h4 id="specify-a-directory-5"><a class="header" href="#specify-a-directory-5">Specify a directory</a></h4>
 <p>The <code>clean</code> command can take a directory as an argument to use as the book's
 root instead of the current working directory.</p>
 <pre><code class="language-bash">mdbook clean path/to/book

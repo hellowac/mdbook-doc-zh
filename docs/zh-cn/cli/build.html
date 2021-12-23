@@ -149,7 +149,7 @@
 <p>它将尝试解析您的<code>SUMMARY.md</code>文件以了解您的书的结构并获取相应的文件。
 请注意，在 <code>SUMMARY.md</code> 中提到但不存在的文件将会自动创建。</p>
 <p>为方便起见，渲染的输出将保持与源相同的目录结构。 大量的books在渲染时将保持结构化。</p>
-<h2 id="指定一个目录"><a class="header" href="#指定一个目录">指定一个目录</a></h2>
+<h2 id="指定目录"><a class="header" href="#指定目录">指定目录</a></h2>
 <p><code>build</code> 命令可以将目录作为参数用作书的根目录而不是当前工作目录。</p>
 <pre><code class="language-bash">mdbook build path/to/book
 </code></pre>
@@ -157,13 +157,8 @@
 <p>当您使用 <code>--open</code> (<code>-o</code>) 标志时，mdbook 在构建后, 将在你默认的 Web 浏览器中打开渲染的books。</p>
 <h2 id="--dest-dir"><a class="header" href="#--dest-dir">--dest-dir</a></h2>
 <p><code>--dest-dir</code> (<code>-d</code>) 选项允许您更改书籍的输出目录。 相对路径是相对于书的根目录解释的。 如果未指定，它将默认为 <code>book.toml</code> 中 <code>build.build-dir</code> 键的值，或为 <code>./book</code>。</p>
-<p>The <code>--dest-dir</code> (<code>-d</code>) option allows you to change the output directory for the
-book. Relative paths are interpreted relative to the book's root directory. If
-not specified it will default to the value of the <code>build.build-dir</code> key in
-<code>book.toml</code>, or to <code>./book</code>.</p>
 <hr />
-<p><em><strong>Note:</strong></em> <em>The build command copies all files (excluding files with <code>.md</code> extension) from the source directory
-into the build directory.</em></p>
+<p><em><strong>注意:</strong></em> <em>build 命令将所有文件（不包括扩展名为 <code>.md</code> 的文件）从源目录复制到 <code>build</code> 目录中。</em></p>
 
                     </main>
 
