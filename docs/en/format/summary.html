@@ -143,6 +143,156 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="summarymd"><a class="header" href="#summarymd">SUMMARY.md</a></h1>
+<p>The summary file is used by mdBook to know what chapters to include, in what
+order they should appear, what their hierarchy is and where the source files
+are. Without this file, there is no book.</p>
+<p>This markdown file must be named <code>SUMMARY.md</code>. Its formatting
+is very strict and must follow the structure outlined below to allow for easy
+parsing. Any element not specified below, be it formatting or textual, is likely
+to be ignored at best, or may cause an error when attempting to build the book.</p>
+<h3 id="structure"><a class="header" href="#structure">Structure</a></h3>
+<ol>
+<li>
+<p><em><strong>Title</strong></em> - While optional, it's common practice to begin with a title, generally <code
+   class="language-markdown"># Summary</code>. This is ignored by the parser however, and
+can be omitted.</p>
+<pre><code class="language-markdown"># Summary
+</code></pre>
+</li>
+<li>
+<p><em><strong>Prefix Chapter</strong></em> - Before the main numbered chapters, prefix chapters can be added
+that will not be numbered. This is useful for forewords,
+introductions, etc. There are, however, some constraints. Prefix chapters cannot be
+nested; they should all be on the root level. And you cannot add
+prefix chapters once you have added numbered chapters.</p>
+<pre><code class="language-markdown">[A Prefix Chapter](relative/path/to/markdown.md)
+
+- [First Chapter](relative/path/to/markdown2.md)
+</code></pre>
+</li>
+<li>
+<p><em><strong>Part Title</strong></em> - Headers can be used as a title for the following numbered
+chapters. This can be used to logically separate different sections
+of the book. The title is rendered as unclickable text.
+Titles are optional, and the numbered chapters can be broken into as many
+parts as desired.</p>
+<pre><code class="language-markdown"># My Part Title
+
+- [First Chapter](relative/path/to/markdown.md)
+</code></pre>
+</li>
+<li>
+<p><em><strong>Numbered Chapter</strong></em> - Numbered chapters outline the main content of the book
+and can be nested, resulting in a nice hierarchy
+(chapters, sub-chapters, etc.).</p>
+<pre><code class="language-markdown"># Title of Part
+
+- [First Chapter](relative/path/to/markdown.md)
+- [Second Chapter](relative/path/to/markdown2.md)
+   - [Sub Chapter](relative/path/to/markdown3.md)
+
+# Title of Another Part
+
+- [Another Chapter](relative/path/to/markdown4.md)
+</code></pre>
+<p>Numbered chapters can be denoted with either <code>-</code> or <code>*</code> (do not mix delimiters).</p>
+</li>
+<li>
+<p><em><strong>Suffix Chapter</strong></em> - Like prefix chapters, suffix chapters are unnumbered, but they come after
+numbered chapters.</p>
+<pre><code class="language-markdown">- [Last Chapter](relative/path/to/markdown.md)
+
+[Title of Suffix Chapter](relative/path/to/markdown2.md)
+</code></pre>
+</li>
+<li>
+<p><em><strong>Draft chapters</strong></em> - Draft chapters are chapters without a file and thus content.
+The purpose of a draft chapter is to signal future chapters still to be written.
+Or when still laying out the structure of the book to avoid creating the files
+while you are still changing the structure of the book a lot.
+Draft chapters will be rendered in the HTML renderer as disabled links in the table
+of contents, as you can see for the next chapter in the table of contents on the left.
+Draft chapters are written like normal chapters but without writing the path to the file.</p>
+<pre><code class="language-markdown">- [Draft Chapter]()
+</code></pre>
+</li>
+<li>
+<p><em><strong>Separators</strong></em> - Separators can be added before, in between, and after any other element. They result
+in an HTML rendered line in the built table of contents.  A separator is
+a line containing exclusively dashes and at least three of them: <code>---</code>.</p>
+<pre><code class="language-markdown"># My Part Title
+
+[A Prefix Chapter](relative/path/to/markdown.md)
+
+---
+
+- [First Chapter](relative/path/to/markdown2.md)
+</code></pre>
+</li>
+</ol>
+<h3 id="example"><a class="header" href="#example">Example</a></h3>
+<p>Below is the markdown source for the <code>SUMMARY.md</code> for this guide, with the resulting table
+of contents as rendered to the left.</p>
+<pre><code class="language-markdown"># Summar
+
+- [zh-cn](index.md)
+  - [指南](zh-cn/README.md)
+  - [命令行](zh-cn/cli/README.md)
+    - [init](zh-cn/cli/init.md)
+    - [build](zh-cn/cli/build.md)
+    - [watch](zh-cn/cli/watch.md)
+    - [serve](zh-cn/cli/serve.md)
+    - [test](zh-cn/cli/test.md)
+    - [clean](zh-cn/cli/clean.md)
+  - [格式](zh-cn/format/README.md)
+    - [SUMMARY.md](zh-cn/format/summary.md)
+    - [配置](zh-cn/format/configuration/README.md)
+      - [常规](zh-cn/format/configuration/general.md)
+      - [预处理器](zh-cn/format/configuration/preprocessors.md)
+      - [渲染](zh-cn/format/configuration/renderers.md)
+      - [环境变量](zh-cn/format/configuration/environment-variables.md)
+    - [主题](zh-cn/format/theme/README.md)
+      - [index.hbs](zh-cn/format/theme/index-hbs.md)
+      - [语法高亮](zh-cn/format/theme/syntax-highlighting.md)
+      - [编辑器](zh-cn/format/theme/editor.md)
+    - [数学公式支持](zh-cn/format/mathjax.md)
+    - [mdBook特定功能](zh-cn/format/mdbook.md)
+    - [Markdown](zh-cn/format/markdown.md)
+  - [持续集成](zh-cn/continuous-integration.md)
+  - [开发者](zh-cn/zh-cn/for_developers/README.md)
+    - [预处理器](zh-cn/for_developers/preprocessors.md)
+    - [选择后端](zh-cn/for_developers/backends.md)
+  - [贡献列表](zh-cn/misc/contributors.md)
+- [en](index.md)
+  - [Introduction](en/README.md)
+  - [Command Line Tool](en/cli/README.md)
+    - [init](en/cli/init.md)
+    - [build](en/cli/build.md)
+    - [watch](en/cli/watch.md)
+    - [serve](en/cli/serve.md)
+    - [test](en/cli/test.md)
+    - [clean](en/cli/clean.md)
+  - [Format](en/format/README.md)
+    - [SUMMARY.md](en/format/summary.md)
+      - [Draft chapter]()
+    - [Configuration](en/format/configuration/README.md)
+      - [General](en/format/configuration/general.md)
+      - [Preprocessors](en/format/configuration/preprocessors.md)
+      - [Renderers](en/format/configuration/renderers.md)
+      - [Environment Variables](en/format/configuration/environment-variables.md)
+    - [Theme](en/format/theme/README.md)
+      - [index.hbs](en/format/theme/index-hbs.md)
+      - [Syntax highlighting](en/format/theme/syntax-highlighting.md)
+      - [Editor](en/format/theme/editor.md)
+    - [MathJax Support](en/format/mathjax.md)
+    - [mdBook-specific features](en/format/mdbook.md)
+    - [Markdown](en/format/markdown.md)
+  - [Continuous Integration](en/continuous-integration.md)
+  - [For Developers](en/for_developers/README.md)
+    - [Preprocessors](en/for_developers/preprocessors.md)
+    - [Alternative Backends](en/for_developers/backends.md)
+  - [Contributors](en/misc/contributors.md)
+</code></pre>
 
                     </main>
 

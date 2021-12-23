@@ -143,6 +143,41 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="command-line-tool"><a class="header" href="#command-line-tool">Command Line Tool</a></h1>
+<p>mdBook can be used either as a command line tool or a <a href="https://crates.io/crates/mdbook">Rust
+crate</a>. Let's focus on the command line tool
+capabilities first.</p>
+<h2 id="install-from-binaries"><a class="header" href="#install-from-binaries">Install From Binaries</a></h2>
+<p>Precompiled binaries are provided for major platforms on a best-effort basis.
+Visit <a href="https://github.com/rust-lang/mdBook/releases">the releases page</a>
+to download the appropriate version for your platform.</p>
+<h2 id="install-from-source"><a class="header" href="#install-from-source">Install From Source</a></h2>
+<p>mdBook can also be installed by compiling the source code on your local machine.</p>
+<h3 id="pre-requisite"><a class="header" href="#pre-requisite">Pre-requisite</a></h3>
+<p>mdBook is written in <strong><a href="https://www.rust-lang.org/">Rust</a></strong> and therefore needs
+to be compiled with <strong>Cargo</strong>. If you haven't already installed Rust, please go
+ahead and <a href="https://www.rust-lang.org/tools/install">install it</a> now.</p>
+<h3 id="install-cratesio-version"><a class="header" href="#install-cratesio-version">Install Crates.io version</a></h3>
+<p>Installing mdBook is relatively easy if you already have Rust and Cargo
+installed. You just have to type this snippet in your terminal:</p>
+<pre><code class="language-bash">cargo install mdbook
+</code></pre>
+<p>This will fetch the source code for the latest release from
+<a href="https://crates.io/">Crates.io</a> and compile it. You will have to add Cargo's
+<code>bin</code> directory to your <code>PATH</code>.</p>
+<p>Run <code>mdbook help</code> in your terminal to verify if it works. Congratulations, you
+have installed mdBook!</p>
+<h3 id="install-git-version"><a class="header" href="#install-git-version">Install Git version</a></h3>
+<p>The <strong><a href="https://github.com/rust-lang/mdBook">git version</a></strong> contains all
+the latest bug-fixes and features, that will be released in the next version on
+<strong>Crates.io</strong>, if you can't wait until the next release. You can build the git
+version yourself. Open your terminal and navigate to the directory of you
+choice. We need to clone the git repository and then build it with Cargo.</p>
+<pre><code class="language-bash">git clone --depth=1 https://github.com/rust-lang/mdBook.git
+cd mdBook
+cargo build --release
+</code></pre>
+<p>The executable <code>mdbook</code> will be in the <code>./target/release</code> folder, this should be
+added to the path.</p>
 
                     </main>
 

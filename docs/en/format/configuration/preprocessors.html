@@ -142,7 +142,61 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="preprocessors"><a class="header" href="#preprocessors">Preprocessors</a></h1>
+                        <h1 id="configuring-preprocessors"><a class="header" href="#configuring-preprocessors">Configuring Preprocessors</a></h1>
+<p>The following preprocessors are available and included by default:</p>
+<ul>
+<li><code>links</code>: Expand the <code>{{ #playground }}</code>, <code>{{ #include }}</code>, and <code>{{ #rustdoc_include }}</code> handlebars
+helpers in a chapter to include the contents of a file.</li>
+<li><code>index</code>: Convert all chapter files named <code>README.md</code> into <code>index.md</code>. That is
+to say, all <code>README.md</code> would be rendered to an index file <code>index.html</code> in the
+rendered book.</li>
+</ul>
+<p><strong>book.toml</strong></p>
+<pre><code class="language-toml">[build]
+build-dir = &quot;build&quot;
+create-missing = false
+
+[preprocessor.links]
+
+[preprocessor.index]
+</code></pre>
+<h3 id="custom-preprocessor-configuration"><a class="header" href="#custom-preprocessor-configuration">Custom Preprocessor Configuration</a></h3>
+<p>Like renderers, preprocessor will need to be given its own table (e.g.
+<code>[preprocessor.mathjax]</code>). In the section, you may then pass extra
+configuration to the preprocessor by adding key-value pairs to the table.</p>
+<p>For example</p>
+<pre><code class="language-toml">[preprocessor.links]
+# set the renderers this preprocessor will run for
+renderers = [&quot;html&quot;]
+some_extra_feature = true
+</code></pre>
+<h4 id="locking-a-preprocessor-dependency-to-a-renderer"><a class="header" href="#locking-a-preprocessor-dependency-to-a-renderer">Locking a Preprocessor dependency to a renderer</a></h4>
+<p>You can explicitly specify that a preprocessor should run for a renderer by
+binding the two together.</p>
+<pre><code class="language-toml">[preprocessor.mathjax]
+renderers = [&quot;html&quot;]  # mathjax only makes sense with the HTML renderer
+</code></pre>
+<h3 id="provide-your-own-command"><a class="header" href="#provide-your-own-command">Provide Your Own Command</a></h3>
+<p>By default when you add a <code>[preprocessor.foo]</code> table to your <code>book.toml</code> file,
+<code>mdbook</code> will try to invoke the <code>mdbook-foo</code> executable. If you want to use a
+different program name or pass in command-line arguments, this behaviour can
+be overridden by adding a <code>command</code> field.</p>
+<pre><code class="language-toml">[preprocessor.random]
+command = &quot;python random.py&quot;
+</code></pre>
+<h3 id="require-a-certain-order"><a class="header" href="#require-a-certain-order">Require A Certain Order</a></h3>
+<p>The order in which preprocessors are run can be controlled with the <code>before</code> and <code>after</code> fields.
+For example, suppose you want your <code>linenos</code> preprocessor to process lines that may have been <code>{{#include}}</code>d; then you want it to run after the built-in <code>links</code> preprocessor, which you can require using either the <code>before</code> or <code>after</code> field:</p>
+<pre><code class="language-toml">[preprocessor.linenos]
+after = [ &quot;links&quot; ]
+</code></pre>
+<p>or</p>
+<pre><code class="language-toml">[preprocessor.links]
+before = [ &quot;linenos&quot; ]
+</code></pre>
+<p>It would also be possible, though redundant, to specify both of the above in the same config file.</p>
+<p>Preprocessors having the same priority specified through <code>before</code> and <code>after</code> are sorted by name.
+Any infinite loops will be detected and produce an error.</p>
 
                     </main>
 

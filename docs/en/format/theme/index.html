@@ -143,6 +143,46 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="theme"><a class="header" href="#theme">Theme</a></h1>
+<p>The default renderer uses a <a href="http://handlebarsjs.com/">handlebars</a> template to
+render your markdown files and comes with a default theme included in the mdBook
+binary.</p>
+<p>The theme is totally customizable, you can selectively replace every file from
+the theme by your own by adding a <code>theme</code> directory next to <code>src</code> folder in your
+project root. Create a new file with the name of the file you want to override
+and now that file will be used instead of the default file.</p>
+<p>Here are the files you can override:</p>
+<ul>
+<li><strong><em>index.hbs</em></strong> is the handlebars template.</li>
+<li><strong><em>head.hbs</em></strong> is appended to the HTML <code>&lt;head&gt;</code> section.</li>
+<li><strong><em>header.hbs</em></strong> content is appended on top of every book page.</li>
+<li><strong><em>css/</em></strong> contains the CSS files for styling the book.
+<ul>
+<li><strong><em>css/chrome.css</em></strong> is for UI elements.</li>
+<li><strong><em>css/general.css</em></strong> is the base styles.</li>
+<li><strong><em>css/print.css</em></strong> is the style for printer output.</li>
+<li><strong><em>css/variables.css</em></strong> contains variables used in other CSS files.</li>
+</ul>
+</li>
+<li><strong><em>book.js</em></strong> is mostly used to add client side functionality, like hiding /
+un-hiding the sidebar, changing the theme, ...</li>
+<li><strong><em>highlight.js</em></strong> is the JavaScript that is used to highlight code snippets,
+you should not need to modify this.</li>
+<li><strong><em>highlight.css</em></strong> is the theme used for the code highlighting.</li>
+<li><strong><em>favicon.svg</em></strong> and <strong><em>favicon.png</em></strong> the favicon that will be used. The SVG
+version is used by <a href="https://caniuse.com/#feat=link-icon-svg">newer browsers</a>.</li>
+</ul>
+<p>Generally, when you want to tweak the theme, you don't need to override all the
+files. If you only need changes in the stylesheet, there is no point in
+overriding all the other files. Because custom files take precedence over
+built-in ones, they will not get updated with new fixes / features.</p>
+<p><strong>Note:</strong> When you override a file, it is possible that you break some
+functionality. Therefore I recommend to use the file from the default theme as
+template and only add / modify what you need. You can copy the default theme
+into your source directory automatically by using <code>mdbook init --theme</code> and just
+remove the files you don't want to override.</p>
+<p>If you completely replace all built-in themes, be sure to also set
+<a href="../configuration/renderers.html#html-renderer-options"><code>output.html.preferred-dark-theme</code></a> in the config, which defaults to the
+built-in <code>navy</code> theme.</p>
 
                     </main>
 

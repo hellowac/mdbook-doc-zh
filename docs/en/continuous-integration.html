@@ -142,7 +142,133 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="continuous-integration"><a class="header" href="#continuous-integration">Continuous Integration</a></h1>
+                        <h1 id="running-mdbook-in-continuous-integration"><a class="header" href="#running-mdbook-in-continuous-integration">Running <code>mdbook</code> in Continuous Integration</a></h1>
+<p>While the following examples use Travis CI, their principles should
+straightforwardly transfer to other continuous integration providers as well.</p>
+<h2 id="ensuring-your-book-builds-and-tests-pass"><a class="header" href="#ensuring-your-book-builds-and-tests-pass">Ensuring Your Book Builds and Tests Pass</a></h2>
+<p>Here is a sample Travis CI <code>.travis.yml</code> configuration that ensures <code>mdbook build</code> and <code>mdbook test</code> run successfully. The key to fast CI turnaround times
+is caching <code>mdbook</code> installs, so that you aren't compiling <code>mdbook</code> on every CI
+run.</p>
+<pre><code class="language-yaml">language: rust
+sudo: false
+
+cache:
+  - cargo
+
+rust:
+  - stable
+
+before_script:
+  - (test -x $HOME/.cargo/bin/cargo-install-update || cargo install cargo-update)
+  - (test -x $HOME/.cargo/bin/mdbook || cargo install --vers &quot;^0.3&quot; mdbook)
+  - cargo install-update -a
+
+script:
+  - mdbook build &amp;&amp; mdbook test # In case of custom book path: mdbook build path/to/mybook &amp;&amp; mdbook test path/to/mybook
+</code></pre>
+<h2 id="deploying-your-book-to-github-pages"><a class="header" href="#deploying-your-book-to-github-pages">Deploying Your Book to GitHub Pages</a></h2>
+<p>Following these instructions will result in your book being published to GitHub
+pages after a successful CI run on your repository's <code>master</code> branch.</p>
+<p>First, create a new GitHub &quot;Personal Access Token&quot; with the &quot;public_repo&quot;
+permissions (or &quot;repo&quot; for private repositories). Go to your repository's Travis
+CI settings page and add an environment variable named <code>GITHUB_TOKEN</code> that is
+marked secure and <em>not</em> shown in the logs.</p>
+<p>Whilst still in your repository's settings page, navigate to Options and change the 
+Source on GitHub pages to <code>gh-pages</code>.</p>
+<p>Then, append this snippet to your <code>.travis.yml</code> and update the path to the
+<code>book</code> directory:</p>
+<pre><code class="language-yaml">deploy:
+  provider: pages
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN
+  local-dir: book # In case of custom book path: path/to/mybook/book
+  keep-history: false
+  on:
+    branch: main
+</code></pre>
+<p>That's it!</p>
+<p>Note: Travis has a new <a href="https://blog.travis-ci.com/2019-08-27-deployment-tooling-dpl-v2-preview-release">dplv2</a> configuration that is currently in beta. To use this new format, update your <code>.travis.yml</code> file to:</p>
+<pre><code class="language-yaml">language: rust
+os: linux
+dist: xenial
+
+cache:
+  - cargo
+
+rust:
+  - stable
+
+before_script:
+  - (test -x $HOME/.cargo/bin/cargo-install-update || cargo install cargo-update)
+  - (test -x $HOME/.cargo/bin/mdbook || cargo install --vers &quot;^0.3&quot; mdbook)
+  - cargo install-update -a
+
+script:
+  - mdbook build &amp;&amp; mdbook test # In case of custom book path: mdbook build path/to/mybook &amp;&amp; mdbook test path/to/mybook
+  
+deploy:
+  provider: pages
+  strategy: git
+  edge: true
+  cleanup: false
+  github-token: $GITHUB_TOKEN
+  local-dir: book # In case of custom book path: path/to/mybook/book
+  keep-history: false
+  on:
+    branch: main
+  target_branch: gh-pages
+</code></pre>
+<h3 id="deploying-to-github-pages-manually"><a class="header" href="#deploying-to-github-pages-manually">Deploying to GitHub Pages manually</a></h3>
+<p>If your CI doesn't support GitHub pages, or you're deploying somewhere else
+with integrations such as Github Pages:
+<em>note: you may want to use different tmp dirs</em>:</p>
+<pre><code class="language-console">$&gt; git worktree add /tmp/book gh-pages
+$&gt; mdbook build
+$&gt; rm -rf /tmp/book/* # this won't delete the .git directory
+$&gt; cp -rp book/* /tmp/book/
+$&gt; cd /tmp/book
+$&gt; git add -A
+$&gt; git commit 'new book message'
+$&gt; git push origin gh-pages
+$&gt; cd -
+</code></pre>
+<p>Or put this into a Makefile rule:</p>
+<pre><code class="language-makefile">.PHONY: deploy
+deploy: book
+	@echo &quot;====&gt; deploying to github&quot;
+	git worktree add /tmp/book gh-pages
+	rm -rf /tmp/book/*
+	cp -rp book/* /tmp/book/
+	cd /tmp/book &amp;&amp; \
+		git add -A &amp;&amp; \
+		git commit -m &quot;deployed on $(shell date) by ${USER}&quot; &amp;&amp; \
+		git push origin gh-pages
+</code></pre>
+<h2 id="deploying-your-book-to-gitlab-pages"><a class="header" href="#deploying-your-book-to-gitlab-pages">Deploying Your Book to GitLab Pages</a></h2>
+<p>Inside your repository's project root, create a file named <code>.gitlab-ci.yml</code> with the following contents:</p>
+<pre><code class="language-yml">stages:
+    - deploy
+
+pages:
+  stage: deploy
+  image: rust
+  variables:
+    CARGO_HOME: $CI_PROJECT_DIR/cargo
+  before_script:
+    - export PATH=&quot;$PATH:$CARGO_HOME/bin&quot;
+    - mdbook --version || cargo install mdbook
+  script:
+    - mdbook build -d public
+  rules:
+    - if: '$CI_COMMIT_REF_NAME == &quot;master&quot;'
+  artifacts:
+    paths:
+      - public
+  cache:
+    paths:
+      - $CARGO_HOME/bin
+</code></pre>
+<p>After you commit and push this new file, GitLab CI will run and your book will be available!</p>
 
                     </main>
 

@@ -143,6 +143,37 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="editor"><a class="header" href="#editor">Editor</a></h1>
+<p>In addition to providing runnable code playgrounds, mdBook optionally allows them
+to be editable. In order to enable editable code blocks, the following needs to
+be added to the <em><strong>book.toml</strong></em>:</p>
+<pre><code class="language-toml">[output.html.playground]
+editable = true
+</code></pre>
+<p>To make a specific block available for editing, the attribute <code>editable</code> needs
+to be added to it:</p>
+<pre><code class="language-markdown">```rust,editable
+fn main() {
+    let number = 5;
+    print!("{}", number);
+}
+```</code></pre>
+<p>The above will result in this editable playground:</p>
+<pre><pre class="playground"><code class="language-rust editable edition2018">fn main() {
+    let number = 5;
+    print!(&quot;{}&quot;, number);
+}
+</code></pre></pre>
+<p>Note the new <code>Undo Changes</code> button in the editable playgrounds.</p>
+<h2 id="customizing-the-editor"><a class="header" href="#customizing-the-editor">Customizing the Editor</a></h2>
+<p>By default, the editor is the <a href="https://ace.c9.io/">Ace</a> editor, but, if desired,
+the functionality may be overridden by providing a different folder:</p>
+<pre><code class="language-toml">[output.html.playground]
+editable = true
+editor = &quot;/path/to/editor&quot;
+</code></pre>
+<p>Note that for the editor changes to function correctly, the <code>book.js</code> inside of
+the <code>theme</code> folder will need to be overridden as it has some couplings with the
+default Ace editor.</p>
 
                     </main>
 

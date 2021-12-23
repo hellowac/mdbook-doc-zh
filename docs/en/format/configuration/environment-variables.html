@@ -143,6 +143,37 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="environment-variables"><a class="header" href="#environment-variables">Environment Variables</a></h1>
+<p>All configuration values can be overridden from the command line by setting the
+corresponding environment variable. Because many operating systems restrict
+environment variables to be alphanumeric characters or <code>_</code>, the configuration
+key needs to be formatted slightly differently to the normal <code>foo.bar.baz</code> form.</p>
+<p>Variables starting with <code>MDBOOK_</code> are used for configuration. The key is created
+by removing the <code>MDBOOK_</code> prefix and turning the resulting string into
+<code>kebab-case</code>. Double underscores (<code>__</code>) separate nested keys, while a single
+underscore (<code>_</code>) is replaced with a dash (<code>-</code>).</p>
+<p>For example:</p>
+<ul>
+<li><code>MDBOOK_foo</code> -&gt; <code>foo</code></li>
+<li><code>MDBOOK_FOO</code> -&gt; <code>foo</code></li>
+<li><code>MDBOOK_FOO__BAR</code> -&gt; <code>foo.bar</code></li>
+<li><code>MDBOOK_FOO_BAR</code> -&gt; <code>foo-bar</code></li>
+<li><code>MDBOOK_FOO_bar__baz</code> -&gt; <code>foo-bar.baz</code></li>
+</ul>
+<p>So by setting the <code>MDBOOK_BOOK__TITLE</code> environment variable you can override the
+book's title without needing to touch your <code>book.toml</code>.</p>
+<blockquote>
+<p><strong>Note:</strong> To facilitate setting more complex config items, the value of an
+environment variable is first parsed as JSON, falling back to a string if the
+parse fails.</p>
+<p>This means, if you so desired, you could override all book metadata when
+building the book with something like</p>
+<pre><code class="language-shell">$ export MDBOOK_BOOK=&quot;{'title': 'My Awesome Book', authors: ['Michael-F-Bryan']}&quot;
+$ mdbook build
+</code></pre>
+</blockquote>
+<p>The latter case may be useful in situations where <code>mdbook</code> is invoked from a
+script or CI, where it sometimes isn't possible to update the <code>book.toml</code> before
+building.</p>
 
                     </main>
 

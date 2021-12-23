@@ -143,6 +143,76 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="markdown"><a class="header" href="#markdown">Markdown</a></h1>
+<p>mdBook's <a href="https://github.com/raphlinus/pulldown-cmark">parser</a> adheres to the <a href="https://commonmark.org/">CommonMark</a>
+specification. You can take a quick <a href="https://commonmark.org/help/tutorial/">tutorial</a>,
+or <a href="https://spec.commonmark.org/dingus/">try out</a> CommonMark in real time. A complete Markdown overview is out of scope for 
+this documentation, but below is a high level overview of some of the basics. For a more in-depth experience, check out the
+<a href="https://www.markdownguide.org">Markdown Guide</a>.</p>
+<h2 id="text-and-paragraphs"><a class="header" href="#text-and-paragraphs">Text and Paragraphs</a></h2>
+<p>Text is rendered relatively predictably: </p>
+<pre><code class="language-markdown">Here is a line of text.
+
+This is a new line.
+</code></pre>
+<p>Will look like you might expect:</p>
+<p>Here is a line of text.</p>
+<p>This is a new line.</p>
+<h2 id="headings"><a class="header" href="#headings">Headings</a></h2>
+<p>Headings use the <code>#</code> marker and should be on a line by themselves. More <code>#</code> mean smaller headings:</p>
+<pre><code class="language-markdown">### A heading 
+
+Some text.
+
+#### A smaller heading 
+
+More text.
+</code></pre>
+<h3 id="a-heading"><a class="header" href="#a-heading">A heading</a></h3>
+<p>Some text.</p>
+<h4 id="a-smaller-heading"><a class="header" href="#a-smaller-heading">A smaller heading</a></h4>
+<p>More text.</p>
+<h2 id="lists"><a class="header" href="#lists">Lists</a></h2>
+<p>Lists can be unordered or ordered. Ordered lists will order automatically:</p>
+<pre><code class="language-markdown">* milk
+* eggs
+* butter
+
+1. carrots
+1. celery
+1. radishes
+</code></pre>
+<ul>
+<li>milk</li>
+<li>eggs</li>
+<li>butter</li>
+</ul>
+<ol>
+<li>carrots</li>
+<li>celery</li>
+<li>radishes</li>
+</ol>
+<h2 id="links"><a class="header" href="#links">Links</a></h2>
+<p>Linking to a URL or local file is easy:</p>
+<pre><code class="language-markdown">Use [mdBook](https://github.com/rust-lang/mdBook). 
+
+Read about [mdBook](mdBook.md).
+
+A bare url: &lt;https://www.rust-lang.org&gt;.
+</code></pre>
+<p>Use <a href="https://github.com/rust-lang/mdBook">mdBook</a>. </p>
+<p>Read about <a href="mdBook.html">mdBook</a>.</p>
+<p>A bare url: <a href="https://www.rust-lang.org">https://www.rust-lang.org</a>.</p>
+<h2 id="images"><a class="header" href="#images">Images</a></h2>
+<p>Including images is simply a matter of including a link to them, much like in the <em>Links</em> section above. The following markdown
+includes the Rust logo SVG image found in the <code>images</code> directory at the same level as this file:</p>
+<pre><code class="language-markdown">![The Rust Logo](images/rust-logo-blk.svg)
+</code></pre>
+<p>Produces the following HTML when built with mdBook:</p>
+<pre><code class="language-html">&lt;p&gt;&lt;img src=&quot;images/rust-logo-blk.svg&quot; alt=&quot;The Rust Logo&quot; /&gt;&lt;/p&gt;
+</code></pre>
+<p>Which, of course displays the image like so:</p>
+<p><img src="images/rust-logo-blk.svg" alt="The Rust Logo" /></p>
+<p>See the <a href="https://www.markdownguide.org/basic-syntax/">Markdown Guide Basic Syntax</a> document for more.</p>
 
                     </main>
 

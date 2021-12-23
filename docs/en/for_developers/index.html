@@ -143,6 +143,41 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="for-developers"><a class="header" href="#for-developers">For Developers</a></h1>
+<p>While <code>mdbook</code> is mainly used as a command line tool, you can also import the
+underlying library directly and use that to manage a book. It also has a fairly
+flexible plugin mechanism, allowing you to create your own custom tooling and
+consumers (often referred to as <em>backends</em>) if you need to do some analysis of
+the book or render it in a different format.</p>
+<p>The <em>For Developers</em> chapters are here to show you the more advanced usage of
+<code>mdbook</code>.</p>
+<p>The two main ways a developer can hook into the book's build process is via,</p>
+<ul>
+<li><a href="preprocessors.html">Preprocessors</a></li>
+<li><a href="backends.html">Alternative Backends</a></li>
+</ul>
+<h2 id="the-build-process"><a class="header" href="#the-build-process">The Build Process</a></h2>
+<p>The process of rendering a book project goes through several steps.</p>
+<ol>
+<li>Load the book
+<ul>
+<li>Parse the <code>book.toml</code>, falling back to the default <code>Config</code> if it doesn't
+exist</li>
+<li>Load the book chapters into memory</li>
+<li>Discover which preprocessors/backends should be used</li>
+</ul>
+</li>
+<li>Run the preprocessors</li>
+<li>Call each backend in turn</li>
+</ol>
+<h2 id="using-mdbook-as-a-library"><a class="header" href="#using-mdbook-as-a-library">Using <code>mdbook</code> as a Library</a></h2>
+<p>The <code>mdbook</code> binary is just a wrapper around the <code>mdbook</code> crate, exposing its
+functionality as a command-line program. As such it is quite easy to create your
+own programs which use <code>mdbook</code> internally, adding your own functionality (e.g.
+a custom preprocessor) or tweaking the build process.</p>
+<p>The easiest way to find out how to use the <code>mdbook</code> crate is by looking at the
+<a href="https://docs.rs/mdbook/*/mdbook/">API Docs</a>. The top level documentation explains how one would use the
+<a href="https://docs.rs/mdbook/*/mdbook/book/struct.MDBook.html"><code>MDBook</code></a> type to load and build a book, while the <a href="https://docs.rs/mdbook/*/mdbook/config/index.html">config</a> module gives a good
+explanation on the configuration system.</p>
 
                     </main>
 

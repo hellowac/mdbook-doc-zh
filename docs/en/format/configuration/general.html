@@ -142,7 +142,98 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="general"><a class="header" href="#general">General</a></h1>
+                        <h1 id="general-configuration"><a class="header" href="#general-configuration">General Configuration</a></h1>
+<p>You can configure the parameters for your book in the <em><strong>book.toml</strong></em> file.</p>
+<p>Here is an example of what a <em><strong>book.toml</strong></em> file might look like:</p>
+<pre><code class="language-toml">[book]
+title = &quot;Example book&quot;
+author = &quot;John Doe&quot;
+description = &quot;The example book covers examples.&quot;
+
+[rust]
+edition = &quot;2018&quot;
+
+[build]
+build-dir = &quot;my-example-book&quot;
+create-missing = false
+
+[preprocessor.index]
+
+[preprocessor.links]
+
+[output.html]
+additional-css = [&quot;custom.css&quot;]
+
+[output.html.search]
+limit-results = 15
+</code></pre>
+<h2 id="supported-configuration-options"><a class="header" href="#supported-configuration-options">Supported configuration options</a></h2>
+<p>It is important to note that <strong>any</strong> relative path specified in the
+configuration will always be taken relative from the root of the book where the
+configuration file is located.</p>
+<h3 id="general-metadata"><a class="header" href="#general-metadata">General metadata</a></h3>
+<p>This is general information about your book.</p>
+<ul>
+<li><strong>title:</strong> The title of the book</li>
+<li><strong>authors:</strong> The author(s) of the book</li>
+<li><strong>description:</strong> A description for the book, which is added as meta
+information in the html <code>&lt;head&gt;</code> of each page</li>
+<li><strong>src:</strong> By default, the source directory is found in the directory named
+<code>src</code> directly under the root folder. But this is configurable with the <code>src</code>
+key in the configuration file.</li>
+<li><strong>language:</strong> The main language of the book, which is used as a language attribute <code>&lt;html lang=&quot;en&quot;&gt;</code> for example.</li>
+</ul>
+<p><strong>book.toml</strong></p>
+<pre><code class="language-toml">[book]
+title = &quot;Example book&quot;
+authors = [&quot;John Doe&quot;, &quot;Jane Doe&quot;]
+description = &quot;The example book covers examples.&quot;
+src = &quot;my-src&quot;  # the source files will be found in `root/my-src` instead of `root/src`
+language = &quot;en&quot;
+</code></pre>
+<h3 id="rust-options"><a class="header" href="#rust-options">Rust options</a></h3>
+<p>Options for the Rust language, relevant to running tests and playground
+integration.</p>
+<ul>
+<li>
+<p><strong>edition</strong>: Rust edition to use by default for the code snippets. Default
+is &quot;2015&quot;. Individual code blocks can be controlled with the <code>edition2015</code>, 
+<code>edition2018</code> or <code>edition2021</code> annotations, such as:</p>
+<pre><code class="language-text">```rust,edition2015
+// This only works in 2015.
+let try = true;
+```
+</code></pre>
+</li>
+</ul>
+<h3 id="build-options"><a class="header" href="#build-options">Build options</a></h3>
+<p>This controls the build process of your book.</p>
+<ul>
+<li>
+<p><strong>build-dir:</strong> The directory to put the rendered book in. By default this is
+<code>book/</code> in the book's root directory.</p>
+</li>
+<li>
+<p><strong>create-missing:</strong> By default, any missing files specified in <code>SUMMARY.md</code>
+will be created when the book is built (i.e. <code>create-missing = true</code>). If this
+is <code>false</code> then the build process will instead exit with an error if any files
+do not exist.</p>
+</li>
+<li>
+<p><strong>use-default-preprocessors:</strong> Disable the default preprocessors of (<code>links</code> &amp;
+<code>index</code>) by setting this option to <code>false</code>.</p>
+<p>If you have the same, and/or other preprocessors declared via their table
+of configuration, they will run instead.</p>
+<ul>
+<li>For clarity, with no preprocessor configuration, the default <code>links</code> and
+<code>index</code> will run.</li>
+<li>Setting <code>use-default-preprocessors = false</code> will disable these
+default preprocessors from running.</li>
+<li>Adding <code>[preprocessor.links]</code>, for example, will ensure, regardless of
+<code>use-default-preprocessors</code> that <code>links</code> it will run.</li>
+</ul>
+</li>
+</ul>
 
                     </main>
 

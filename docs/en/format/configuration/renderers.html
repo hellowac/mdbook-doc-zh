@@ -142,7 +142,194 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="renderers"><a class="header" href="#renderers">Renderers</a></h1>
+                        <h1 id="configuring-renderers"><a class="header" href="#configuring-renderers">Configuring Renderers</a></h1>
+<h3 id="html-renderer-options"><a class="header" href="#html-renderer-options">HTML renderer options</a></h3>
+<p>The HTML renderer has a couple of options as well. All the options for the
+renderer need to be specified under the TOML table <code>[output.html]</code>.</p>
+<p>The following configuration options are available:</p>
+<ul>
+<li><strong>theme:</strong> mdBook comes with a default theme and all the resource files needed
+for it. But if this option is set, mdBook will selectively overwrite the theme
+files with the ones found in the specified folder.</li>
+<li><strong>default-theme:</strong> The theme color scheme to select by default in the
+'Change Theme' dropdown. Defaults to <code>light</code>.</li>
+<li><strong>preferred-dark-theme:</strong> The default dark theme. This theme will be used if
+the browser requests the dark version of the site via the
+<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme">'prefers-color-scheme'</a>
+CSS media query. Defaults to <code>navy</code>.</li>
+<li><strong>curly-quotes:</strong> Convert straight quotes to curly quotes, except for those
+that occur in code blocks and code spans. Defaults to <code>false</code>.</li>
+<li><strong>mathjax-support:</strong> Adds support for <a href="../mathjax.html">MathJax</a>. Defaults to
+<code>false</code>.</li>
+<li><strong>copy-fonts:</strong> Copies fonts.css and respective font files to the output directory and use them in the default theme. Defaults to <code>true</code>.</li>
+<li><strong>google-analytics:</strong> This field has been deprecated and will be removed in a future release.
+Use the <code>theme/head.hbs</code> file to add the appropriate Google Analytics code instead.</li>
+<li><strong>additional-css:</strong> If you need to slightly change the appearance of your book
+without overwriting the whole style, you can specify a set of stylesheets that
+will be loaded after the default ones where you can surgically change the
+style.</li>
+<li><strong>additional-js:</strong> If you need to add some behaviour to your book without
+removing the current behaviour, you can specify a set of JavaScript files that
+will be loaded alongside the default one.</li>
+<li><strong>print:</strong> A subtable for configuration print settings. mdBook by default adds
+support for printing out the book as a single page. This is accessed using the
+print icon on the top right of the book.</li>
+<li><strong>no-section-label:</strong> mdBook by defaults adds section label in table of
+contents column. For example, &quot;1.&quot;, &quot;2.1&quot;. Set this option to true to disable
+those labels. Defaults to <code>false</code>.</li>
+<li><strong>fold:</strong> A subtable for configuring sidebar section-folding behavior.</li>
+<li><strong>playground:</strong> A subtable for configuring various playground settings.</li>
+<li><strong>search:</strong> A subtable for configuring the in-browser search functionality.
+mdBook must be compiled with the <code>search</code> feature enabled (on by default).</li>
+<li><strong>git-repository-url:</strong>  A url to the git repository for the book. If provided
+an icon link will be output in the menu bar of the book.</li>
+<li><strong>git-repository-icon:</strong> The FontAwesome icon class to use for the git
+repository link. Defaults to <code>fa-github</code>.</li>
+<li><strong>edit-url-template:</strong> Edit url template, when provided shows a
+&quot;Suggest an edit&quot; button for directly jumping to editing the currently
+viewed page. For e.g. GitHub projects set this to
+<code>https://github.com/&lt;owner&gt;/&lt;repo&gt;/edit/master/{path}</code> or for
+Bitbucket projects set it to
+<code>https://bitbucket.org/&lt;owner&gt;/&lt;repo&gt;/src/master/{path}?mode=edit</code>
+where {path} will be replaced with the full path of the file in the
+repository.</li>
+<li><strong>redirect:</strong> A subtable used for generating redirects when a page is moved.
+The table contains key-value pairs where the key is where the redirect file
+needs to be created, as an absolute path from the build directory, (e.g.
+<code>/appendices/bibliography.html</code>). The value can be any valid URI the
+browser should navigate to (e.g. <code>https://rust-lang.org/</code>,
+<code>/overview.html</code>, or <code>../bibliography.html</code>).</li>
+<li><strong>input-404:</strong> The name of the markdown file used for missing files.
+The corresponding output file will be the same, with the extension replaced with <code>html</code>.
+Defaults to <code>404.md</code>.</li>
+<li><strong>site-url:</strong> The url where the book will be hosted. This is required to ensure
+navigation links and script/css imports in the 404 file work correctly, even when accessing
+urls in subdirectories. Defaults to <code>/</code>.</li>
+<li><strong>cname:</strong> The DNS subdomain or apex domain at which your book will be hosted.
+This string will be written to a file named CNAME in the root of your site, as
+required by GitHub Pages (see <a href="https://docs.github.com/en/github/working-with-github-pages/managing-a-custom-domain-for-your-github-pages-site"><em>Managing a custom domain for your GitHub Pages
+site</em></a>).</li>
+</ul>
+<p>Available configuration options for the <code>[output.html.print]</code> table:</p>
+<ul>
+<li><strong>enable:</strong> Enable print support. When <code>false</code>, all print support will not be
+rendered. Defaults to <code>true</code>.</li>
+</ul>
+<p>Available configuration options for the <code>[output.html.fold]</code> table:</p>
+<ul>
+<li><strong>enable:</strong> Enable section-folding. When off, all folds are open.
+Defaults to <code>false</code>.</li>
+<li><strong>level:</strong> The higher the more folded regions are open. When level is 0, all
+folds are closed. Defaults to <code>0</code>.</li>
+</ul>
+<p>Available configuration options for the <code>[output.html.playground]</code> table:</p>
+<ul>
+<li><strong>editable:</strong> Allow editing the source code. Defaults to <code>false</code>.</li>
+<li><strong>copyable:</strong> Display the copy button on code snippets. Defaults to <code>true</code>.</li>
+<li><strong>copy-js:</strong> Copy JavaScript files for the editor to the output directory.
+Defaults to <code>true</code>.</li>
+<li><strong>line-numbers</strong> Display line numbers on editable sections of code. Requires both <code>editable</code> and <code>copy-js</code> to be <code>true</code>. Defaults to <code>false</code>.</li>
+</ul>
+<p>Available configuration options for the <code>[output.html.search]</code> table:</p>
+<ul>
+<li><strong>enable:</strong> Enables the search feature. Defaults to <code>true</code>.</li>
+<li><strong>limit-results:</strong> The maximum number of search results. Defaults to <code>30</code>.</li>
+<li><strong>teaser-word-count:</strong> The number of words used for a search result teaser.
+Defaults to <code>30</code>.</li>
+<li><strong>use-boolean-and:</strong> Define the logical link between multiple search words. If
+true, all search words must appear in each result. Defaults to <code>false</code>.</li>
+<li><strong>boost-title:</strong> Boost factor for the search result score if a search word
+appears in the header. Defaults to <code>2</code>.</li>
+<li><strong>boost-hierarchy:</strong> Boost factor for the search result score if a search word
+appears in the hierarchy. The hierarchy contains all titles of the parent
+documents and all parent headings. Defaults to <code>1</code>.</li>
+<li><strong>boost-paragraph:</strong> Boost factor for the search result score if a search word
+appears in the text. Defaults to <code>1</code>.</li>
+<li><strong>expand:</strong> True if search should match longer results e.g. search <code>micro</code>
+should match <code>microwave</code>. Defaults to <code>true</code>.</li>
+<li><strong>heading-split-level:</strong> Search results will link to a section of the document
+which contains the result. Documents are split into sections by headings this
+level or less. Defaults to <code>3</code>. (<code>### This is a level 3 heading</code>)</li>
+<li><strong>copy-js:</strong> Copy JavaScript files for the search implementation to the output
+directory. Defaults to <code>true</code>.</li>
+</ul>
+<p>This shows all available HTML output options in the <strong>book.toml</strong>:</p>
+<pre><code class="language-toml">[book]
+title = &quot;Example book&quot;
+authors = [&quot;John Doe&quot;, &quot;Jane Doe&quot;]
+description = &quot;The example book covers examples.&quot;
+
+[output.html]
+theme = &quot;my-theme&quot;
+default-theme = &quot;light&quot;
+preferred-dark-theme = &quot;navy&quot;
+curly-quotes = true
+mathjax-support = false
+copy-fonts = true
+additional-css = [&quot;custom.css&quot;, &quot;custom2.css&quot;]
+additional-js = [&quot;custom.js&quot;]
+no-section-label = false
+git-repository-url = &quot;https://github.com/rust-lang/mdBook&quot;
+git-repository-icon = &quot;fa-github&quot;
+edit-url-template = &quot;https://github.com/rust-lang/mdBook/edit/master/guide/{path}&quot;
+site-url = &quot;/example-book/&quot;
+cname = &quot;myproject.rs&quot;
+input-404 = &quot;not-found.md&quot;
+
+[output.html.print]
+enable = true
+
+[output.html.fold]
+enable = false
+level = 0
+
+[output.html.playground]
+editable = false
+copy-js = true
+line-numbers = false
+
+[output.html.search]
+enable = true
+limit-results = 30
+teaser-word-count = 30
+use-boolean-and = true
+boost-title = 2
+boost-hierarchy = 1
+boost-paragraph = 1
+expand = true
+heading-split-level = 3
+copy-js = true
+
+[output.html.redirect]
+&quot;/appendices/bibliography.html&quot; = &quot;https://rustc-dev-guide.rust-lang.org/appendix/bibliography.html&quot;
+&quot;/other-installation-methods.html&quot; = &quot;../infra/other-installation-methods.html&quot;
+</code></pre>
+<h3 id="markdown-renderer"><a class="header" href="#markdown-renderer">Markdown Renderer</a></h3>
+<p>The Markdown renderer will run preprocessors and then output the resulting
+Markdown. This is mostly useful for debugging preprocessors, especially in
+conjunction with <code>mdbook test</code> to see the Markdown that <code>mdbook</code> is passing
+to <code>rustdoc</code>.</p>
+<p>The Markdown renderer is included with <code>mdbook</code> but disabled by default.
+Enable it by adding an empty table to your <code>book.toml</code> as follows:</p>
+<pre><code class="language-toml">[output.markdown]
+</code></pre>
+<p>There are no configuration options for the Markdown renderer at this time;
+only whether it is enabled or disabled.</p>
+<p>See <a href="preprocessors.html">the preprocessors documentation</a> for how to
+specify which preprocessors should run before the Markdown renderer.</p>
+<h3 id="custom-renderers"><a class="header" href="#custom-renderers">Custom Renderers</a></h3>
+<p>A custom renderer can be enabled by adding a <code>[output.foo]</code> table to your
+<code>book.toml</code>. Similar to <a href="preprocessors.html">preprocessors</a> this will
+instruct <code>mdbook</code> to pass a representation of the book to <code>mdbook-foo</code> for
+rendering. See the <a href="../../for_developers/backends.html">alternative backends</a> chapter for more detail.</p>
+<p>The custom renderer has access to all the fields within its table (i.e.
+anything under <code>[output.foo]</code>). mdBook checks for two common fields:</p>
+<ul>
+<li><strong>command:</strong> The command to execute for this custom renderer. Defaults to
+the name of the renderer with the <code>mdbook-</code> prefix (such as <code>mdbook-foo</code>).</li>
+<li><strong>optional:</strong> If <code>true</code>, then the command will be ignored if it is not
+installed, otherwise mdBook will fail with an error. Defaults to <code>false</code>.</li>
+</ul>
 
                     </main>
 

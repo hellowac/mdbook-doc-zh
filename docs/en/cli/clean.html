@@ -142,7 +142,24 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="clean"><a class="header" href="#clean">clean</a></h1>
+                        <h1 id="the-clean-command"><a class="header" href="#the-clean-command">The clean command</a></h1>
+<p>The clean command is used to delete the generated book and any other build
+artifacts.</p>
+<pre><code class="language-bash">mdbook clean
+</code></pre>
+<h4 id="specify-a-directory"><a class="header" href="#specify-a-directory">Specify a directory</a></h4>
+<p>The <code>clean</code> command can take a directory as an argument to use as the book's
+root instead of the current working directory.</p>
+<pre><code class="language-bash">mdbook clean path/to/book
+</code></pre>
+<h4 id="--dest-dir"><a class="header" href="#--dest-dir">--dest-dir</a></h4>
+<p>The <code>--dest-dir</code> (<code>-d</code>) option allows you to override the book's output
+directory, which will be deleted by this command. Relative paths are interpreted
+relative to the book's root directory. If not specified it will default to the
+value of the <code>build.build-dir</code> key in <code>book.toml</code>, or to <code>./book</code>.</p>
+<pre><code class="language-bash">mdbook clean --dest-dir=path/to/book
+</code></pre>
+<p><code>path/to/book</code> could be absolute or relative.</p>
 
                     </main>
 
