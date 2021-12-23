@@ -1,49 +1,34 @@
-# Command Line Tool
+# 命令行工具
 
-mdBook can be used either as a command line tool or a [Rust
-crate](https://crates.io/crates/mdbook). Let's focus on the command line tool
-capabilities first.
+mdBook 既可以用作命令行工具，也可以用作 [Rust crate](https://crates.io/crates/mdbook)。 让我们首先关注命令行工具功能。
 
-## Install From Binaries
+## 二进制文件安装
 
-Precompiled binaries are provided for major platforms on a best-effort basis.
-Visit [the releases page](https://github.com/rust-lang/mdBook/releases)
-to download the appropriate version for your platform.
+我们尽最大努力为主要平台提供了预编译的二进制文件。 访问[发布页面](https://github.com/rust-lang/mdBook/releases)以下载适合您平台的版本。
 
-## Install From Source
+## 源码安装
 
-mdBook can also be installed by compiling the source code on your local machine.
+mdBook 也可以通过在本地机器上编译源代码来安装。
 
-### Pre-requisite
+### 先决条件
 
-mdBook is written in **[Rust](https://www.rust-lang.org/)** and therefore needs
-to be compiled with **Cargo**. If you haven't already installed Rust, please go
-ahead and [install it](https://www.rust-lang.org/tools/install) now.
+mdBook 是用 **[Rust](https://www.rust-lang.org/)** 编写的，因此需要用 **Cargo** 编译。 如果您还没有安装 Rust，请立即[安装](https://www.rust-lang.org/tools/install)。
 
-### Install Crates.io version
+### 安装 Crates.io 版本
 
-Installing mdBook is relatively easy if you already have Rust and Cargo
-installed. You just have to type this snippet in your terminal:
+如果您已经安装了 Rust 和 Cargo，则安装 mdBook 相对容易。 你只需要在你的终端中输入这段代码：
 
 ```bash
 cargo install mdbook
 ```
 
-This will fetch the source code for the latest release from
-[Crates.io](https://crates.io/) and compile it. You will have to add Cargo's
-`bin` directory to your `PATH`.
+这将从 [Crates.io](https://crates.io/) 获取最新版本的源代码并编译它。 您必须将 Cargo 的 `bin` 目录添加到您的 `PATH` 环境变量中。
 
-Run `mdbook help` in your terminal to verify if it works. Congratulations, you
-have installed mdBook!
+在终端中运行 `mdbook help` 以验证它是否有效。 恭喜，您已经安装了 mdBook！
 
+### 安装 Git 版本
 
-### Install Git version
-
-The **[git version](https://github.com/rust-lang/mdBook)** contains all
-the latest bug-fixes and features, that will be released in the next version on
-**Crates.io**, if you can't wait until the next release. You can build the git
-version yourself. Open your terminal and navigate to the directory of you
-choice. We need to clone the git repository and then build it with Cargo.
+**[git 版本](https://github.com/rust-lang/mdBook)**包含所有最新的错误修复和功能，如果您不能等到下一个版本，它们将在 **Crates.io** 的下一个版本中发布。 您可以自己构建 git 版本。 打开您的终端并导航到您选择的目录。 我们需要克隆 git 存储库，然后使用 Cargo 构建它。
 
 ```bash
 git clone --depth=1 https://github.com/rust-lang/mdBook.git
@@ -51,5 +36,4 @@ cd mdBook
 cargo build --release
 ```
 
-The executable `mdbook` will be in the `./target/release` folder, this should be
-added to the path.
+可执行文件 `mdbook` 将在 `./target/release` 文件夹中，这应该添加到`PATH` 环境变量中。
