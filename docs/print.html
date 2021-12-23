@@ -1,0 +1,2173 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>mdBook 文档</title>
+        <meta name="robots" content="noindex" />
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="Create book from markdown files. Like Gitbook but implemented in Rust">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <!-- MathJax -->
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="zh-cn/index.html"><strong aria-hidden="true">1.</strong> zh-cn</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="zh-cn/index.html"><strong aria-hidden="true">1.1.</strong> 指南</a></li><li class="chapter-item expanded "><a href="zh-cn/cli/index.html"><strong aria-hidden="true">1.2.</strong> 命令行</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="zh-cn/cli/init.html"><strong aria-hidden="true">1.2.1.</strong> init</a></li><li class="chapter-item expanded "><a href="zh-cn/cli/build.html"><strong aria-hidden="true">1.2.2.</strong> build</a></li><li class="chapter-item expanded "><a href="zh-cn/cli/watch.html"><strong aria-hidden="true">1.2.3.</strong> watch</a></li><li class="chapter-item expanded "><a href="zh-cn/cli/serve.html"><strong aria-hidden="true">1.2.4.</strong> serve</a></li><li class="chapter-item expanded "><a href="zh-cn/cli/test.html"><strong aria-hidden="true">1.2.5.</strong> test</a></li><li class="chapter-item expanded "><a href="zh-cn/cli/clean.html"><strong aria-hidden="true">1.2.6.</strong> clean</a></li></ol></li><li class="chapter-item expanded "><a href="zh-cn/format/index.html"><strong aria-hidden="true">1.3.</strong> 格式</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="zh-cn/format/summary.html"><strong aria-hidden="true">1.3.1.</strong> SUMMARY.md</a></li><li class="chapter-item expanded "><a href="zh-cn/format/configuration/index.html"><strong aria-hidden="true">1.3.2.</strong> 配置</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="zh-cn/format/configuration/general.html"><strong aria-hidden="true">1.3.2.1.</strong> 常规</a></li><li class="chapter-item expanded "><a href="zh-cn/format/configuration/preprocessors.html"><strong aria-hidden="true">1.3.2.2.</strong> 预处理器</a></li><li class="chapter-item expanded "><a href="zh-cn/format/configuration/renderers.html"><strong aria-hidden="true">1.3.2.3.</strong> 渲染</a></li><li class="chapter-item expanded "><a href="zh-cn/format/configuration/environment-variables.html"><strong aria-hidden="true">1.3.2.4.</strong> 环境变量</a></li></ol></li><li class="chapter-item expanded "><a href="zh-cn/format/theme/index.html"><strong aria-hidden="true">1.3.3.</strong> 主题</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="zh-cn/format/theme/index-hbs.html"><strong aria-hidden="true">1.3.3.1.</strong> index.hbs</a></li><li class="chapter-item expanded "><a href="zh-cn/format/theme/syntax-highlighting.html"><strong aria-hidden="true">1.3.3.2.</strong> 语法高亮</a></li><li class="chapter-item expanded "><a href="zh-cn/format/theme/editor.html"><strong aria-hidden="true">1.3.3.3.</strong> 编辑器</a></li></ol></li><li class="chapter-item expanded "><a href="zh-cn/format/mathjax.html"><strong aria-hidden="true">1.3.4.</strong> 数学公式支持</a></li><li class="chapter-item expanded "><a href="zh-cn/format/mdbook.html"><strong aria-hidden="true">1.3.5.</strong> mdBook特定功能</a></li><li class="chapter-item expanded "><a href="zh-cn/format/markdown.html"><strong aria-hidden="true">1.3.6.</strong> Markdown</a></li></ol></li><li class="chapter-item expanded "><a href="zh-cn/continuous-integration.html"><strong aria-hidden="true">1.4.</strong> 持续集成</a></li><li class="chapter-item expanded "><a href="zh-cn/zh-cn/for_developers/index.html"><strong aria-hidden="true">1.5.</strong> 开发者</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="zh-cn/for_developers/preprocessors.html"><strong aria-hidden="true">1.5.1.</strong> 预处理器</a></li><li class="chapter-item expanded "><a href="zh-cn/for_developers/backends.html"><strong aria-hidden="true">1.5.2.</strong> 选择后端</a></li></ol></li><li class="chapter-item expanded "><a href="zh-cn/misc/contributors.html"><strong aria-hidden="true">1.6.</strong> 贡献列表</a></li></ol></li><li class="chapter-item expanded "><a href="en/index.html"><strong aria-hidden="true">2.</strong> en</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="en/index.html"><strong aria-hidden="true">2.1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="en/cli/index.html"><strong aria-hidden="true">2.2.</strong> Command Line Tool</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="en/cli/init.html"><strong aria-hidden="true">2.2.1.</strong> init</a></li><li class="chapter-item expanded "><a href="en/cli/build.html"><strong aria-hidden="true">2.2.2.</strong> build</a></li><li class="chapter-item expanded "><a href="en/cli/watch.html"><strong aria-hidden="true">2.2.3.</strong> watch</a></li><li class="chapter-item expanded "><a href="en/cli/serve.html"><strong aria-hidden="true">2.2.4.</strong> serve</a></li><li class="chapter-item expanded "><a href="en/cli/test.html"><strong aria-hidden="true">2.2.5.</strong> test</a></li><li class="chapter-item expanded "><a href="en/cli/clean.html"><strong aria-hidden="true">2.2.6.</strong> clean</a></li></ol></li><li class="chapter-item expanded "><a href="en/format/index.html"><strong aria-hidden="true">2.3.</strong> Format</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="en/format/summary.html"><strong aria-hidden="true">2.3.1.</strong> SUMMARY.md</a></li><li><ol class="section"><li class="chapter-item expanded "><div><strong aria-hidden="true">2.3.1.1.</strong> Draft chapter</div></li></ol></li><li class="chapter-item expanded "><a href="en/format/configuration/index.html"><strong aria-hidden="true">2.3.2.</strong> Configuration</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="en/format/configuration/general.html"><strong aria-hidden="true">2.3.2.1.</strong> General</a></li><li class="chapter-item expanded "><a href="en/format/configuration/preprocessors.html"><strong aria-hidden="true">2.3.2.2.</strong> Preprocessors</a></li><li class="chapter-item expanded "><a href="en/format/configuration/renderers.html"><strong aria-hidden="true">2.3.2.3.</strong> Renderers</a></li><li class="chapter-item expanded "><a href="en/format/configuration/environment-variables.html"><strong aria-hidden="true">2.3.2.4.</strong> Environment Variables</a></li></ol></li><li class="chapter-item expanded "><a href="en/format/theme/index.html"><strong aria-hidden="true">2.3.3.</strong> Theme</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="en/format/theme/index-hbs.html"><strong aria-hidden="true">2.3.3.1.</strong> index.hbs</a></li><li class="chapter-item expanded "><a href="en/format/theme/syntax-highlighting.html"><strong aria-hidden="true">2.3.3.2.</strong> Syntax highlighting</a></li><li class="chapter-item expanded "><a href="en/format/theme/editor.html"><strong aria-hidden="true">2.3.3.3.</strong> Editor</a></li></ol></li><li class="chapter-item expanded "><a href="en/format/mathjax.html"><strong aria-hidden="true">2.3.4.</strong> MathJax Support</a></li><li class="chapter-item expanded "><a href="en/format/mdbook.html"><strong aria-hidden="true">2.3.5.</strong> mdBook-specific features</a></li><li class="chapter-item expanded "><a href="en/format/markdown.html"><strong aria-hidden="true">2.3.6.</strong> Markdown</a></li></ol></li><li class="chapter-item expanded "><a href="en/continuous-integration.html"><strong aria-hidden="true">2.4.</strong> Continuous Integration</a></li><li class="chapter-item expanded "><a href="en/for_developers/index.html"><strong aria-hidden="true">2.5.</strong> For Developers</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="en/for_developers/preprocessors.html"><strong aria-hidden="true">2.5.1.</strong> Preprocessors</a></li><li class="chapter-item expanded "><a href="en/for_developers/backends.html"><strong aria-hidden="true">2.5.2.</strong> Alternative Backends</a></li></ol></li><li class="chapter-item expanded "><a href="en/misc/contributors.html"><strong aria-hidden="true">2.6.</strong> Contributors</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">mdBook 文档</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/rust-lang/mdBook/tree/master/guide" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="指南"><a class="header" href="#指南">指南</a></h1>
+<p><strong>mdBook</strong> 是一个命令行工具和 Rust crate，用于使用 Markdown 创建书籍。
+输出类似于 Gitbook 等工具，非常适合创建产品或 API 文档、教程、课程材料或任何需要干净、易于导航和可自定义的演示文稿的内容。
+mdBook 是用 <a href="https://www.rust-lang.org">Rust</a> 编写的；
+它的性能和简单性使其非常适合用作通过自动化直接发布到托管网站（例如 <a href="https://pages.github.com">GitHub Pages</a>）的工具。
+事实上，本指南既是 mdBook 文档，也是 mdBook 生成内容的一个很好的例子。</p>
+<p>mdBook 包括对 Markdown 预处理和用于生成 HTML 以外格式的替代渲染器的内置支持。
+这些工具还支持其他功能，例如验证。
+<a href="https://crates.io/search?q=mdbook&amp;sort=relevance">搜索</a> Rust 的 <a href="https://crates.io">crates.io</a> 是发现更多扩展的好方法。</p>
+<h2 id="api-文档"><a class="header" href="#api-文档">API 文档</a></h2>
+<p>除了以上特性，mdBook 还有一个 Rust <a href="https://docs.rs/mdbook/*/mdbook/">API</a>。 这允许您编写自己的预处理器或渲染器，以及将 mdBook 功能合并到其他应用程序中。 本指南的<a href="zh-cn/for_developers/index.html">面向开发人员</a>部分包含更多信息和一些示例。</p>
+<h2 id="贡献"><a class="header" href="#贡献">贡献</a></h2>
+<p>mdBook 是免费和开源的。 您可以在 <a href="https://github.com/rust-lang/mdBook">GitHub</a> 上找到源代码，问题和功能请求可以发布在 <a href="https://github.com/rust-lang/mdBook/issues">GitHub 问题跟踪器</a>上。 mdBook 依靠社区来修复错误和添加功能：如果您想做出贡献，请阅读 <a href="https://github.com/rust-lang/mdBook/blob/master/CONTRIBUTING.md">CONTRIBUTING</a> 指南并考虑打开<a href="https://github.com/rust-lang/mdBook/pulls">拉取请求</a>。</p>
+<h2 id="许可"><a class="header" href="#许可">许可</a></h2>
+<p>mdBook 源代码和文档在 <a href="https://www.mozilla.org/MPL/2.0/">Mozilla Public License v2.0</a> 下发布。</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="指南-1"><a class="header" href="#指南-1">指南</a></h1>
+<p><strong>mdBook</strong> 是一个命令行工具和 Rust crate，用于使用 Markdown 创建书籍。
+输出类似于 Gitbook 等工具，非常适合创建产品或 API 文档、教程、课程材料或任何需要干净、易于导航和可自定义的演示文稿的内容。
+mdBook 是用 <a href="https://www.rust-lang.org">Rust</a> 编写的；
+它的性能和简单性使其非常适合用作通过自动化直接发布到托管网站（例如 <a href="https://pages.github.com">GitHub Pages</a>）的工具。
+事实上，本指南既是 mdBook 文档，也是 mdBook 生成内容的一个很好的例子。</p>
+<p>mdBook 包括对 Markdown 预处理和用于生成 HTML 以外格式的替代渲染器的内置支持。
+这些工具还支持其他功能，例如验证。
+<a href="https://crates.io/search?q=mdbook&amp;sort=relevance">搜索</a> Rust 的 <a href="https://crates.io">crates.io</a> 是发现更多扩展的好方法。</p>
+<h2 id="api-文档-1"><a class="header" href="#api-文档-1">API 文档</a></h2>
+<p>除了以上特性，mdBook 还有一个 Rust <a href="https://docs.rs/mdbook/*/mdbook/">API</a>。 这允许您编写自己的预处理器或渲染器，以及将 mdBook 功能合并到其他应用程序中。 本指南的<a href="zh-cn/for_developers/index.html">面向开发人员</a>部分包含更多信息和一些示例。</p>
+<h2 id="贡献-1"><a class="header" href="#贡献-1">贡献</a></h2>
+<p>mdBook 是免费和开源的。 您可以在 <a href="https://github.com/rust-lang/mdBook">GitHub</a> 上找到源代码，问题和功能请求可以发布在 <a href="https://github.com/rust-lang/mdBook/issues">GitHub 问题跟踪器</a>上。 mdBook 依靠社区来修复错误和添加功能：如果您想做出贡献，请阅读 <a href="https://github.com/rust-lang/mdBook/blob/master/CONTRIBUTING.md">CONTRIBUTING</a> 指南并考虑打开<a href="https://github.com/rust-lang/mdBook/pulls">拉取请求</a>。</p>
+<h2 id="许可-1"><a class="header" href="#许可-1">许可</a></h2>
+<p>mdBook 源代码和文档在 <a href="https://www.mozilla.org/MPL/2.0/">Mozilla Public License v2.0</a> 下发布。</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="命令行工具"><a class="header" href="#命令行工具">命令行工具</a></h1>
+<p>mdBook 既可以用作命令行工具，也可以用作 <a href="https://crates.io/crates/mdbook">Rust crate</a>。 让我们首先关注命令行工具功能。</p>
+<h2 id="二进制文件安装"><a class="header" href="#二进制文件安装">二进制文件安装</a></h2>
+<p>我们尽最大努力为主要平台提供了预编译的二进制文件。 访问<a href="https://github.com/rust-lang/mdBook/releases">发布页面</a>以下载适合您平台的版本。</p>
+<h2 id="源码安装"><a class="header" href="#源码安装">源码安装</a></h2>
+<p>mdBook 也可以通过在本地机器上编译源代码来安装。</p>
+<h3 id="先决条件"><a class="header" href="#先决条件">先决条件</a></h3>
+<p>mdBook 是用 <strong><a href="https://www.rust-lang.org/">Rust</a></strong> 编写的，因此需要用 <strong>Cargo</strong> 编译。 如果您还没有安装 Rust，请立即<a href="https://www.rust-lang.org/tools/install">安装</a>。</p>
+<h3 id="安装-cratesio-版本"><a class="header" href="#安装-cratesio-版本">安装 Crates.io 版本</a></h3>
+<p>如果您已经安装了 Rust 和 Cargo，则安装 mdBook 相对容易。 你只需要在你的终端中输入这段代码：</p>
+<pre><code class="language-bash">cargo install mdbook
+</code></pre>
+<p>这将从 <a href="https://crates.io/">Crates.io</a> 获取最新版本的源代码并编译它。 您必须将 Cargo 的 <code>bin</code> 目录添加到您的 <code>PATH</code> 环境变量中。</p>
+<p>在终端中运行 <code>mdbook help</code> 以验证它是否有效。 恭喜，您已经安装了 mdBook！</p>
+<h3 id="安装-git-版本"><a class="header" href="#安装-git-版本">安装 Git 版本</a></h3>
+<p>**<a href="https://github.com/rust-lang/mdBook">git 版本</a>**包含所有最新的错误修复和功能，如果您不能等到下一个版本，它们将在 <strong>Crates.io</strong> 的下一个版本中发布。 您可以自己构建 git 版本。 打开您的终端并导航到您选择的目录。 我们需要克隆 git 存储库，然后使用 Cargo 构建它。</p>
+<pre><code class="language-bash">git clone --depth=1 https://github.com/rust-lang/mdBook.git
+cd mdBook
+cargo build --release
+</code></pre>
+<p>可执行文件 <code>mdbook</code> 将在 <code>./target/release</code> 文件夹中，这应该添加到<code>PATH</code> 环境变量中。</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="init-命令"><a class="header" href="#init-命令">init 命令</a></h1>
+<p>每本新书都有一些相同的最小模板。 为此，mdBook 包含了一个 <code>init</code> 命令。</p>
+<p><code>init</code> 命令的用法如下：</p>
+<pre><code class="language-bash">mdbook init
+</code></pre>
+<p>第一次使用 <code>init</code> 命令时，会为你设置几个文件：</p>
+<pre><code class="language-bash">book-test/
+├── book
+└── src
+    ├── chapter_1.md
+    └── SUMMARY.md
+</code></pre>
+<ul>
+<li><code>src</code> 目录是你用 Markdown 写书的地方。 它包含所有源文件、配置文件等。</li>
+<li><code>book</code> 目录是你的书被渲染的地方。 所有输出都已准备好上传到服务器以供观众查看。</li>
+<li><code>SUMMARY.md</code> 是本书的骨架，将在<a href="zh-cn/cli/../format/summary.html">另一章</a>中进行更详细的讨论。</li>
+</ul>
+<p><strong>提示</strong>：从 SUMMARY.md 生成章节</p>
+<p>当一个<code>SUMMARY.md</code>文件已经存在时，<code>init</code>命令会首先解析它并根据<code>SUMMARY.md</code>中使用的路径生成不存在的文件。 这允许您思考和创建您的书的整个结构，然后让 mdBook 为您生成它。</p>
+<h2 id="指定目录"><a class="header" href="#指定目录">指定目录</a></h2>
+<p><code>init</code> 命令可以将目录作为参数用作书的根目录而不是当前工作目录。</p>
+<pre><code class="language-bash">mdbook init path/to/book
+</code></pre>
+<h2 id="--theme"><a class="header" href="#--theme">--theme</a></h2>
+<p>当您使用 <code>--theme</code> 参数时，默认主题将被复制到源目录中名为 <code>theme</code> 的目录中，以便您可以对其进行修改。</p>
+<p>主题被选择性覆盖，这意味着如果您不想覆盖特定文件，只需将其删除即可使用默认文件。</p>
+<h2 id="--title"><a class="header" href="#--title">--title</a></h2>
+<p>指定书名。 如果未提供，交互式提示将要求提供标题。</p>
+<pre><code class="language-bash">mdbook init --title=&quot;my amazing book&quot;
+</code></pre>
+<h2 id="--ignore"><a class="header" href="#--ignore">--ignore</a></h2>
+<p>创建一个 <code>.gitignore</code> 文件，配置为忽略<a href="zh-cn/cli/build.html">构建</a>书籍时创建的 <code>book</code> 目录。 如果未提供，交互式提示将询问是否应创建。</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="the-build-command"><a class="header" href="#the-build-command">The build command</a></h1>
+<p>The build command is used to render your book:</p>
+<pre><code class="language-bash">mdbook build
+</code></pre>
+<p>It will try to parse your <code>SUMMARY.md</code> file to understand the structure of your
+book and fetch the corresponding files. Note that files mentioned in <code>SUMMARY.md</code>
+but not present will be created.</p>
+<p>The rendered output will maintain the same directory structure as the source for
+convenience. Large books will therefore remain structured when rendered.</p>
+<h4 id="specify-a-directory"><a class="header" href="#specify-a-directory">Specify a directory</a></h4>
+<p>The <code>build</code> command can take a directory as an argument to use as the book's
+root instead of the current working directory.</p>
+<pre><code class="language-bash">mdbook build path/to/book
+</code></pre>
+<h4 id="--open"><a class="header" href="#--open">--open</a></h4>
+<p>When you use the <code>--open</code> (<code>-o</code>) flag, mdbook will open the rendered book in
+your default web browser after building it.</p>
+<h4 id="--dest-dir"><a class="header" href="#--dest-dir">--dest-dir</a></h4>
+<p>The <code>--dest-dir</code> (<code>-d</code>) option allows you to change the output directory for the
+book. Relative paths are interpreted relative to the book's root directory. If
+not specified it will default to the value of the <code>build.build-dir</code> key in
+<code>book.toml</code>, or to <code>./book</code>.</p>
+<hr />
+<p><em><strong>Note:</strong></em> <em>The build command copies all files (excluding files with <code>.md</code> extension) from the source directory
+into the build directory.</em></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="the-watch-command"><a class="header" href="#the-watch-command">The watch command</a></h1>
+<p>The <code>watch</code> command is useful when you want your book to be rendered on every
+file change. You could repeatedly issue <code>mdbook build</code> every time a file is
+changed. But using <code>mdbook watch</code> once will watch your files and will trigger a
+build automatically whenever you modify a file; this includes re-creating
+deleted files still mentioned in <code>SUMMARY.md</code>!</p>
+<h4 id="specify-a-directory-1"><a class="header" href="#specify-a-directory-1">Specify a directory</a></h4>
+<p>The <code>watch</code> command can take a directory as an argument to use as the book's
+root instead of the current working directory.</p>
+<pre><code class="language-bash">mdbook watch path/to/book
+</code></pre>
+<h4 id="--open-1"><a class="header" href="#--open-1">--open</a></h4>
+<p>When you use the <code>--open</code> (<code>-o</code>) option, mdbook will open the rendered book in
+your default web browser.</p>
+<h4 id="--dest-dir-1"><a class="header" href="#--dest-dir-1">--dest-dir</a></h4>
+<p>The <code>--dest-dir</code> (<code>-d</code>) option allows you to change the output directory for the
+book. Relative paths are interpreted relative to the book's root directory. If
+not specified it will default to the value of the <code>build.build-dir</code> key in
+<code>book.toml</code>, or to <code>./book</code>.</p>
+<h4 id="specify-exclude-patterns"><a class="header" href="#specify-exclude-patterns">Specify exclude patterns</a></h4>
+<p>The <code>watch</code> command will not automatically trigger a build for files listed in
+the <code>.gitignore</code> file in the book root directory. The <code>.gitignore</code> file may
+contain file patterns described in the <a href="https://git-scm.com/docs/gitignore">gitignore
+documentation</a>. This can be useful for
+ignoring temporary files created by some editors.</p>
+<p><em>Note: Only <code>.gitignore</code> from book root directory is used. Global
+<code>$HOME/.gitignore</code> or <code>.gitignore</code> files in parent directories are not used.</em></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="the-serve-command"><a class="header" href="#the-serve-command">The serve command</a></h1>
+<p>The serve command is used to preview a book by serving it via HTTP at
+<code>localhost:3000</code> by default: </p>
+<pre><code class="language-bash">mdbook serve
+</code></pre>
+<p>The <code>serve</code> command  watches the book's <code>src</code> directory for
+changes, rebuilding the book and refreshing clients for each change; this includes
+re-creating deleted files still mentioned in <code>SUMMARY.md</code>! A websocket
+connection is used to trigger the client-side refresh.</p>
+<p><em><strong>Note:</strong></em> <em>The <code>serve</code> command is for testing a book's HTML output, and is not
+intended to be a complete HTTP server for a website.</em></p>
+<h4 id="specify-a-directory-2"><a class="header" href="#specify-a-directory-2">Specify a directory</a></h4>
+<p>The <code>serve</code> command can take a directory as an argument to use as the book's
+root instead of the current working directory.</p>
+<pre><code class="language-bash">mdbook serve path/to/book
+</code></pre>
+<h3 id="server-options"><a class="header" href="#server-options">Server options</a></h3>
+<p>The <code>serve</code> hostname defaults to <code>localhost</code>, and the port defaults to <code>3000</code>. Either option can be specified on the command line:</p>
+<pre><code class="language-bash">mdbook serve path/to/book -p 8000 -n 127.0.0.1 
+</code></pre>
+<h4 id="--open-2"><a class="header" href="#--open-2">--open</a></h4>
+<p>When you use the <code>--open</code> (<code>-o</code>) flag, mdbook will open the book in your
+default web browser after starting the server.</p>
+<h4 id="--dest-dir-2"><a class="header" href="#--dest-dir-2">--dest-dir</a></h4>
+<p>The <code>--dest-dir</code> (<code>-d</code>) option allows you to change the output directory for the
+book. Relative paths are interpreted relative to the book's root directory. If
+not specified it will default to the value of the <code>build.build-dir</code> key in
+<code>book.toml</code>, or to <code>./book</code>.</p>
+<h4 id="specify-exclude-patterns-1"><a class="header" href="#specify-exclude-patterns-1">Specify exclude patterns</a></h4>
+<p>The <code>serve</code> command will not automatically trigger a build for files listed in
+the <code>.gitignore</code> file in the book root directory. The <code>.gitignore</code> file may
+contain file patterns described in the <a href="https://git-scm.com/docs/gitignore">gitignore
+documentation</a>. This can be useful for
+ignoring temporary files created by some editors.</p>
+<p><em><strong>Note:</strong></em> <em>Only the <code>.gitignore</code> from the book root directory is used. Global
+<code>$HOME/.gitignore</code> or <code>.gitignore</code> files in parent directories are not used.</em></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="the-test-command"><a class="header" href="#the-test-command">The test command</a></h1>
+<p>When writing a book, you sometimes need to automate some tests. For example,
+<a href="https://doc.rust-lang.org/stable/book/">The Rust Programming Book</a> uses a lot
+of code examples that could get outdated. Therefore it is very important for
+them to be able to automatically test these code examples.</p>
+<p>mdBook supports a <code>test</code> command that will run all available tests in a book. At
+the moment, only rustdoc tests are supported, but this may be expanded upon in
+the future.</p>
+<h4 id="disable-tests-on-a-code-block"><a class="header" href="#disable-tests-on-a-code-block">Disable tests on a code block</a></h4>
+<p>rustdoc doesn't test code blocks which contain the <code>ignore</code> attribute:</p>
+<pre><code>```rust,ignore
+fn main() {}
+```
+</code></pre>
+<p>rustdoc also doesn't test code blocks which specify a language other than Rust:</p>
+<pre><code>```markdown
+**Foo**: _bar_
+```
+</code></pre>
+<p>rustdoc <em>does</em> test code blocks which have no language specified:</p>
+<pre><code>```
+This is going to cause an error!
+```
+</code></pre>
+<h4 id="specify-a-directory-3"><a class="header" href="#specify-a-directory-3">Specify a directory</a></h4>
+<p>The <code>test</code> command can take a directory as an argument to use as the book's root
+instead of the current working directory.</p>
+<pre><code class="language-bash">mdbook test path/to/book
+</code></pre>
+<h4 id="--library-path"><a class="header" href="#--library-path">--library-path</a></h4>
+<p>The <code>--library-path</code> (<code>-L</code>) option allows you to add directories to the library
+search path used by <code>rustdoc</code> when it builds and tests the examples. Multiple
+directories can be specified with multiple options (<code>-L foo -L bar</code>) or with a
+comma-delimited list (<code>-L foo,bar</code>). The path should point to the Cargo 
+<a href="https://doc.rust-lang.org/cargo/guide/build-cache.html">build cache</a> <code>deps</code> directory that
+contains the build output of your project. For example, if your Rust project's book is in a directory
+named <code>my-book</code>, the following command would include the crate's dependencies when running <code>test</code>:</p>
+<pre><code class="language-shell">mdbook test my-book -L target/debug/deps/
+</code></pre>
+<p>See the <code>rustdoc</code> command-line <a href="https://doc.rust-lang.org/rustdoc/command-line-arguments.html#-l--library-path-where-to-look-for-dependencies">documentation</a>
+for more information.</p>
+<h4 id="--dest-dir-3"><a class="header" href="#--dest-dir-3">--dest-dir</a></h4>
+<p>The <code>--dest-dir</code> (<code>-d</code>) option allows you to change the output directory for the
+book. Relative paths are interpreted relative to the book's root directory. If
+not specified it will default to the value of the <code>build.build-dir</code> key in
+<code>book.toml</code>, or to <code>./book</code>.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="the-clean-command"><a class="header" href="#the-clean-command">The clean command</a></h1>
+<p>The clean command is used to delete the generated book and any other build
+artifacts.</p>
+<pre><code class="language-bash">mdbook clean
+</code></pre>
+<h4 id="specify-a-directory-4"><a class="header" href="#specify-a-directory-4">Specify a directory</a></h4>
+<p>The <code>clean</code> command can take a directory as an argument to use as the book's
+root instead of the current working directory.</p>
+<pre><code class="language-bash">mdbook clean path/to/book
+</code></pre>
+<h4 id="--dest-dir-4"><a class="header" href="#--dest-dir-4">--dest-dir</a></h4>
+<p>The <code>--dest-dir</code> (<code>-d</code>) option allows you to override the book's output
+directory, which will be deleted by this command. Relative paths are interpreted
+relative to the book's root directory. If not specified it will default to the
+value of the <code>build.build-dir</code> key in <code>book.toml</code>, or to <code>./book</code>.</p>
+<pre><code class="language-bash">mdbook clean --dest-dir=path/to/book
+</code></pre>
+<p><code>path/to/book</code> could be absolute or relative.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="format"><a class="header" href="#format">Format</a></h1>
+<p>In this section you will learn how to:</p>
+<ul>
+<li>Structure your book correctly</li>
+<li>Format your <code>SUMMARY.md</code> file</li>
+<li>Configure your book using <code>book.toml</code></li>
+<li>Customize your theme</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="summarymd"><a class="header" href="#summarymd">SUMMARY.md</a></h1>
+<p>The summary file is used by mdBook to know what chapters to include, in what
+order they should appear, what their hierarchy is and where the source files
+are. Without this file, there is no book.</p>
+<p>This markdown file must be named <code>SUMMARY.md</code>. Its formatting
+is very strict and must follow the structure outlined below to allow for easy
+parsing. Any element not specified below, be it formatting or textual, is likely
+to be ignored at best, or may cause an error when attempting to build the book.</p>
+<h3 id="structure"><a class="header" href="#structure">Structure</a></h3>
+<ol>
+<li>
+<p><em><strong>Title</strong></em> - While optional, it's common practice to begin with a title, generally <code
+   class="language-markdown"># Summary</code>. This is ignored by the parser however, and
+can be omitted.</p>
+<pre><code class="language-markdown"># Summary
+</code></pre>
+</li>
+<li>
+<p><em><strong>Prefix Chapter</strong></em> - Before the main numbered chapters, prefix chapters can be added
+that will not be numbered. This is useful for forewords,
+introductions, etc. There are, however, some constraints. Prefix chapters cannot be
+nested; they should all be on the root level. And you cannot add
+prefix chapters once you have added numbered chapters.</p>
+<pre><code class="language-markdown">[A Prefix Chapter](relative/path/to/markdown.md)
+
+- [First Chapter](relative/path/to/markdown2.md)
+</code></pre>
+</li>
+<li>
+<p><em><strong>Part Title</strong></em> - Headers can be used as a title for the following numbered
+chapters. This can be used to logically separate different sections
+of the book. The title is rendered as unclickable text.
+Titles are optional, and the numbered chapters can be broken into as many
+parts as desired.</p>
+<pre><code class="language-markdown"># My Part Title
+
+- [First Chapter](relative/path/to/markdown.md)
+</code></pre>
+</li>
+<li>
+<p><em><strong>Numbered Chapter</strong></em> - Numbered chapters outline the main content of the book
+and can be nested, resulting in a nice hierarchy
+(chapters, sub-chapters, etc.).</p>
+<pre><code class="language-markdown"># Title of Part
+
+- [First Chapter](relative/path/to/markdown.md)
+- [Second Chapter](relative/path/to/markdown2.md)
+   - [Sub Chapter](relative/path/to/markdown3.md)
+
+# Title of Another Part
+
+- [Another Chapter](relative/path/to/markdown4.md)
+</code></pre>
+<p>Numbered chapters can be denoted with either <code>-</code> or <code>*</code> (do not mix delimiters).</p>
+</li>
+<li>
+<p><em><strong>Suffix Chapter</strong></em> - Like prefix chapters, suffix chapters are unnumbered, but they come after
+numbered chapters.</p>
+<pre><code class="language-markdown">- [Last Chapter](relative/path/to/markdown.md)
+
+[Title of Suffix Chapter](relative/path/to/markdown2.md)
+</code></pre>
+</li>
+<li>
+<p><em><strong>Draft chapters</strong></em> - Draft chapters are chapters without a file and thus content.
+The purpose of a draft chapter is to signal future chapters still to be written.
+Or when still laying out the structure of the book to avoid creating the files
+while you are still changing the structure of the book a lot.
+Draft chapters will be rendered in the HTML renderer as disabled links in the table
+of contents, as you can see for the next chapter in the table of contents on the left.
+Draft chapters are written like normal chapters but without writing the path to the file.</p>
+<pre><code class="language-markdown">- [Draft Chapter]()
+</code></pre>
+</li>
+<li>
+<p><em><strong>Separators</strong></em> - Separators can be added before, in between, and after any other element. They result
+in an HTML rendered line in the built table of contents.  A separator is
+a line containing exclusively dashes and at least three of them: <code>---</code>.</p>
+<pre><code class="language-markdown"># My Part Title
+
+[A Prefix Chapter](relative/path/to/markdown.md)
+
+---
+
+- [First Chapter](relative/path/to/markdown2.md)
+</code></pre>
+</li>
+</ol>
+<h3 id="example"><a class="header" href="#example">Example</a></h3>
+<p>Below is the markdown source for the <code>SUMMARY.md</code> for this guide, with the resulting table
+of contents as rendered to the left.</p>
+<pre><code class="language-markdown"># Summar
+
+- [zh-cn](zh-cn/README.md)
+  - [指南](zh-cn/README.md)
+  - [命令行](zh-cn/cli/README.md)
+    - [init](zh-cn/cli/init.md)
+    - [build](zh-cn/cli/build.md)
+    - [watch](zh-cn/cli/watch.md)
+    - [serve](zh-cn/cli/serve.md)
+    - [test](zh-cn/cli/test.md)
+    - [clean](zh-cn/cli/clean.md)
+  - [格式](zh-cn/format/README.md)
+    - [SUMMARY.md](zh-cn/format/summary.md)
+    - [配置](zh-cn/format/configuration/README.md)
+      - [常规](zh-cn/format/configuration/general.md)
+      - [预处理器](zh-cn/format/configuration/preprocessors.md)
+      - [渲染](zh-cn/format/configuration/renderers.md)
+      - [环境变量](zh-cn/format/configuration/environment-variables.md)
+    - [主题](zh-cn/format/theme/README.md)
+      - [index.hbs](zh-cn/format/theme/index-hbs.md)
+      - [语法高亮](zh-cn/format/theme/syntax-highlighting.md)
+      - [编辑器](zh-cn/format/theme/editor.md)
+    - [数学公式支持](zh-cn/format/mathjax.md)
+    - [mdBook特定功能](zh-cn/format/mdbook.md)
+    - [Markdown](zh-cn/format/markdown.md)
+  - [持续集成](zh-cn/continuous-integration.md)
+  - [开发者](zh-cn/zh-cn/for_developers/README.md)
+    - [预处理器](zh-cn/for_developers/preprocessors.md)
+    - [选择后端](zh-cn/for_developers/backends.md)
+  - [贡献列表](zh-cn/misc/contributors.md)
+- [en](en/README.md)
+  - [Introduction](en/README.md)
+  - [Command Line Tool](en/cli/README.md)
+    - [init](en/cli/init.md)
+    - [build](en/cli/build.md)
+    - [watch](en/cli/watch.md)
+    - [serve](en/cli/serve.md)
+    - [test](en/cli/test.md)
+    - [clean](en/cli/clean.md)
+  - [Format](en/format/README.md)
+    - [SUMMARY.md](en/format/summary.md)
+      - [Draft chapter]()
+    - [Configuration](en/format/configuration/README.md)
+      - [General](en/format/configuration/general.md)
+      - [Preprocessors](en/format/configuration/preprocessors.md)
+      - [Renderers](en/format/configuration/renderers.md)
+      - [Environment Variables](en/format/configuration/environment-variables.md)
+    - [Theme](en/format/theme/README.md)
+      - [index.hbs](en/format/theme/index-hbs.md)
+      - [Syntax highlighting](en/format/theme/syntax-highlighting.md)
+      - [Editor](en/format/theme/editor.md)
+    - [MathJax Support](en/format/mathjax.md)
+    - [mdBook-specific features](en/format/mdbook.md)
+    - [Markdown](en/format/markdown.md)
+  - [Continuous Integration](en/continuous-integration.md)
+  - [For Developers](en/for_developers/README.md)
+    - [Preprocessors](en/for_developers/preprocessors.md)
+    - [Alternative Backends](en/for_developers/backends.md)
+  - [Contributors](en/misc/contributors.md)
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="configuration"><a class="header" href="#configuration">Configuration</a></h1>
+<p>This section details the configuration options available in the <em><strong>book.toml</strong></em>:</p>
+<ul>
+<li><strong><a href="zh-cn/format/configuration/general.html">General</a></strong> configuration including the <code>book</code>, <code>rust</code>, <code>build</code> sections</li>
+<li><strong><a href="zh-cn/format/configuration/preprocessors.html">Preprocessor</a></strong> configuration for default and custom book preprocessors</li>
+<li><strong><a href="zh-cn/format/configuration/renderers.html">Renderer</a></strong> configuration for the HTML, Markdown and custom renderers</li>
+<li><strong><a href="zh-cn/format/configuration/environment-variables.html">Environment Variable</a></strong> configuration for overriding configuration options in your environment</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="general-configuration"><a class="header" href="#general-configuration">General Configuration</a></h1>
+<p>You can configure the parameters for your book in the <em><strong>book.toml</strong></em> file.</p>
+<p>Here is an example of what a <em><strong>book.toml</strong></em> file might look like:</p>
+<pre><code class="language-toml">[book]
+title = &quot;Example book&quot;
+author = &quot;John Doe&quot;
+description = &quot;The example book covers examples.&quot;
+
+[rust]
+edition = &quot;2018&quot;
+
+[build]
+build-dir = &quot;my-example-book&quot;
+create-missing = false
+
+[preprocessor.index]
+
+[preprocessor.links]
+
+[output.html]
+additional-css = [&quot;custom.css&quot;]
+
+[output.html.search]
+limit-results = 15
+</code></pre>
+<h2 id="supported-configuration-options"><a class="header" href="#supported-configuration-options">Supported configuration options</a></h2>
+<p>It is important to note that <strong>any</strong> relative path specified in the
+configuration will always be taken relative from the root of the book where the
+configuration file is located.</p>
+<h3 id="general-metadata"><a class="header" href="#general-metadata">General metadata</a></h3>
+<p>This is general information about your book.</p>
+<ul>
+<li><strong>title:</strong> The title of the book</li>
+<li><strong>authors:</strong> The author(s) of the book</li>
+<li><strong>description:</strong> A description for the book, which is added as meta
+information in the html <code>&lt;head&gt;</code> of each page</li>
+<li><strong>src:</strong> By default, the source directory is found in the directory named
+<code>src</code> directly under the root folder. But this is configurable with the <code>src</code>
+key in the configuration file.</li>
+<li><strong>language:</strong> The main language of the book, which is used as a language attribute <code>&lt;html lang=&quot;en&quot;&gt;</code> for example.</li>
+</ul>
+<p><strong>book.toml</strong></p>
+<pre><code class="language-toml">[book]
+title = &quot;Example book&quot;
+authors = [&quot;John Doe&quot;, &quot;Jane Doe&quot;]
+description = &quot;The example book covers examples.&quot;
+src = &quot;my-src&quot;  # the source files will be found in `root/my-src` instead of `root/src`
+language = &quot;en&quot;
+</code></pre>
+<h3 id="rust-options"><a class="header" href="#rust-options">Rust options</a></h3>
+<p>Options for the Rust language, relevant to running tests and playground
+integration.</p>
+<ul>
+<li>
+<p><strong>edition</strong>: Rust edition to use by default for the code snippets. Default
+is &quot;2015&quot;. Individual code blocks can be controlled with the <code>edition2015</code>, 
+<code>edition2018</code> or <code>edition2021</code> annotations, such as:</p>
+<pre><code class="language-text">```rust,edition2015
+// This only works in 2015.
+let try = true;
+```
+</code></pre>
+</li>
+</ul>
+<h3 id="build-options"><a class="header" href="#build-options">Build options</a></h3>
+<p>This controls the build process of your book.</p>
+<ul>
+<li>
+<p><strong>build-dir:</strong> The directory to put the rendered book in. By default this is
+<code>book/</code> in the book's root directory.</p>
+</li>
+<li>
+<p><strong>create-missing:</strong> By default, any missing files specified in <code>SUMMARY.md</code>
+will be created when the book is built (i.e. <code>create-missing = true</code>). If this
+is <code>false</code> then the build process will instead exit with an error if any files
+do not exist.</p>
+</li>
+<li>
+<p><strong>use-default-preprocessors:</strong> Disable the default preprocessors of (<code>links</code> &amp;
+<code>index</code>) by setting this option to <code>false</code>.</p>
+<p>If you have the same, and/or other preprocessors declared via their table
+of configuration, they will run instead.</p>
+<ul>
+<li>For clarity, with no preprocessor configuration, the default <code>links</code> and
+<code>index</code> will run.</li>
+<li>Setting <code>use-default-preprocessors = false</code> will disable these
+default preprocessors from running.</li>
+<li>Adding <code>[preprocessor.links]</code>, for example, will ensure, regardless of
+<code>use-default-preprocessors</code> that <code>links</code> it will run.</li>
+</ul>
+</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="configuring-preprocessors"><a class="header" href="#configuring-preprocessors">Configuring Preprocessors</a></h1>
+<p>The following preprocessors are available and included by default:</p>
+<ul>
+<li><code>links</code>: Expand the <code>{{ #playground }}</code>, <code>{{ #include }}</code>, and <code>{{ #rustdoc_include }}</code> handlebars
+helpers in a chapter to include the contents of a file.</li>
+<li><code>index</code>: Convert all chapter files named <code>README.md</code> into <code>index.md</code>. That is
+to say, all <code>README.md</code> would be rendered to an index file <code>index.html</code> in the
+rendered book.</li>
+</ul>
+<p><strong>book.toml</strong></p>
+<pre><code class="language-toml">[build]
+build-dir = &quot;build&quot;
+create-missing = false
+
+[preprocessor.links]
+
+[preprocessor.index]
+</code></pre>
+<h3 id="custom-preprocessor-configuration"><a class="header" href="#custom-preprocessor-configuration">Custom Preprocessor Configuration</a></h3>
+<p>Like renderers, preprocessor will need to be given its own table (e.g.
+<code>[preprocessor.mathjax]</code>). In the section, you may then pass extra
+configuration to the preprocessor by adding key-value pairs to the table.</p>
+<p>For example</p>
+<pre><code class="language-toml">[preprocessor.links]
+# set the renderers this preprocessor will run for
+renderers = [&quot;html&quot;]
+some_extra_feature = true
+</code></pre>
+<h4 id="locking-a-preprocessor-dependency-to-a-renderer"><a class="header" href="#locking-a-preprocessor-dependency-to-a-renderer">Locking a Preprocessor dependency to a renderer</a></h4>
+<p>You can explicitly specify that a preprocessor should run for a renderer by
+binding the two together.</p>
+<pre><code class="language-toml">[preprocessor.mathjax]
+renderers = [&quot;html&quot;]  # mathjax only makes sense with the HTML renderer
+</code></pre>
+<h3 id="provide-your-own-command"><a class="header" href="#provide-your-own-command">Provide Your Own Command</a></h3>
+<p>By default when you add a <code>[preprocessor.foo]</code> table to your <code>book.toml</code> file,
+<code>mdbook</code> will try to invoke the <code>mdbook-foo</code> executable. If you want to use a
+different program name or pass in command-line arguments, this behaviour can
+be overridden by adding a <code>command</code> field.</p>
+<pre><code class="language-toml">[preprocessor.random]
+command = &quot;python random.py&quot;
+</code></pre>
+<h3 id="require-a-certain-order"><a class="header" href="#require-a-certain-order">Require A Certain Order</a></h3>
+<p>The order in which preprocessors are run can be controlled with the <code>before</code> and <code>after</code> fields.
+For example, suppose you want your <code>linenos</code> preprocessor to process lines that may have been <code>{{#include}}</code>d; then you want it to run after the built-in <code>links</code> preprocessor, which you can require using either the <code>before</code> or <code>after</code> field:</p>
+<pre><code class="language-toml">[preprocessor.linenos]
+after = [ &quot;links&quot; ]
+</code></pre>
+<p>or</p>
+<pre><code class="language-toml">[preprocessor.links]
+before = [ &quot;linenos&quot; ]
+</code></pre>
+<p>It would also be possible, though redundant, to specify both of the above in the same config file.</p>
+<p>Preprocessors having the same priority specified through <code>before</code> and <code>after</code> are sorted by name.
+Any infinite loops will be detected and produce an error.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="configuring-renderers"><a class="header" href="#configuring-renderers">Configuring Renderers</a></h1>
+<h3 id="html-renderer-options"><a class="header" href="#html-renderer-options">HTML renderer options</a></h3>
+<p>The HTML renderer has a couple of options as well. All the options for the
+renderer need to be specified under the TOML table <code>[output.html]</code>.</p>
+<p>The following configuration options are available:</p>
+<ul>
+<li><strong>theme:</strong> mdBook comes with a default theme and all the resource files needed
+for it. But if this option is set, mdBook will selectively overwrite the theme
+files with the ones found in the specified folder.</li>
+<li><strong>default-theme:</strong> The theme color scheme to select by default in the
+'Change Theme' dropdown. Defaults to <code>light</code>.</li>
+<li><strong>preferred-dark-theme:</strong> The default dark theme. This theme will be used if
+the browser requests the dark version of the site via the
+<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme">'prefers-color-scheme'</a>
+CSS media query. Defaults to <code>navy</code>.</li>
+<li><strong>curly-quotes:</strong> Convert straight quotes to curly quotes, except for those
+that occur in code blocks and code spans. Defaults to <code>false</code>.</li>
+<li><strong>mathjax-support:</strong> Adds support for <a href="zh-cn/format/configuration/../mathjax.html">MathJax</a>. Defaults to
+<code>false</code>.</li>
+<li><strong>copy-fonts:</strong> Copies fonts.css and respective font files to the output directory and use them in the default theme. Defaults to <code>true</code>.</li>
+<li><strong>google-analytics:</strong> This field has been deprecated and will be removed in a future release.
+Use the <code>theme/head.hbs</code> file to add the appropriate Google Analytics code instead.</li>
+<li><strong>additional-css:</strong> If you need to slightly change the appearance of your book
+without overwriting the whole style, you can specify a set of stylesheets that
+will be loaded after the default ones where you can surgically change the
+style.</li>
+<li><strong>additional-js:</strong> If you need to add some behaviour to your book without
+removing the current behaviour, you can specify a set of JavaScript files that
+will be loaded alongside the default one.</li>
+<li><strong>print:</strong> A subtable for configuration print settings. mdBook by default adds
+support for printing out the book as a single page. This is accessed using the
+print icon on the top right of the book.</li>
+<li><strong>no-section-label:</strong> mdBook by defaults adds section label in table of
+contents column. For example, &quot;1.&quot;, &quot;2.1&quot;. Set this option to true to disable
+those labels. Defaults to <code>false</code>.</li>
+<li><strong>fold:</strong> A subtable for configuring sidebar section-folding behavior.</li>
+<li><strong>playground:</strong> A subtable for configuring various playground settings.</li>
+<li><strong>search:</strong> A subtable for configuring the in-browser search functionality.
+mdBook must be compiled with the <code>search</code> feature enabled (on by default).</li>
+<li><strong>git-repository-url:</strong>  A url to the git repository for the book. If provided
+an icon link will be output in the menu bar of the book.</li>
+<li><strong>git-repository-icon:</strong> The FontAwesome icon class to use for the git
+repository link. Defaults to <code>fa-github</code>.</li>
+<li><strong>edit-url-template:</strong> Edit url template, when provided shows a
+&quot;Suggest an edit&quot; button for directly jumping to editing the currently
+viewed page. For e.g. GitHub projects set this to
+<code>https://github.com/&lt;owner&gt;/&lt;repo&gt;/edit/master/{path}</code> or for
+Bitbucket projects set it to
+<code>https://bitbucket.org/&lt;owner&gt;/&lt;repo&gt;/src/master/{path}?mode=edit</code>
+where {path} will be replaced with the full path of the file in the
+repository.</li>
+<li><strong>redirect:</strong> A subtable used for generating redirects when a page is moved.
+The table contains key-value pairs where the key is where the redirect file
+needs to be created, as an absolute path from the build directory, (e.g.
+<code>/appendices/bibliography.html</code>). The value can be any valid URI the
+browser should navigate to (e.g. <code>https://rust-lang.org/</code>,
+<code>/overview.html</code>, or <code>../bibliography.html</code>).</li>
+<li><strong>input-404:</strong> The name of the markdown file used for missing files.
+The corresponding output file will be the same, with the extension replaced with <code>html</code>.
+Defaults to <code>404.md</code>.</li>
+<li><strong>site-url:</strong> The url where the book will be hosted. This is required to ensure
+navigation links and script/css imports in the 404 file work correctly, even when accessing
+urls in subdirectories. Defaults to <code>/</code>.</li>
+<li><strong>cname:</strong> The DNS subdomain or apex domain at which your book will be hosted.
+This string will be written to a file named CNAME in the root of your site, as
+required by GitHub Pages (see <a href="https://docs.github.com/en/github/working-with-github-pages/managing-a-custom-domain-for-your-github-pages-site"><em>Managing a custom domain for your GitHub Pages
+site</em></a>).</li>
+</ul>
+<p>Available configuration options for the <code>[output.html.print]</code> table:</p>
+<ul>
+<li><strong>enable:</strong> Enable print support. When <code>false</code>, all print support will not be
+rendered. Defaults to <code>true</code>.</li>
+</ul>
+<p>Available configuration options for the <code>[output.html.fold]</code> table:</p>
+<ul>
+<li><strong>enable:</strong> Enable section-folding. When off, all folds are open.
+Defaults to <code>false</code>.</li>
+<li><strong>level:</strong> The higher the more folded regions are open. When level is 0, all
+folds are closed. Defaults to <code>0</code>.</li>
+</ul>
+<p>Available configuration options for the <code>[output.html.playground]</code> table:</p>
+<ul>
+<li><strong>editable:</strong> Allow editing the source code. Defaults to <code>false</code>.</li>
+<li><strong>copyable:</strong> Display the copy button on code snippets. Defaults to <code>true</code>.</li>
+<li><strong>copy-js:</strong> Copy JavaScript files for the editor to the output directory.
+Defaults to <code>true</code>.</li>
+<li><strong>line-numbers</strong> Display line numbers on editable sections of code. Requires both <code>editable</code> and <code>copy-js</code> to be <code>true</code>. Defaults to <code>false</code>.</li>
+</ul>
+<p>Available configuration options for the <code>[output.html.search]</code> table:</p>
+<ul>
+<li><strong>enable:</strong> Enables the search feature. Defaults to <code>true</code>.</li>
+<li><strong>limit-results:</strong> The maximum number of search results. Defaults to <code>30</code>.</li>
+<li><strong>teaser-word-count:</strong> The number of words used for a search result teaser.
+Defaults to <code>30</code>.</li>
+<li><strong>use-boolean-and:</strong> Define the logical link between multiple search words. If
+true, all search words must appear in each result. Defaults to <code>false</code>.</li>
+<li><strong>boost-title:</strong> Boost factor for the search result score if a search word
+appears in the header. Defaults to <code>2</code>.</li>
+<li><strong>boost-hierarchy:</strong> Boost factor for the search result score if a search word
+appears in the hierarchy. The hierarchy contains all titles of the parent
+documents and all parent headings. Defaults to <code>1</code>.</li>
+<li><strong>boost-paragraph:</strong> Boost factor for the search result score if a search word
+appears in the text. Defaults to <code>1</code>.</li>
+<li><strong>expand:</strong> True if search should match longer results e.g. search <code>micro</code>
+should match <code>microwave</code>. Defaults to <code>true</code>.</li>
+<li><strong>heading-split-level:</strong> Search results will link to a section of the document
+which contains the result. Documents are split into sections by headings this
+level or less. Defaults to <code>3</code>. (<code>### This is a level 3 heading</code>)</li>
+<li><strong>copy-js:</strong> Copy JavaScript files for the search implementation to the output
+directory. Defaults to <code>true</code>.</li>
+</ul>
+<p>This shows all available HTML output options in the <strong>book.toml</strong>:</p>
+<pre><code class="language-toml">[book]
+title = &quot;Example book&quot;
+authors = [&quot;John Doe&quot;, &quot;Jane Doe&quot;]
+description = &quot;The example book covers examples.&quot;
+
+[output.html]
+theme = &quot;my-theme&quot;
+default-theme = &quot;light&quot;
+preferred-dark-theme = &quot;navy&quot;
+curly-quotes = true
+mathjax-support = false
+copy-fonts = true
+additional-css = [&quot;custom.css&quot;, &quot;custom2.css&quot;]
+additional-js = [&quot;custom.js&quot;]
+no-section-label = false
+git-repository-url = &quot;https://github.com/rust-lang/mdBook&quot;
+git-repository-icon = &quot;fa-github&quot;
+edit-url-template = &quot;https://github.com/rust-lang/mdBook/edit/master/guide/{path}&quot;
+site-url = &quot;/example-book/&quot;
+cname = &quot;myproject.rs&quot;
+input-404 = &quot;not-found.md&quot;
+
+[output.html.print]
+enable = true
+
+[output.html.fold]
+enable = false
+level = 0
+
+[output.html.playground]
+editable = false
+copy-js = true
+line-numbers = false
+
+[output.html.search]
+enable = true
+limit-results = 30
+teaser-word-count = 30
+use-boolean-and = true
+boost-title = 2
+boost-hierarchy = 1
+boost-paragraph = 1
+expand = true
+heading-split-level = 3
+copy-js = true
+
+[output.html.redirect]
+&quot;/appendices/bibliography.html&quot; = &quot;https://rustc-dev-guide.rust-lang.org/appendix/bibliography.html&quot;
+&quot;/other-installation-methods.html&quot; = &quot;../infra/other-installation-methods.html&quot;
+</code></pre>
+<h3 id="markdown-renderer"><a class="header" href="#markdown-renderer">Markdown Renderer</a></h3>
+<p>The Markdown renderer will run preprocessors and then output the resulting
+Markdown. This is mostly useful for debugging preprocessors, especially in
+conjunction with <code>mdbook test</code> to see the Markdown that <code>mdbook</code> is passing
+to <code>rustdoc</code>.</p>
+<p>The Markdown renderer is included with <code>mdbook</code> but disabled by default.
+Enable it by adding an empty table to your <code>book.toml</code> as follows:</p>
+<pre><code class="language-toml">[output.markdown]
+</code></pre>
+<p>There are no configuration options for the Markdown renderer at this time;
+only whether it is enabled or disabled.</p>
+<p>See <a href="zh-cn/format/configuration/preprocessors.html">the preprocessors documentation</a> for how to
+specify which preprocessors should run before the Markdown renderer.</p>
+<h3 id="custom-renderers"><a class="header" href="#custom-renderers">Custom Renderers</a></h3>
+<p>A custom renderer can be enabled by adding a <code>[output.foo]</code> table to your
+<code>book.toml</code>. Similar to <a href="zh-cn/format/configuration/preprocessors.html">preprocessors</a> this will
+instruct <code>mdbook</code> to pass a representation of the book to <code>mdbook-foo</code> for
+rendering. See the <a href="zh-cn/format/configuration/../../for_developers/backends.html">alternative backends</a> chapter for more detail.</p>
+<p>The custom renderer has access to all the fields within its table (i.e.
+anything under <code>[output.foo]</code>). mdBook checks for two common fields:</p>
+<ul>
+<li><strong>command:</strong> The command to execute for this custom renderer. Defaults to
+the name of the renderer with the <code>mdbook-</code> prefix (such as <code>mdbook-foo</code>).</li>
+<li><strong>optional:</strong> If <code>true</code>, then the command will be ignored if it is not
+installed, otherwise mdBook will fail with an error. Defaults to <code>false</code>.</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="environment-variables"><a class="header" href="#environment-variables">Environment Variables</a></h1>
+<p>All configuration values can be overridden from the command line by setting the
+corresponding environment variable. Because many operating systems restrict
+environment variables to be alphanumeric characters or <code>_</code>, the configuration
+key needs to be formatted slightly differently to the normal <code>foo.bar.baz</code> form.</p>
+<p>Variables starting with <code>MDBOOK_</code> are used for configuration. The key is created
+by removing the <code>MDBOOK_</code> prefix and turning the resulting string into
+<code>kebab-case</code>. Double underscores (<code>__</code>) separate nested keys, while a single
+underscore (<code>_</code>) is replaced with a dash (<code>-</code>).</p>
+<p>For example:</p>
+<ul>
+<li><code>MDBOOK_foo</code> -&gt; <code>foo</code></li>
+<li><code>MDBOOK_FOO</code> -&gt; <code>foo</code></li>
+<li><code>MDBOOK_FOO__BAR</code> -&gt; <code>foo.bar</code></li>
+<li><code>MDBOOK_FOO_BAR</code> -&gt; <code>foo-bar</code></li>
+<li><code>MDBOOK_FOO_bar__baz</code> -&gt; <code>foo-bar.baz</code></li>
+</ul>
+<p>So by setting the <code>MDBOOK_BOOK__TITLE</code> environment variable you can override the
+book's title without needing to touch your <code>book.toml</code>.</p>
+<blockquote>
+<p><strong>Note:</strong> To facilitate setting more complex config items, the value of an
+environment variable is first parsed as JSON, falling back to a string if the
+parse fails.</p>
+<p>This means, if you so desired, you could override all book metadata when
+building the book with something like</p>
+<pre><code class="language-shell">$ export MDBOOK_BOOK=&quot;{'title': 'My Awesome Book', authors: ['Michael-F-Bryan']}&quot;
+$ mdbook build
+</code></pre>
+</blockquote>
+<p>The latter case may be useful in situations where <code>mdbook</code> is invoked from a
+script or CI, where it sometimes isn't possible to update the <code>book.toml</code> before
+building.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="theme"><a class="header" href="#theme">Theme</a></h1>
+<p>The default renderer uses a <a href="http://handlebarsjs.com/">handlebars</a> template to
+render your markdown files and comes with a default theme included in the mdBook
+binary.</p>
+<p>The theme is totally customizable, you can selectively replace every file from
+the theme by your own by adding a <code>theme</code> directory next to <code>src</code> folder in your
+project root. Create a new file with the name of the file you want to override
+and now that file will be used instead of the default file.</p>
+<p>Here are the files you can override:</p>
+<ul>
+<li><strong><em>index.hbs</em></strong> is the handlebars template.</li>
+<li><strong><em>head.hbs</em></strong> is appended to the HTML <code>&lt;head&gt;</code> section.</li>
+<li><strong><em>header.hbs</em></strong> content is appended on top of every book page.</li>
+<li><strong><em>css/</em></strong> contains the CSS files for styling the book.
+<ul>
+<li><strong><em>css/chrome.css</em></strong> is for UI elements.</li>
+<li><strong><em>css/general.css</em></strong> is the base styles.</li>
+<li><strong><em>css/print.css</em></strong> is the style for printer output.</li>
+<li><strong><em>css/variables.css</em></strong> contains variables used in other CSS files.</li>
+</ul>
+</li>
+<li><strong><em>book.js</em></strong> is mostly used to add client side functionality, like hiding /
+un-hiding the sidebar, changing the theme, ...</li>
+<li><strong><em>highlight.js</em></strong> is the JavaScript that is used to highlight code snippets,
+you should not need to modify this.</li>
+<li><strong><em>highlight.css</em></strong> is the theme used for the code highlighting.</li>
+<li><strong><em>favicon.svg</em></strong> and <strong><em>favicon.png</em></strong> the favicon that will be used. The SVG
+version is used by <a href="https://caniuse.com/#feat=link-icon-svg">newer browsers</a>.</li>
+</ul>
+<p>Generally, when you want to tweak the theme, you don't need to override all the
+files. If you only need changes in the stylesheet, there is no point in
+overriding all the other files. Because custom files take precedence over
+built-in ones, they will not get updated with new fixes / features.</p>
+<p><strong>Note:</strong> When you override a file, it is possible that you break some
+functionality. Therefore I recommend to use the file from the default theme as
+template and only add / modify what you need. You can copy the default theme
+into your source directory automatically by using <code>mdbook init --theme</code> and just
+remove the files you don't want to override.</p>
+<p>If you completely replace all built-in themes, be sure to also set
+<a href="zh-cn/format/theme/../configuration/renderers.html#html-renderer-options"><code>output.html.preferred-dark-theme</code></a> in the config, which defaults to the
+built-in <code>navy</code> theme.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="indexhbs"><a class="header" href="#indexhbs">index.hbs</a></h1>
+<p><code>index.hbs</code> is the handlebars template that is used to render the book. The
+markdown files are processed to html and then injected in that template.</p>
+<p>If you want to change the layout or style of your book, chances are that you
+will have to modify this template a little bit. Here is what you need to know.</p>
+<h2 id="data"><a class="header" href="#data">Data</a></h2>
+<p>A lot of data is exposed to the handlebars template with the &quot;context&quot;. In the
+handlebars template you can access this information by using</p>
+<pre><code class="language-handlebars">{{name_of_property}}
+</code></pre>
+<p>Here is a list of the properties that are exposed:</p>
+<ul>
+<li>
+<p><em><strong>language</strong></em> Language of the book in the form <code>en</code>, as specified in <code>book.toml</code> (if not specified, defaults to <code>en</code>). To use in <code
+  class="language-html">&lt;html lang=&quot;{{ language }}&quot;&gt;</code> for example.</p>
+</li>
+<li>
+<p><em><strong>title</strong></em> Title used for the current page. This is identical to <code>{{ chapter_title }} - {{ book_title }}</code> unless <code>book_title</code> is not set in which case it just defaults to the <code>chapter_title</code>.</p>
+</li>
+<li>
+<p><em><strong>book_title</strong></em> Title of the book, as specified in <code>book.toml</code></p>
+</li>
+<li>
+<p><em><strong>chapter_title</strong></em> Title of the current chapter, as listed in <code>SUMMARY.md</code></p>
+</li>
+<li>
+<p><em><strong>path</strong></em> Relative path to the original markdown file from the source
+directory</p>
+</li>
+<li>
+<p><em><strong>content</strong></em> This is the rendered markdown.</p>
+</li>
+<li>
+<p><em><strong>path_to_root</strong></em> This is a path containing exclusively <code>../</code>'s that points
+to the root of the book from the current file. Since the original directory
+structure is maintained, it is useful to prepend relative links with this
+<code>path_to_root</code>.</p>
+</li>
+<li>
+<p><em><strong>chapters</strong></em> Is an array of dictionaries of the form</p>
+<pre><code class="language-json">{&quot;section&quot;: &quot;1.2.1&quot;, &quot;name&quot;: &quot;name of this chapter&quot;, &quot;path&quot;: &quot;dir/markdown.md&quot;}
+</code></pre>
+<p>containing all the chapters of the book. It is used for example to construct
+the table of contents (sidebar).</p>
+</li>
+</ul>
+<h2 id="handlebars-helpers"><a class="header" href="#handlebars-helpers">Handlebars Helpers</a></h2>
+<p>In addition to the properties you can access, there are some handlebars helpers
+at your disposal.</p>
+<h3 id="1-toc"><a class="header" href="#1-toc">1. toc</a></h3>
+<p>The toc helper is used like this</p>
+<pre><code class="language-handlebars">{{#toc}}{{/toc}}
+</code></pre>
+<p>and outputs something that looks like this, depending on the structure of your
+book</p>
+<pre><code class="language-html">&lt;ul class=&quot;chapter&quot;&gt;
+    &lt;li&gt;&lt;a href=&quot;link/to/file.html&quot;&gt;Some chapter&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;
+        &lt;ul class=&quot;section&quot;&gt;
+            &lt;li&gt;&lt;a href=&quot;link/to/other_file.html&quot;&gt;Some other Chapter&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+&lt;/ul&gt;
+</code></pre>
+<p>If you would like to make a toc with another structure, you have access to the
+chapters property containing all the data. The only limitation at the moment
+is that you would have to do it with JavaScript instead of with a handlebars
+helper.</p>
+<pre><code class="language-html">&lt;script&gt;
+var chapters = {{chapters}};
+// Processing here
+&lt;/script&gt;
+</code></pre>
+<h3 id="2-previous--next"><a class="header" href="#2-previous--next">2. previous / next</a></h3>
+<p>The previous and next helpers expose a <code>link</code> and <code>name</code> property to the
+previous and next chapters.</p>
+<p>They are used like this</p>
+<pre><code class="language-handlebars">{{#previous}}
+    &lt;a href=&quot;{{link}}&quot; class=&quot;nav-chapters previous&quot;&gt;
+        &lt;i class=&quot;fa fa-angle-left&quot;&gt;&lt;/i&gt;
+    &lt;/a&gt;
+{{/previous}}
+</code></pre>
+<p>The inner html will only be rendered if the previous / next chapter exists.
+Of course the inner html can be changed to your liking.</p>
+<hr />
+<p><em>If you would like other properties or helpers exposed, please <a href="https://github.com/rust-lang/mdBook/issues">create a new
+issue</a></em></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="syntax-highlighting"><a class="header" href="#syntax-highlighting">Syntax Highlighting</a></h1>
+<p>mdBook uses <a href="https://highlightjs.org">Highlight.js</a> with a custom theme
+for syntax highlighting.</p>
+<p>Automatic language detection has been turned off, so you will probably want to
+specify the programming language you use like this:</p>
+<pre><code class="language-markdown">```rust
+fn main() {
+    // Some code
+}
+```
+</code></pre>
+<h2 id="supported-languages"><a class="header" href="#supported-languages">Supported languages</a></h2>
+<p>These languages are supported by default, but you can add more by supplying
+your own <code>highlight.js</code> file:</p>
+<ul>
+<li>apache</li>
+<li>armasm</li>
+<li>bash</li>
+<li>c</li>
+<li>coffeescript</li>
+<li>cpp</li>
+<li>csharp</li>
+<li>css</li>
+<li>d</li>
+<li>diff</li>
+<li>go</li>
+<li>handlebars</li>
+<li>haskell</li>
+<li>http</li>
+<li>ini</li>
+<li>java</li>
+<li>javascript</li>
+<li>json</li>
+<li>julia</li>
+<li>kotlin</li>
+<li>less</li>
+<li>lua</li>
+<li>makefile</li>
+<li>markdown</li>
+<li>nginx</li>
+<li>objectivec</li>
+<li>perl</li>
+<li>php</li>
+<li>plaintext</li>
+<li>properties</li>
+<li>python</li>
+<li>r</li>
+<li>ruby</li>
+<li>rust</li>
+<li>scala</li>
+<li>scss</li>
+<li>shell</li>
+<li>sql</li>
+<li>swift</li>
+<li>typescript</li>
+<li>x86asm</li>
+<li>xml</li>
+<li>yaml</li>
+</ul>
+<h2 id="custom-theme"><a class="header" href="#custom-theme">Custom theme</a></h2>
+<p>Like the rest of the theme, the files used for syntax highlighting can be
+overridden with your own.</p>
+<ul>
+<li><em><strong>highlight.js</strong></em> normally you shouldn't have to overwrite this file, unless
+you want to use a more recent version.</li>
+<li><em><strong>highlight.css</strong></em> theme used by highlight.js for syntax highlighting.</li>
+</ul>
+<p>If you want to use another theme for <code>highlight.js</code> download it from their
+website, or make it yourself, rename it to <code>highlight.css</code> and put it in
+the <code>theme</code> folder of your book.</p>
+<p>Now your theme will be used instead of the default theme.</p>
+<h2 id="hiding-code-lines"><a class="header" href="#hiding-code-lines">Hiding code lines</a></h2>
+<p>There is a feature in mdBook that lets you hide code lines by prepending them
+with a <code>#</code>.</p>
+<pre><code class="language-bash"># fn main() {
+    let x = 5;
+    let y = 6;
+
+    println!(&quot;{}&quot;, x + y);
+# }
+</code></pre>
+<p>Will render as</p>
+<pre><pre class="playground"><code class="language-rust edition2018"><span class="boring">fn main() {
+</span>    let x = 5;
+    let y = 7;
+
+    println!(&quot;{}&quot;, x + y);
+<span class="boring">}
+</span></code></pre></pre>
+<p><strong>At the moment, this only works for code examples that are annotated with
+<code>rust</code>. Because it would collide with semantics of some programming languages.
+In the future, we want to make this configurable through the <code>book.toml</code> so that
+everyone can benefit from it.</strong></p>
+<h2 id="improve-default-theme"><a class="header" href="#improve-default-theme">Improve default theme</a></h2>
+<p>If you think the default theme doesn't look quite right for a specific language,
+or could be improved, feel free to <a href="https://github.com/rust-lang/mdBook/issues">submit a new
+issue</a> explaining what you
+have in mind and I will take a look at it.</p>
+<p>You could also create a pull-request with the proposed improvements.</p>
+<p>Overall the theme should be light and sober, without too many flashy colors.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="editor"><a class="header" href="#editor">Editor</a></h1>
+<p>In addition to providing runnable code playgrounds, mdBook optionally allows them
+to be editable. In order to enable editable code blocks, the following needs to
+be added to the <em><strong>book.toml</strong></em>:</p>
+<pre><code class="language-toml">[output.html.playground]
+editable = true
+</code></pre>
+<p>To make a specific block available for editing, the attribute <code>editable</code> needs
+to be added to it:</p>
+<pre><code class="language-markdown">```rust,editable
+fn main() {
+    let number = 5;
+    print!("{}", number);
+}
+```</code></pre>
+<p>The above will result in this editable playground:</p>
+<pre><pre class="playground"><code class="language-rust editable edition2018">fn main() {
+    let number = 5;
+    print!(&quot;{}&quot;, number);
+}
+</code></pre></pre>
+<p>Note the new <code>Undo Changes</code> button in the editable playgrounds.</p>
+<h2 id="customizing-the-editor"><a class="header" href="#customizing-the-editor">Customizing the Editor</a></h2>
+<p>By default, the editor is the <a href="https://ace.c9.io/">Ace</a> editor, but, if desired,
+the functionality may be overridden by providing a different folder:</p>
+<pre><code class="language-toml">[output.html.playground]
+editable = true
+editor = &quot;/path/to/editor&quot;
+</code></pre>
+<p>Note that for the editor changes to function correctly, the <code>book.js</code> inside of
+the <code>theme</code> folder will need to be overridden as it has some couplings with the
+default Ace editor.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="mathjax-support"><a class="header" href="#mathjax-support">MathJax Support</a></h1>
+<p>mdBook has optional support for math equations through
+<a href="https://www.mathjax.org/">MathJax</a>.</p>
+<p>To enable MathJax, you need to add the <code>mathjax-support</code> key to your <code>book.toml</code>
+under the <code>output.html</code> section.</p>
+<pre><code class="language-toml">[output.html]
+mathjax-support = true
+</code></pre>
+<blockquote>
+<p><strong>Note:</strong> The usual delimiters MathJax uses are not yet supported. You can't
+currently use <code>$$ ... $$</code> as delimiters and the <code>\[ ... \]</code> delimiters need an
+extra backslash to work. Hopefully this limitation will be lifted soon.</p>
+</blockquote>
+<blockquote>
+<p><strong>Note:</strong> When you use double backslashes in MathJax blocks (for example in
+commands such as <code>\begin{cases} \frac 1 2 \\ \frac 3 4 \end{cases}</code>) you need
+to add <em>two extra</em> backslashes (e.g., <code>\begin{cases} \frac 1 2 \\\\ \frac 3 4 \end{cases}</code>).</p>
+</blockquote>
+<h3 id="inline-equations"><a class="header" href="#inline-equations">Inline equations</a></h3>
+<p>Inline equations are delimited by <code>\\(</code> and <code>\\)</code>. So for example, to render the
+following inline equation \( \int x dx = \frac{x^2}{2} + C \) you would write
+the following:</p>
+<pre><code>\\( \int x dx = \frac{x^2}{2} + C \\)
+</code></pre>
+<h3 id="block-equations"><a class="header" href="#block-equations">Block equations</a></h3>
+<p>Block equations are delimited by <code>\\[</code> and <code>\\]</code>. To render the following
+equation</p>
+<p>\[ \mu = \frac{1}{N} \sum_{i=0} x_i \]</p>
+<p>you would write:</p>
+<pre><code class="language-bash">\\[ \mu = \frac{1}{N} \sum_{i=0} x_i \\]
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="mdbook-specific-features"><a class="header" href="#mdbook-specific-features">mdBook-specific features</a></h1>
+<h2 id="hiding-code-lines-1"><a class="header" href="#hiding-code-lines-1">Hiding code lines</a></h2>
+<p>There is a feature in mdBook that lets you hide code lines by prepending them
+with a <code>#</code> <a href="https://doc.rust-lang.org/stable/rustdoc/documentation-tests.html#hiding-portions-of-the-example">like you would with Rustdoc</a>.</p>
+<pre><code class="language-bash"># fn main() {
+    let x = 5;
+    let y = 6;
+
+    println!(&quot;{}&quot;, x + y);
+# }
+</code></pre>
+<p>Will render as</p>
+<pre><pre class="playground"><code class="language-rust edition2018"><span class="boring">fn main() {
+</span>    let x = 5;
+    let y = 6;
+
+    println!(&quot;{}&quot;, x + y);
+<span class="boring">}
+</span></code></pre></pre>
+<h2 id="including-files"><a class="header" href="#including-files">Including files</a></h2>
+<p>With the following syntax, you can include files into your book:</p>
+<pre><code class="language-hbs">{{#include file.rs}}
+</code></pre>
+<p>The path to the file has to be relative from the current source file.</p>
+<p>mdBook will interpret included files as Markdown. Since the include command
+is usually used for inserting code snippets and examples, you will often
+wrap the command with <code>```</code> to display the file contents without
+interpreting them.</p>
+<pre><code class="language-hbs">```
+{{#include file.rs}}
+```
+</code></pre>
+<h2 id="including-portions-of-a-file"><a class="header" href="#including-portions-of-a-file">Including portions of a file</a></h2>
+<p>Often you only need a specific part of the file, e.g. relevant lines for an
+example. We support four different modes of partial includes:</p>
+<pre><code class="language-hbs">{{#include file.rs:2}}
+{{#include file.rs::10}}
+{{#include file.rs:2:}}
+{{#include file.rs:2:10}}
+</code></pre>
+<p>The first command only includes the second line from file <code>file.rs</code>. The second
+command includes all lines up to line 10, i.e. the lines from 11 till the end of
+the file are omitted. The third command includes all lines from line 2, i.e. the
+first line is omitted. The last command includes the excerpt of <code>file.rs</code>
+consisting of lines 2 to 10.</p>
+<p>To avoid breaking your book when modifying included files, you can also
+include a specific section using anchors instead of line numbers.
+An anchor is a pair of matching lines. The line beginning an anchor must
+match the regex <code>ANCHOR:\s*[\w_-]+</code> and similarly the ending line must match
+the regex <code>ANCHOR_END:\s*[\w_-]+</code>. This allows you to put anchors in
+any kind of commented line.</p>
+<p>Consider the following file to include:</p>
+<pre><code class="language-rs">/* ANCHOR: all */
+
+// ANCHOR: component
+struct Paddle {
+    hello: f32,
+}
+// ANCHOR_END: component
+
+////////// ANCHOR: system
+impl System for MySystem { ... }
+////////// ANCHOR_END: system
+
+/* ANCHOR_END: all */
+</code></pre>
+<p>Then in the book, all you have to do is:</p>
+<pre><code class="language-hbs">Here is a component:
+```rust,no_run,noplayground
+{{#include file.rs:component}}
+```
+
+Here is a system:
+```rust,no_run,noplayground
+{{#include file.rs:system}}
+```
+
+This is the full file.
+```rust,no_run,noplayground
+{{#include file.rs:all}}
+```
+</code></pre>
+<p>Lines containing anchor patterns inside the included anchor are ignored.</p>
+<h2 id="including-a-file-but-initially-hiding-all-except-specified-lines"><a class="header" href="#including-a-file-but-initially-hiding-all-except-specified-lines">Including a file but initially hiding all except specified lines</a></h2>
+<p>The <code>rustdoc_include</code> helper is for including code from external Rust files that contain complete
+examples, but only initially showing particular lines specified with line numbers or anchors in the
+same way as with <code>include</code>.</p>
+<p>The lines not in the line number range or between the anchors will still be included, but they will
+be prefaced with <code>#</code>. This way, a reader can expand the snippet to see the complete example, and
+Rustdoc will use the complete example when you run <code>mdbook test</code>.</p>
+<p>For example, consider a file named <code>file.rs</code> that contains this Rust program:</p>
+<pre><pre class="playground"><code class="language-rust edition2018">fn main() {
+    let x = add_one(2);
+    assert_eq!(x, 3);
+}
+
+fn add_one(num: i32) -&gt; i32 {
+    num + 1
+}
+</code></pre></pre>
+<p>We can include a snippet that initially shows only line 2 by using this syntax:</p>
+<pre><code class="language-hbs">To call the `add_one` function, we pass it an `i32` and bind the returned value to `x`:
+
+```rust
+{{#rustdoc_include file.rs:2}}
+```
+</code></pre>
+<p>This would have the same effect as if we had manually inserted the code and hidden all but line 2
+using <code>#</code>:</p>
+<pre><code class="language-hbs">To call the `add_one` function, we pass it an `i32` and bind the returned value to `x`:
+
+```rust
+# fn main() {
+    let x = add_one(2);
+#     assert_eq!(x, 3);
+# }
+#
+# fn add_one(num: i32) -&gt; i32 {
+#     num + 1
+# }
+```
+</code></pre>
+<p>That is, it looks like this (click the &quot;expand&quot; icon to see the rest of the file):</p>
+<pre><pre class="playground"><code class="language-rust edition2018"><span class="boring">fn main() {
+</span>    let x = add_one(2);
+<span class="boring">    assert_eq!(x, 3);
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">fn add_one(num: i32) -&gt; i32 {
+</span><span class="boring">    num + 1
+</span><span class="boring">}
+</span></code></pre></pre>
+<h2 id="inserting-runnable-rust-files"><a class="header" href="#inserting-runnable-rust-files">Inserting runnable Rust files</a></h2>
+<p>With the following syntax, you can insert runnable Rust files into your book:</p>
+<pre><code class="language-hbs">{{#playground file.rs}}
+</code></pre>
+<p>The path to the Rust file has to be relative from the current source file.</p>
+<p>When play is clicked, the code snippet will be sent to the <a href="https://play.rust-lang.org/">Rust Playground</a> to be
+compiled and run. The result is sent back and displayed directly underneath the
+code.</p>
+<p>Here is what a rendered code snippet looks like:</p>
+<pre><pre class="playground"><code class="language-rust edition2018">fn main() {
+    println!(&quot;Hello World!&quot;);
+<span class="boring">
+</span><span class="boring">    // You can even hide lines! :D
+</span><span class="boring">    println!(&quot;I am hidden! Expand the code snippet to see me&quot;);
+</span>}
+</code></pre></pre>
+<h2 id="controlling-page-title"><a class="header" href="#controlling-page-title">Controlling page &lt;title&gt;</a></h2>
+<p>A chapter can set a &lt;title&gt; that is different from its entry in the table of
+contents (sidebar) by including a <code>{{#title ...}}</code> near the top of the page.</p>
+<pre><code class="language-hbs">{{#title My Title}}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="markdown"><a class="header" href="#markdown">Markdown</a></h1>
+<p>mdBook's <a href="https://github.com/raphlinus/pulldown-cmark">parser</a> adheres to the <a href="https://commonmark.org/">CommonMark</a>
+specification. You can take a quick <a href="https://commonmark.org/help/tutorial/">tutorial</a>,
+or <a href="https://spec.commonmark.org/dingus/">try out</a> CommonMark in real time. A complete Markdown overview is out of scope for 
+this documentation, but below is a high level overview of some of the basics. For a more in-depth experience, check out the
+<a href="https://www.markdownguide.org">Markdown Guide</a>.</p>
+<h2 id="text-and-paragraphs"><a class="header" href="#text-and-paragraphs">Text and Paragraphs</a></h2>
+<p>Text is rendered relatively predictably: </p>
+<pre><code class="language-markdown">Here is a line of text.
+
+This is a new line.
+</code></pre>
+<p>Will look like you might expect:</p>
+<p>Here is a line of text.</p>
+<p>This is a new line.</p>
+<h2 id="headings"><a class="header" href="#headings">Headings</a></h2>
+<p>Headings use the <code>#</code> marker and should be on a line by themselves. More <code>#</code> mean smaller headings:</p>
+<pre><code class="language-markdown">### A heading 
+
+Some text.
+
+#### A smaller heading 
+
+More text.
+</code></pre>
+<h3 id="a-heading"><a class="header" href="#a-heading">A heading</a></h3>
+<p>Some text.</p>
+<h4 id="a-smaller-heading"><a class="header" href="#a-smaller-heading">A smaller heading</a></h4>
+<p>More text.</p>
+<h2 id="lists"><a class="header" href="#lists">Lists</a></h2>
+<p>Lists can be unordered or ordered. Ordered lists will order automatically:</p>
+<pre><code class="language-markdown">* milk
+* eggs
+* butter
+
+1. carrots
+1. celery
+1. radishes
+</code></pre>
+<ul>
+<li>milk</li>
+<li>eggs</li>
+<li>butter</li>
+</ul>
+<ol>
+<li>carrots</li>
+<li>celery</li>
+<li>radishes</li>
+</ol>
+<h2 id="links"><a class="header" href="#links">Links</a></h2>
+<p>Linking to a URL or local file is easy:</p>
+<pre><code class="language-markdown">Use [mdBook](https://github.com/rust-lang/mdBook). 
+
+Read about [mdBook](mdBook.md).
+
+A bare url: &lt;https://www.rust-lang.org&gt;.
+</code></pre>
+<p>Use <a href="https://github.com/rust-lang/mdBook">mdBook</a>. </p>
+<p>Read about <a href="zh-cn/format/mdBook.html">mdBook</a>.</p>
+<p>A bare url: <a href="https://www.rust-lang.org">https://www.rust-lang.org</a>.</p>
+<h2 id="images"><a class="header" href="#images">Images</a></h2>
+<p>Including images is simply a matter of including a link to them, much like in the <em>Links</em> section above. The following markdown
+includes the Rust logo SVG image found in the <code>images</code> directory at the same level as this file:</p>
+<pre><code class="language-markdown">![The Rust Logo](images/rust-logo-blk.svg)
+</code></pre>
+<p>Produces the following HTML when built with mdBook:</p>
+<pre><code class="language-html">&lt;p&gt;&lt;img src=&quot;images/rust-logo-blk.svg&quot; alt=&quot;The Rust Logo&quot; /&gt;&lt;/p&gt;
+</code></pre>
+<p>Which, of course displays the image like so:</p>
+<p><img src="zh-cn/format/images/rust-logo-blk.svg" alt="The Rust Logo" /></p>
+<p>See the <a href="https://www.markdownguide.org/basic-syntax/">Markdown Guide Basic Syntax</a> document for more.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="running-mdbook-in-continuous-integration"><a class="header" href="#running-mdbook-in-continuous-integration">Running <code>mdbook</code> in Continuous Integration</a></h1>
+<p>While the following examples use Travis CI, their principles should
+straightforwardly transfer to other continuous integration providers as well.</p>
+<h2 id="ensuring-your-book-builds-and-tests-pass"><a class="header" href="#ensuring-your-book-builds-and-tests-pass">Ensuring Your Book Builds and Tests Pass</a></h2>
+<p>Here is a sample Travis CI <code>.travis.yml</code> configuration that ensures <code>mdbook build</code> and <code>mdbook test</code> run successfully. The key to fast CI turnaround times
+is caching <code>mdbook</code> installs, so that you aren't compiling <code>mdbook</code> on every CI
+run.</p>
+<pre><code class="language-yaml">language: rust
+sudo: false
+
+cache:
+  - cargo
+
+rust:
+  - stable
+
+before_script:
+  - (test -x $HOME/.cargo/bin/cargo-install-update || cargo install cargo-update)
+  - (test -x $HOME/.cargo/bin/mdbook || cargo install --vers &quot;^0.3&quot; mdbook)
+  - cargo install-update -a
+
+script:
+  - mdbook build &amp;&amp; mdbook test # In case of custom book path: mdbook build path/to/mybook &amp;&amp; mdbook test path/to/mybook
+</code></pre>
+<h2 id="deploying-your-book-to-github-pages"><a class="header" href="#deploying-your-book-to-github-pages">Deploying Your Book to GitHub Pages</a></h2>
+<p>Following these instructions will result in your book being published to GitHub
+pages after a successful CI run on your repository's <code>master</code> branch.</p>
+<p>First, create a new GitHub &quot;Personal Access Token&quot; with the &quot;public_repo&quot;
+permissions (or &quot;repo&quot; for private repositories). Go to your repository's Travis
+CI settings page and add an environment variable named <code>GITHUB_TOKEN</code> that is
+marked secure and <em>not</em> shown in the logs.</p>
+<p>Whilst still in your repository's settings page, navigate to Options and change the 
+Source on GitHub pages to <code>gh-pages</code>.</p>
+<p>Then, append this snippet to your <code>.travis.yml</code> and update the path to the
+<code>book</code> directory:</p>
+<pre><code class="language-yaml">deploy:
+  provider: pages
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN
+  local-dir: book # In case of custom book path: path/to/mybook/book
+  keep-history: false
+  on:
+    branch: main
+</code></pre>
+<p>That's it!</p>
+<p>Note: Travis has a new <a href="https://blog.travis-ci.com/2019-08-27-deployment-tooling-dpl-v2-preview-release">dplv2</a> configuration that is currently in beta. To use this new format, update your <code>.travis.yml</code> file to:</p>
+<pre><code class="language-yaml">language: rust
+os: linux
+dist: xenial
+
+cache:
+  - cargo
+
+rust:
+  - stable
+
+before_script:
+  - (test -x $HOME/.cargo/bin/cargo-install-update || cargo install cargo-update)
+  - (test -x $HOME/.cargo/bin/mdbook || cargo install --vers &quot;^0.3&quot; mdbook)
+  - cargo install-update -a
+
+script:
+  - mdbook build &amp;&amp; mdbook test # In case of custom book path: mdbook build path/to/mybook &amp;&amp; mdbook test path/to/mybook
+  
+deploy:
+  provider: pages
+  strategy: git
+  edge: true
+  cleanup: false
+  github-token: $GITHUB_TOKEN
+  local-dir: book # In case of custom book path: path/to/mybook/book
+  keep-history: false
+  on:
+    branch: main
+  target_branch: gh-pages
+</code></pre>
+<h3 id="deploying-to-github-pages-manually"><a class="header" href="#deploying-to-github-pages-manually">Deploying to GitHub Pages manually</a></h3>
+<p>If your CI doesn't support GitHub pages, or you're deploying somewhere else
+with integrations such as Github Pages:
+<em>note: you may want to use different tmp dirs</em>:</p>
+<pre><code class="language-console">$&gt; git worktree add /tmp/book gh-pages
+$&gt; mdbook build
+$&gt; rm -rf /tmp/book/* # this won't delete the .git directory
+$&gt; cp -rp book/* /tmp/book/
+$&gt; cd /tmp/book
+$&gt; git add -A
+$&gt; git commit 'new book message'
+$&gt; git push origin gh-pages
+$&gt; cd -
+</code></pre>
+<p>Or put this into a Makefile rule:</p>
+<pre><code class="language-makefile">.PHONY: deploy
+deploy: book
+	@echo &quot;====&gt; deploying to github&quot;
+	git worktree add /tmp/book gh-pages
+	rm -rf /tmp/book/*
+	cp -rp book/* /tmp/book/
+	cd /tmp/book &amp;&amp; \
+		git add -A &amp;&amp; \
+		git commit -m &quot;deployed on $(shell date) by ${USER}&quot; &amp;&amp; \
+		git push origin gh-pages
+</code></pre>
+<h2 id="deploying-your-book-to-gitlab-pages"><a class="header" href="#deploying-your-book-to-gitlab-pages">Deploying Your Book to GitLab Pages</a></h2>
+<p>Inside your repository's project root, create a file named <code>.gitlab-ci.yml</code> with the following contents:</p>
+<pre><code class="language-yml">stages:
+    - deploy
+
+pages:
+  stage: deploy
+  image: rust
+  variables:
+    CARGO_HOME: $CI_PROJECT_DIR/cargo
+  before_script:
+    - export PATH=&quot;$PATH:$CARGO_HOME/bin&quot;
+    - mdbook --version || cargo install mdbook
+  script:
+    - mdbook build -d public
+  rules:
+    - if: '$CI_COMMIT_REF_NAME == &quot;master&quot;'
+  artifacts:
+    paths:
+      - public
+  cache:
+    paths:
+      - $CARGO_HOME/bin
+</code></pre>
+<p>After you commit and push this new file, GitLab CI will run and your book will be available!</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="for-developers"><a class="header" href="#for-developers">For Developers</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="preprocessors"><a class="header" href="#preprocessors">Preprocessors</a></h1>
+<p>A <em>preprocessor</em> is simply a bit of code which gets run immediately after the
+book is loaded and before it gets rendered, allowing you to update and mutate
+the book. Possible use cases are:</p>
+<ul>
+<li>Creating custom helpers like <code>{{#include /path/to/file.md}}</code></li>
+<li>Updating links so <code>[some chapter](some_chapter.md)</code> is automatically changed
+to <code>[some chapter](some_chapter.html)</code> for the HTML renderer</li>
+<li>Substituting in latex-style expressions (<code>$$ \frac{1}{3} $$</code>) with their
+mathjax equivalents</li>
+</ul>
+<h2 id="hooking-into-mdbook"><a class="header" href="#hooking-into-mdbook">Hooking Into MDBook</a></h2>
+<p>MDBook uses a fairly simple mechanism for discovering third party plugins.
+A new table is added to <code>book.toml</code> (e.g. <code>preprocessor.foo</code> for the <code>foo</code>
+preprocessor) and then <code>mdbook</code> will try to invoke the <code>mdbook-foo</code> program as
+part of the build process.</p>
+<p>A preprocessor can be hard-coded to specify which backend(s) it should be run
+for with the <code>preprocessor.foo.renderer</code> key. For example, it doesn't make sense for
+<a href="zh-cn/for_developers/../format/mathjax.html">MathJax</a> to be used for non-HTML renderers.</p>
+<pre><code class="language-toml">[book]
+title = &quot;My Book&quot;
+authors = [&quot;Michael-F-Bryan&quot;]
+
+[preprocessor.foo]
+# The command can also be specified manually
+command = &quot;python3 /path/to/foo.py&quot;
+# Only run the `foo` preprocessor for the HTML and EPUB renderer
+renderer = [&quot;html&quot;, &quot;epub&quot;]
+</code></pre>
+<p>Once the preprocessor has been defined and the build process starts, mdBook executes the command defined in the <code>preprocessor.foo.command</code> key twice.
+The first time it runs the preprocessor to determine if it supports the given renderer.
+mdBook passes two arguments to the process: the first argument is the string <code>supports</code> and the second argument is the renderer name.
+The preprocessor should exit with a status code 0 if it supports the given renderer, or return a non-zero exit code if it does not.</p>
+<p>If the preprocessor supports the renderer, then mdbook runs it a second time, passing JSON data into stdin.
+The JSON consists of an array of <code>[context, book]</code> where <code>context</code> is the serialized object <a href="https://docs.rs/mdbook/latest/mdbook/preprocess/struct.PreprocessorContext.html"><code>PreprocessorContext</code></a> and <code>book</code> is a <a href="https://docs.rs/mdbook/latest/mdbook/book/struct.Book.html"><code>Book</code></a> object containing the content of the book.</p>
+<p>The preprocessor should return the JSON format of the <a href="https://docs.rs/mdbook/latest/mdbook/book/struct.Book.html"><code>Book</code></a> object to stdout, with any modifications it wishes to perform.</p>
+<p>The easiest way to get started is by creating your own implementation of the
+<code>Preprocessor</code> trait (e.g. in <code>lib.rs</code>) and then creating a shell binary which
+translates inputs to the correct <code>Preprocessor</code> method. For convenience, there
+is <a href="https://github.com/rust-lang/mdBook/blob/master/examples/nop-preprocessor.rs">an example no-op preprocessor</a> in the <code>examples/</code> directory which can easily
+be adapted for other preprocessors.</p>
+<details>
+<summary>Example no-op preprocessor</summary>
+<pre><pre class="playground"><code class="language-rust edition2018">// nop-preprocessors.rs
+
+use crate::nop_lib::Nop;
+use clap::{App, Arg, ArgMatches, SubCommand};
+use mdbook::book::Book;
+use mdbook::errors::Error;
+use mdbook::preprocess::{CmdPreprocessor, Preprocessor, PreprocessorContext};
+use semver::{Version, VersionReq};
+use std::io;
+use std::process;
+
+pub fn make_app() -&gt; App&lt;'static, 'static&gt; {
+    App::new(&quot;nop-preprocessor&quot;)
+        .about(&quot;A mdbook preprocessor which does precisely nothing&quot;)
+        .subcommand(
+            SubCommand::with_name(&quot;supports&quot;)
+                .arg(Arg::with_name(&quot;renderer&quot;).required(true))
+                .about(&quot;Check whether a renderer is supported by this preprocessor&quot;),
+        )
+}
+
+fn main() {
+    let matches = make_app().get_matches();
+
+    // Users will want to construct their own preprocessor here
+    let preprocessor = Nop::new();
+
+    if let Some(sub_args) = matches.subcommand_matches(&quot;supports&quot;) {
+        handle_supports(&amp;preprocessor, sub_args);
+    } else if let Err(e) = handle_preprocessing(&amp;preprocessor) {
+        eprintln!(&quot;{}&quot;, e);
+        process::exit(1);
+    }
+}
+
+fn handle_preprocessing(pre: &amp;dyn Preprocessor) -&gt; Result&lt;(), Error&gt; {
+    let (ctx, book) = CmdPreprocessor::parse_input(io::stdin())?;
+
+    let book_version = Version::parse(&amp;ctx.mdbook_version)?;
+    let version_req = VersionReq::parse(mdbook::MDBOOK_VERSION)?;
+
+    if !version_req.matches(&amp;book_version) {
+        eprintln!(
+            &quot;Warning: The {} plugin was built against version {} of mdbook, \
+             but we're being called from version {}&quot;,
+            pre.name(),
+            mdbook::MDBOOK_VERSION,
+            ctx.mdbook_version
+        );
+    }
+
+    let processed_book = pre.run(&amp;ctx, book)?;
+    serde_json::to_writer(io::stdout(), &amp;processed_book)?;
+
+    Ok(())
+}
+
+fn handle_supports(pre: &amp;dyn Preprocessor, sub_args: &amp;ArgMatches) -&gt; ! {
+    let renderer = sub_args.value_of(&quot;renderer&quot;).expect(&quot;Required argument&quot;);
+    let supported = pre.supports_renderer(renderer);
+
+    // Signal whether the renderer is supported by exiting with 1 or 0.
+    if supported {
+        process::exit(0);
+    } else {
+        process::exit(1);
+    }
+}
+
+/// The actual implementation of the `Nop` preprocessor. This would usually go
+/// in your main `lib.rs` file.
+mod nop_lib {
+    use super::*;
+
+    /// A no-op preprocessor.
+    pub struct Nop;
+
+    impl Nop {
+        pub fn new() -&gt; Nop {
+            Nop
+        }
+    }
+
+    impl Preprocessor for Nop {
+        fn name(&amp;self) -&gt; &amp;str {
+            &quot;nop-preprocessor&quot;
+        }
+
+        fn run(&amp;self, ctx: &amp;PreprocessorContext, book: Book) -&gt; Result&lt;Book, Error&gt; {
+            // In testing we want to tell the preprocessor to blow up by setting a
+            // particular config value
+            if let Some(nop_cfg) = ctx.config.get_preprocessor(self.name()) {
+                if nop_cfg.contains_key(&quot;blow-up&quot;) {
+                    anyhow::bail!(&quot;Boom!!1!&quot;);
+                }
+            }
+
+            // we *are* a no-op preprocessor after all
+            Ok(book)
+        }
+
+        fn supports_renderer(&amp;self, renderer: &amp;str) -&gt; bool {
+            renderer != &quot;not-supported&quot;
+        }
+    }
+}
+</code></pre></pre>
+</details>
+<h2 id="hints-for-implementing-a-preprocessor"><a class="header" href="#hints-for-implementing-a-preprocessor">Hints For Implementing A Preprocessor</a></h2>
+<p>By pulling in <code>mdbook</code> as a library, preprocessors can have access to the
+existing infrastructure for dealing with books.</p>
+<p>For example, a custom preprocessor could use the
+<a href="https://docs.rs/mdbook/latest/mdbook/preprocess/trait.Preprocessor.html#method.parse_input"><code>CmdPreprocessor::parse_input()</code></a> function to deserialize the JSON written to
+<code>stdin</code>. Then each chapter of the <code>Book</code> can be mutated in-place via
+<a href="https://docs.rs/mdbook/latest/mdbook/book/struct.Book.html#method.for_each_mut"><code>Book::for_each_mut()</code></a>, and then written to <code>stdout</code> with the <code>serde_json</code>
+crate.</p>
+<p>Chapters can be accessed either directly (by recursively iterating over
+chapters) or via the <code>Book::for_each_mut()</code> convenience method.</p>
+<p>The <code>chapter.content</code> is just a string which happens to be markdown. While it's
+entirely possible to use regular expressions or do a manual find &amp; replace,
+you'll probably want to process the input into something more computer-friendly.
+The <a href="https://crates.io/crates/pulldown-cmark"><code>pulldown-cmark</code></a> crate implements a production-quality event-based
+Markdown parser, with the <a href="https://crates.io/crates/pulldown-cmark-to-cmark"><code>pulldown-cmark-to-cmark</code></a> allowing you to
+translate events back into markdown text.</p>
+<p>The following code block shows how to remove all emphasis from markdown,
+without accidentally breaking the document.</p>
+<pre><pre class="playground"><code class="language-rust edition2018">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn remove_emphasis(
+    num_removed_items: &amp;mut usize,
+    chapter: &amp;mut Chapter,
+) -&gt; Result&lt;String&gt; {
+    let mut buf = String::with_capacity(chapter.content.len());
+
+    let events = Parser::new(&amp;chapter.content).filter(|e| {
+        let should_keep = match *e {
+            Event::Start(Tag::Emphasis)
+            | Event::Start(Tag::Strong)
+            | Event::End(Tag::Emphasis)
+            | Event::End(Tag::Strong) =&gt; false,
+            _ =&gt; true,
+        };
+        if !should_keep {
+            *num_removed_items += 1;
+        }
+        should_keep
+    });
+
+    cmark(events, &amp;mut buf, None).map(|_| buf).map_err(|err| {
+        Error::from(format!(&quot;Markdown serialization failed: {}&quot;, err))
+    })
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>For everything else, have a look <a href="https://github.com/rust-lang/mdBook/blob/master/examples/nop-preprocessor.rs">at the complete example</a>.</p>
+<h2 id="implementing-a-preprocessor-with-a-different-language"><a class="header" href="#implementing-a-preprocessor-with-a-different-language">Implementing a preprocessor with a different language</a></h2>
+<p>The fact that mdBook utilizes stdin and stdout to communicate with the preprocessors makes it easy to implement them in a language other than Rust.
+The following code shows how to implement a simple preprocessor in Python, which will modify the content of the first chapter.
+The example below follows the configuration shown above with <code>preprocessor.foo.command</code> actually pointing to a Python script.</p>
+<pre><code class="language-python">import json
+import sys
+
+
+if __name__ == '__main__':
+    if len(sys.argv) &gt; 1: # we check if we received any argument
+        if sys.argv[1] == &quot;supports&quot;: 
+            # then we are good to return an exit status code of 0, since the other argument will just be the renderer's name
+            sys.exit(0)
+
+    # load both the context and the book representations from stdin
+    context, book = json.load(sys.stdin)
+    # and now, we can just modify the content of the first chapter
+    book['sections'][0]['Chapter']['content'] = '# Hello'
+    # we are done with the book's modification, we can just print it to stdout, 
+    print(json.dumps(book))
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="alternative-backends"><a class="header" href="#alternative-backends">Alternative Backends</a></h1>
+<p>A &quot;backend&quot; is simply a program which <code>mdbook</code> will invoke during the book
+rendering process. This program is passed a JSON representation of the book and
+configuration information via <code>stdin</code>. Once the backend receives this
+information it is free to do whatever it wants.</p>
+<p>There are already several alternative backends on GitHub which can be used as a
+rough example of how this is accomplished in practice.</p>
+<ul>
+<li><a href="https://github.com/Michael-F-Bryan/mdbook-linkcheck">mdbook-linkcheck</a> - a simple program for verifying the book doesn't contain
+any broken links</li>
+<li><a href="https://github.com/Michael-F-Bryan/mdbook-epub">mdbook-epub</a> - an EPUB renderer</li>
+<li><a href="https://github.com/Michael-F-Bryan/mdbook-test">mdbook-test</a> - a program to run the book's contents through <a href="https://github.com/budziq/rust-skeptic">rust-skeptic</a> to
+verify everything compiles and runs correctly (similar to <code>rustdoc --test</code>)</li>
+<li><a href="https://github.com/vv9k/mdbook-man">mdbook-man</a> - generate manual pages from the book</li>
+</ul>
+<p>This page will step you through creating your own alternative backend in the form
+of a simple word counting program. Although it will be written in Rust, there's
+no reason why it couldn't be accomplished using something like Python or Ruby.</p>
+<h2 id="setting-up"><a class="header" href="#setting-up">Setting Up</a></h2>
+<p>First you'll want to create a new binary program and add <code>mdbook</code> as a
+dependency.</p>
+<pre><code class="language-shell">$ cargo new --bin mdbook-wordcount
+$ cd mdbook-wordcount
+$ cargo add mdbook
+</code></pre>
+<p>When our <code>mdbook-wordcount</code> plugin is invoked, <code>mdbook</code> will send it a JSON
+version of <a href="https://docs.rs/mdbook/*/mdbook/renderer/struct.RenderContext.html"><code>RenderContext</code></a> via our plugin's <code>stdin</code>. For convenience, there's
+a <a href="https://docs.rs/mdbook/*/mdbook/renderer/struct.RenderContext.html#method.from_json"><code>RenderContext::from_json()</code></a> constructor which will load a <code>RenderContext</code>.</p>
+<p>This is all the boilerplate necessary for our backend to load the book.</p>
+<pre><pre class="playground"><code class="language-rust edition2018">// src/main.rs
+extern crate mdbook;
+
+use std::io;
+use mdbook::renderer::RenderContext;
+
+fn main() {
+    let mut stdin = io::stdin();
+    let ctx = RenderContext::from_json(&amp;mut stdin).unwrap();
+}
+</code></pre></pre>
+<blockquote>
+<p><strong>Note:</strong> The <code>RenderContext</code> contains a <code>version</code> field. This lets backends
+figure out whether they are compatible with the version of <code>mdbook</code> it's being
+called by. This <code>version</code> comes directly from the corresponding field in
+<code>mdbook</code>'s <code>Cargo.toml</code>.</p>
+</blockquote>
+<p>It is recommended that backends use the <a href="https://crates.io/crates/semver"><code>semver</code></a> crate to inspect this field
+and emit a warning if there may be a compatibility issue.</p>
+<h2 id="inspecting-the-book"><a class="header" href="#inspecting-the-book">Inspecting the Book</a></h2>
+<p>Now our backend has a copy of the book, lets count how many words are in each
+chapter!</p>
+<p>Because the <code>RenderContext</code> contains a <a href="https://docs.rs/mdbook/*/mdbook/book/struct.Book.html"><code>Book</code></a> field (<code>book</code>), and a <code>Book</code> has
+the <a href="https://docs.rs/mdbook/*/mdbook/book/struct.Book.html#method.iter"><code>Book::iter()</code></a> method for iterating over all items in a <code>Book</code>, this step
+turns out to be just as easy as the first.</p>
+<pre><pre class="playground"><code class="language-rust edition2018">
+fn main() {
+    let mut stdin = io::stdin();
+    let ctx = RenderContext::from_json(&amp;mut stdin).unwrap();
+
+    for item in ctx.book.iter() {
+        if let BookItem::Chapter(ref ch) = *item {
+            let num_words = count_words(ch);
+            println!(&quot;{}: {}&quot;, ch.name, num_words);
+        }
+    }
+}
+
+fn count_words(ch: &amp;Chapter) -&gt; usize {
+    ch.content.split_whitespace().count()
+}
+</code></pre></pre>
+<h2 id="enabling-the-backend"><a class="header" href="#enabling-the-backend">Enabling the Backend</a></h2>
+<p>Now we've got the basics running, we want to actually use it. First, install the
+program.</p>
+<pre><code class="language-shell">$ cargo install --path .
+</code></pre>
+<p>Then <code>cd</code> to the particular book you'd like to count the words of and update its
+<code>book.toml</code> file.</p>
+<pre><code class="language-diff">  [book]
+  title = &quot;mdBook Documentation&quot;
+  description = &quot;Create book from markdown files. Like Gitbook but implemented in Rust&quot;
+  authors = [&quot;Mathieu David&quot;, &quot;Michael-F-Bryan&quot;]
+
++ [output.html]
+
++ [output.wordcount]
+</code></pre>
+<p>When it loads a book into memory, <code>mdbook</code> will inspect your <code>book.toml</code> file to
+try and figure out which backends to use by looking for all <code>output.*</code> tables.
+If none are provided it'll fall back to using the default HTML renderer.</p>
+<p>Notably, this means if you want to add your own custom backend you'll also need
+to make sure to add the HTML backend, even if its table just stays empty.</p>
+<p>Now you just need to build your book like normal, and everything should <em>Just
+Work</em>.</p>
+<pre><code class="language-shell">$ mdbook build
+...
+2018-01-16 07:31:15 [INFO] (mdbook::renderer): Invoking the &quot;mdbook-wordcount&quot; renderer
+mdBook: 126
+Command Line Tool: 224
+init: 283
+build: 145
+watch: 146
+serve: 292
+test: 139
+Format: 30
+SUMMARY.md: 259
+Configuration: 784
+Theme: 304
+index.hbs: 447
+Syntax highlighting: 314
+MathJax Support: 153
+Rust code specific features: 148
+For Developers: 788
+Alternative Backends: 710
+Contributors: 85
+</code></pre>
+<p>The reason we didn't need to specify the full name/path of our <code>wordcount</code>
+backend is because <code>mdbook</code> will try to <em>infer</em> the program's name via
+convention. The executable for the <code>foo</code> backend is typically called
+<code>mdbook-foo</code>, with an associated <code>[output.foo]</code> entry in the <code>book.toml</code>. To
+explicitly tell <code>mdbook</code> what command to invoke (it may require command-line
+arguments or be an interpreted script), you can use the <code>command</code> field.</p>
+<pre><code class="language-diff">  [book]
+  title = &quot;mdBook Documentation&quot;
+  description = &quot;Create book from markdown files. Like Gitbook but implemented in Rust&quot;
+  authors = [&quot;Mathieu David&quot;, &quot;Michael-F-Bryan&quot;]
+
+  [output.html]
+
+  [output.wordcount]
++ command = &quot;python /path/to/wordcount.py&quot;
+</code></pre>
+<h2 id="configuration-1"><a class="header" href="#configuration-1">Configuration</a></h2>
+<p>Now imagine you don't want to count the number of words on a particular chapter
+(it might be generated text/code, etc). The canonical way to do this is via the
+usual <code>book.toml</code> configuration file by adding items to your <code>[output.foo]</code>
+table.</p>
+<p>The <code>Config</code> can be treated roughly as a nested hashmap which lets you call
+methods like <code>get()</code> to access the config's contents, with a
+<code>get_deserialized()</code> convenience method for retrieving a value and automatically
+deserializing to some arbitrary type <code>T</code>.</p>
+<p>To implement this, we'll create our own serializable <code>WordcountConfig</code> struct
+which will encapsulate all configuration for this backend.</p>
+<p>First add <code>serde</code> and <code>serde_derive</code> to your <code>Cargo.toml</code>,</p>
+<pre><code>$ cargo add serde serde_derive
+</code></pre>
+<p>And then you can create the config struct,</p>
+<pre><pre class="playground"><code class="language-rust edition2018">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>extern crate serde;
+#[macro_use]
+extern crate serde_derive;
+
+...
+
+#[derive(Debug, Default, Serialize, Deserialize)]
+#[serde(default, rename_all = &quot;kebab-case&quot;)]
+pub struct WordcountConfig {
+  pub ignores: Vec&lt;String&gt;,
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>Now we just need to deserialize the <code>WordcountConfig</code> from our <code>RenderContext</code>
+and then add a check to make sure we skip ignored chapters.</p>
+<pre><code class="language-diff">  fn main() {
+      let mut stdin = io::stdin();
+      let ctx = RenderContext::from_json(&amp;mut stdin).unwrap();
++     let cfg: WordcountConfig = ctx.config
++         .get_deserialized(&quot;output.wordcount&quot;)
++         .unwrap_or_default();
+
+      for item in ctx.book.iter() {
+          if let BookItem::Chapter(ref ch) = *item {
++             if cfg.ignores.contains(&amp;ch.name) {
++                 continue;
++             }
++
+              let num_words = count_words(ch);
+              println!(&quot;{}: {}&quot;, ch.name, num_words);
+          }
+      }
+  }
+</code></pre>
+<h2 id="output-and-signalling-failure"><a class="header" href="#output-and-signalling-failure">Output and Signalling Failure</a></h2>
+<p>While it's nice to print word counts to the terminal when a book is built, it
+might also be a good idea to output them to a file somewhere. <code>mdbook</code> tells a
+backend where it should place any generated output via the <code>destination</code> field
+in <a href="https://docs.rs/mdbook/*/mdbook/renderer/struct.RenderContext.html"><code>RenderContext</code></a>.</p>
+<pre><code class="language-diff">+ use std::fs::{self, File};
++ use std::io::{self, Write};
+- use std::io;
+  use mdbook::renderer::RenderContext;
+  use mdbook::book::{BookItem, Chapter};
+
+  fn main() {
+    ...
+
++     let _ = fs::create_dir_all(&amp;ctx.destination);
++     let mut f = File::create(ctx.destination.join(&quot;wordcounts.txt&quot;)).unwrap();
++
+      for item in ctx.book.iter() {
+          if let BookItem::Chapter(ref ch) = *item {
+              ...
+
+              let num_words = count_words(ch);
+              println!(&quot;{}: {}&quot;, ch.name, num_words);
++             writeln!(f, &quot;{}: {}&quot;, ch.name, num_words).unwrap();
+          }
+      }
+  }
+</code></pre>
+<blockquote>
+<p><strong>Note:</strong> There is no guarantee that the destination directory exists or is
+empty (<code>mdbook</code> may leave the previous contents to let backends do caching),
+so it's always a good idea to create it with <code>fs::create_dir_all()</code>.</p>
+<p>If the destination directory already exists, don't assume it will be empty.
+To allow backends to cache the results from previous runs, <code>mdbook</code> may leave
+old content in the directory.</p>
+</blockquote>
+<p>There's always the possibility that an error will occur while processing a book
+(just look at all the <code>unwrap()</code>'s we've written already), so <code>mdbook</code> will
+interpret a non-zero exit code as a rendering failure.</p>
+<p>For example, if we wanted to make sure all chapters have an <em>even</em> number of
+words, erroring out if an odd number is encountered, then you may do something
+like this:</p>
+<pre><code class="language-diff">+ use std::process;
+  ...
+
+  fn main() {
+      ...
+
+      for item in ctx.book.iter() {
+          if let BookItem::Chapter(ref ch) = *item {
+              ...
+
+              let num_words = count_words(ch);
+              println!(&quot;{}: {}&quot;, ch.name, num_words);
+              writeln!(f, &quot;{}: {}&quot;, ch.name, num_words).unwrap();
+
++             if cfg.deny_odds &amp;&amp; num_words % 2 == 1 {
++               eprintln!(&quot;{} has an odd number of words!&quot;, ch.name);
++               process::exit(1);
+              }
+          }
+      }
+  }
+
+  #[derive(Debug, Default, Serialize, Deserialize)]
+  #[serde(default, rename_all = &quot;kebab-case&quot;)]
+  pub struct WordcountConfig {
+      pub ignores: Vec&lt;String&gt;,
++     pub deny_odds: bool,
+  }
+</code></pre>
+<p>Now, if we reinstall the backend and build a book,</p>
+<pre><code class="language-shell">$ cargo install --path . --force
+$ mdbook build /path/to/book
+...
+2018-01-16 21:21:39 [INFO] (mdbook::renderer): Invoking the &quot;wordcount&quot; renderer
+mdBook: 126
+Command Line Tool: 224
+init: 283
+init has an odd number of words!
+2018-01-16 21:21:39 [ERROR] (mdbook::renderer): Renderer exited with non-zero return code.
+2018-01-16 21:21:39 [ERROR] (mdbook::utils): Error: Rendering failed
+2018-01-16 21:21:39 [ERROR] (mdbook::utils):    Caused By: The &quot;mdbook-wordcount&quot; renderer failed
+</code></pre>
+<p>As you've probably already noticed, output from the plugin's subprocess is
+immediately passed through to the user. It is encouraged for plugins to follow
+the &quot;rule of silence&quot; and only generate output when necessary (e.g. an error in
+generation or a warning).</p>
+<p>All environment variables are passed through to the backend, allowing you to use
+the usual <code>RUST_LOG</code> to control logging verbosity.</p>
+<h2 id="handling-missing-backends"><a class="header" href="#handling-missing-backends">Handling missing backends</a></h2>
+<p>If you enable a backend that isn't installed, the default behavior is to throw an error:</p>
+<pre><code class="language-text">The command `mdbook-wordcount` wasn't found, is the &quot;wordcount&quot; backend installed?
+If you want to ignore this error when the &quot;wordcount&quot; backend is not installed,
+set `optional = true` in the `[output.wordcount]` section of the book.toml configuration file.
+</code></pre>
+<p>This behavior can be changed by marking the backend as optional.</p>
+<pre><code class="language-diff">  [book]
+  title = &quot;mdBook Documentation&quot;
+  description = &quot;Create book from markdown files. Like Gitbook but implemented in Rust&quot;
+  authors = [&quot;Mathieu David&quot;, &quot;Michael-F-Bryan&quot;]
+
+  [output.html]
+
+  [output.wordcount]
+  command = &quot;python /path/to/wordcount.py&quot;
++ optional = true
+</code></pre>
+<p>This demotes the error to a warning, and it will instead look like this:</p>
+<pre><code class="language-text">The command was not found, but was marked as optional.
+    Command: wordcount
+</code></pre>
+<h2 id="wrapping-up"><a class="header" href="#wrapping-up">Wrapping Up</a></h2>
+<p>Although contrived, hopefully this example was enough to show how you'd create
+an alternative backend for <code>mdbook</code>. If you feel it's missing something, don't
+hesitate to create an issue in the <a href="https://github.com/rust-lang/mdBook/issues">issue tracker</a> so we can improve the user
+guide.</p>
+<p>The existing backends mentioned towards the start of this chapter should serve
+as a good example of how it's done in real life, so feel free to skim through
+the source code or ask questions.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="contributors"><a class="header" href="#contributors">Contributors</a></h1>
+<p>Here is a list of the contributors who have helped improving mdBook. Big
+shout-out to them!</p>
+<ul>
+<li><a href="https://github.com/mdinger">mdinger</a></li>
+<li>Kevin (<a href="https://github.com/kbknapp">kbknapp</a>)</li>
+<li>Steve Klabnik (<a href="https://github.com/steveklabnik">steveklabnik</a>)</li>
+<li>Adam Solove (<a href="https://github.com/asolove">asolove</a>)</li>
+<li>Wayne Nilsen (<a href="https://github.com/waynenilsen">waynenilsen</a>)</li>
+<li><a href="https://github.com/funkill">funnkill</a></li>
+<li>Fu Gangqiang (<a href="https://github.com/FuGangqiang">FuGangqiang</a>)</li>
+<li><a href="https://github.com/Michael-F-Bryan">Michael-F-Bryan</a></li>
+<li>Chris Spiegel (<a href="https://github.com/cspiegel">cspiegel</a>)</li>
+<li><a href="https://github.com/projektir">projektir</a></li>
+<li><a href="https://github.com/Phaiax">Phaiax</a></li>
+<li>Matt Ickstadt (<a href="https://github.com/mattico">mattico</a>)</li>
+<li>Weihang Lo (<a href="https://github.com/weihanglo">weihanglo</a>)</li>
+<li>Avision Ho (<a href="https://github.com/avisionh">avisionh</a>)</li>
+<li>Vivek Akupatni (<a href="https://github.com/apatniv">apatniv</a>)</li>
+<li>Eric Huss (<a href="https://github.com/ehuss">ehuss</a>)</li>
+<li>Josh Rotenberg (<a href="https://github.com/joshrotenberg">joshrotenberg</a>)</li>
+</ul>
+<p>If you feel you're missing from this list, feel free to add yourself in a PR.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="introduction"><a class="header" href="#introduction">Introduction</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="introduction-1"><a class="header" href="#introduction-1">Introduction</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="command-line-tool"><a class="header" href="#command-line-tool">Command Line Tool</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="init"><a class="header" href="#init">init</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="build"><a class="header" href="#build">build</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="watch"><a class="header" href="#watch">watch</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="serve"><a class="header" href="#serve">serve</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="test"><a class="header" href="#test">test</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="clean"><a class="header" href="#clean">clean</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="format-1"><a class="header" href="#format-1">Format</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="summarymd-1"><a class="header" href="#summarymd-1">SUMMARY.md</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="configuration-2"><a class="header" href="#configuration-2">Configuration</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="general"><a class="header" href="#general">General</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="preprocessors-1"><a class="header" href="#preprocessors-1">Preprocessors</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="renderers"><a class="header" href="#renderers">Renderers</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="environment-variables-1"><a class="header" href="#environment-variables-1">Environment Variables</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="theme-1"><a class="header" href="#theme-1">Theme</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="indexhbs-1"><a class="header" href="#indexhbs-1">index.hbs</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="syntax-highlighting-1"><a class="header" href="#syntax-highlighting-1">Syntax highlighting</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="editor-1"><a class="header" href="#editor-1">Editor</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="mathjax-support-1"><a class="header" href="#mathjax-support-1">MathJax Support</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="mdbook-specific-features-1"><a class="header" href="#mdbook-specific-features-1">mdBook-specific features</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="markdown-1"><a class="header" href="#markdown-1">Markdown</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="continuous-integration"><a class="header" href="#continuous-integration">Continuous Integration</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="for-developers-1"><a class="header" href="#for-developers-1">For Developers</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="preprocessors-2"><a class="header" href="#preprocessors-2">Preprocessors</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="alternative-backends-1"><a class="header" href="#alternative-backends-1">Alternative Backends</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="contributors-1"><a class="header" href="#contributors-1">Contributors</a></h1>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_line_numbers = true;
+        </script>
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="ace.js" type="text/javascript" charset="utf-8"></script>
+        <script src="editor.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mode-rust.js" type="text/javascript" charset="utf-8"></script>
+        <script src="theme-dawn.js" type="text/javascript" charset="utf-8"></script>
+        <script src="theme-tomorrow_night.js" type="text/javascript" charset="utf-8"></script>
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        <script type="text/javascript">
+        window.addEventListener('load', function() {
+            MathJax.Hub.Register.StartupHook('End', function() {
+                window.setTimeout(window.print, 100);
+            });
+        });
+        </script>
+    </body>
+</html>
