@@ -2,7 +2,7 @@
 
 - [zh-cn](index.md)
   - [指南](zh-cn/README.md)
-  - [命令行](zh-cn/cli/README.md)
+  - [命令](zh-cn/cli/README.md)
     - [init](zh-cn/cli/init.md)
     - [build](zh-cn/cli/build.md)
     - [watch](zh-cn/cli/watch.md)
