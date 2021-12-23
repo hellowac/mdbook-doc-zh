@@ -14,6 +14,7 @@ to be ignored at best, or may cause an error when attempting to build the book.
 1. ***Title*** - While optional, it's common practice to begin with a title, generally <code
    class="language-markdown"># Summary</code>. This is ignored by the parser however, and
    can be omitted.
+
    ```markdown
    # Summary
    ```
@@ -23,6 +24,7 @@ to be ignored at best, or may cause an error when attempting to build the book.
    introductions, etc. There are, however, some constraints. Prefix chapters cannot be
    nested; they should all be on the root level. And you cannot add
    prefix chapters once you have added numbered chapters.
+
    ```markdown
    [A Prefix Chapter](relative/path/to/markdown.md)
 
@@ -34,6 +36,7 @@ to be ignored at best, or may cause an error when attempting to build the book.
    of the book. The title is rendered as unclickable text.
    Titles are optional, and the numbered chapters can be broken into as many
    parts as desired.
+
    ```markdown
    # My Part Title
 
@@ -43,6 +46,7 @@ to be ignored at best, or may cause an error when attempting to build the book.
 1. ***Numbered Chapter*** - Numbered chapters outline the main content of the book
    and can be nested, resulting in a nice hierarchy
    (chapters, sub-chapters, etc.).
+
    ```markdown
    # Title of Part
 
@@ -54,10 +58,12 @@ to be ignored at best, or may cause an error when attempting to build the book.
 
    - [Another Chapter](relative/path/to/markdown4.md)
    ```
-   Numbered chapters can be denoted with either `-` or `*` (do not mix delimiters). 
-   
-1. ***Suffix Chapter*** - Like prefix chapters, suffix chapters are unnumbered, but they come after 
+
+   Numbered chapters can be denoted with either `-` or `*` (do not mix delimiters).
+
+1. ***Suffix Chapter*** - Like prefix chapters, suffix chapters are unnumbered, but they come after
    numbered chapters.
+
    ```markdown
    - [Last Chapter](relative/path/to/markdown.md)
 
@@ -71,6 +77,7 @@ to be ignored at best, or may cause an error when attempting to build the book.
    Draft chapters will be rendered in the HTML renderer as disabled links in the table
    of contents, as you can see for the next chapter in the table of contents on the left.
    Draft chapters are written like normal chapters but without writing the path to the file.
+
    ```markdown
    - [Draft Chapter]()
    ```
@@ -78,6 +85,7 @@ to be ignored at best, or may cause an error when attempting to build the book.
 1. ***Separators*** - Separators can be added before, in between, and after any other element. They result
    in an HTML rendered line in the built table of contents.  A separator is
    a line containing exclusively dashes and at least three of them: `---`.
+
    ```markdown
    # My Part Title
    
@@ -88,12 +96,11 @@ to be ignored at best, or may cause an error when attempting to build the book.
    - [First Chapter](relative/path/to/markdown2.md)
    ```
   
-
 ### Example
 
 Below is the markdown source for the `SUMMARY.md` for this guide, with the resulting table
 of contents as rendered to the left.
 
 ```markdown
-{{#include ../SUMMARY.md}}
+{{#include ../../SUMMARY.md}}
 ```
