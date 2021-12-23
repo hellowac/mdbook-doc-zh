@@ -1,33 +1,45 @@
 # Summar
 
-- [zh-cn](index.md)
-  - [指南](zh-cn/README.md)
-  - [命令](zh-cn/cli/README.md)
-    - [init](zh-cn/cli/init.md)
-    - [build](zh-cn/cli/build.md)
-    - [watch](zh-cn/cli/watch.md)
-    - [serve](zh-cn/cli/serve.md)
-    - [test](zh-cn/cli/test.md)
-    - [clean](zh-cn/cli/clean.md)
-  - [格式](zh-cn/format/README.md)
-    - [SUMMARY.md](zh-cn/format/summary.md)
-    - [配置](zh-cn/format/configuration/README.md)
-      - [常规](zh-cn/format/configuration/general.md)
-      - [预处理器](zh-cn/format/configuration/preprocessors.md)
-      - [渲染](zh-cn/format/configuration/renderers.md)
-      - [环境变量](zh-cn/format/configuration/environment-variables.md)
-    - [主题](zh-cn/format/theme/README.md)
-      - [index.hbs](zh-cn/format/theme/index-hbs.md)
-      - [语法高亮](zh-cn/format/theme/syntax-highlighting.md)
-      - [编辑器](zh-cn/format/theme/editor.md)
-    - [数学公式支持](zh-cn/format/mathjax.md)
-    - [mdBook特定功能](zh-cn/format/mdbook.md)
-    - [Markdown](zh-cn/format/markdown.md)
-  - [持续集成](zh-cn/continuous-integration.md)
-  - [开发者](zh-cn/zh-cn/for_developers/README.md)
-    - [预处理器](zh-cn/for_developers/preprocessors.md)
-    - [选择后端](zh-cn/for_developers/backends.md)
-  - [贡献列表](zh-cn/misc/contributors.md)
+<!-- - [zh-cn](index.md) -->
+
+[说明](index.md)
+
+---
+
+# 中文
+
+- [指南](zh-cn/README.md)
+- [命令](zh-cn/cli/README.md)
+  - [init](zh-cn/cli/init.md)
+  - [build](zh-cn/cli/build.md)
+  - [watch](zh-cn/cli/watch.md)
+  - [serve](zh-cn/cli/serve.md)
+  - [test](zh-cn/cli/test.md)
+  - [clean](zh-cn/cli/clean.md)
+- [格式](zh-cn/format/README.md)
+  - [SUMMARY.md](zh-cn/format/summary.md)
+  - [配置](zh-cn/format/configuration/README.md)
+    - [常规](zh-cn/format/configuration/general.md)
+    - [预处理器](zh-cn/format/configuration/preprocessors.md)
+    - [渲染](zh-cn/format/configuration/renderers.md)
+    - [环境变量](zh-cn/format/configuration/environment-variables.md)
+  - [主题](zh-cn/format/theme/README.md)
+    - [index.hbs](zh-cn/format/theme/index-hbs.md)
+    - [语法高亮](zh-cn/format/theme/syntax-highlighting.md)
+    - [编辑器](zh-cn/format/theme/editor.md)
+  - [数学公式支持](zh-cn/format/mathjax.md)
+  - [mdBook特定功能](zh-cn/format/mdbook.md)
+  - [Markdown](zh-cn/format/markdown.md)
+- [持续集成](zh-cn/continuous-integration.md)
+- [开发者](zh-cn/zh-cn/for_developers/README.md)
+  - [预处理器](zh-cn/for_developers/preprocessors.md)
+  - [选择后端](zh-cn/for_developers/backends.md)
+- [贡献列表](zh-cn/misc/contributors.md)
+
+----
+
+# 原文
+
 - [en](index.md)
   - [Introduction](en/README.md)
   - [Command Line Tool](en/cli/README.md)
