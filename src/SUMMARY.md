@@ -1,6 +1,6 @@
 # Summar
 
-- [zh-cn](../README.md)
+- [zh-cn](index.md)
   - [指南](zh-cn/README.md)
   - [命令行](zh-cn/cli/README.md)
     - [init](zh-cn/cli/init.md)
@@ -28,7 +28,7 @@
     - [预处理器](zh-cn/for_developers/preprocessors.md)
     - [选择后端](zh-cn/for_developers/backends.md)
   - [贡献列表](zh-cn/misc/contributors.md)
-- [en](../README.md)
+- [en](index.md)
   - [Introduction](en/README.md)
   - [Command Line Tool](en/cli/README.md)
     - [init](en/cli/init.md)
