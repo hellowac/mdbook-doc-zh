@@ -16,7 +16,7 @@
   - [serve](zh-cn/cli/serve.md)
   - [test](zh-cn/cli/test.md)
   - [clean](zh-cn/cli/clean.md)
-- [格式](zh-cn/format/README.md)
+- [结构](zh-cn/format/README.md)
   - [SUMMARY.md](zh-cn/format/summary.md)
   - [配置](zh-cn/format/configuration/README.md)
     - [常规](zh-cn/format/configuration/general.md)
