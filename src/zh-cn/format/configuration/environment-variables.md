@@ -1,16 +1,10 @@
-# Environment Variables
+# 环境变量
 
-All configuration values can be overridden from the command line by setting the
-corresponding environment variable. Because many operating systems restrict
-environment variables to be alphanumeric characters or `_`, the configuration
-key needs to be formatted slightly differently to the normal `foo.bar.baz` form.
+通过设置相应的环境变量，可以从命令行覆盖所有配置值。 由于许多操作系统将环境变量限制为字母数字字符或 `_`，因此配置键的格式需要与正常的 `foo.bar.baz` 格式略有不同。
 
-Variables starting with `MDBOOK_` are used for configuration. The key is created
-by removing the `MDBOOK_` prefix and turning the resulting string into
-`kebab-case`. Double underscores (`__`) separate nested keys, while a single
-underscore (`_`) is replaced with a dash (`-`).
+以 `MDBOOK_` 开头的变量用于配置。 密钥是通过删除 `MDBOOK_` 前缀并将结果字符串转换为 `kebab-case` 来创建的。 双下划线 (`__`) 分隔为嵌套键(`.`)，而单个下划线 (`_`) 则替换为破折号 (`-`)。
 
-For example:
+例子:
 
 - `MDBOOK_foo` -> `foo`
 - `MDBOOK_FOO` -> `foo`
@@ -18,21 +12,15 @@ For example:
 - `MDBOOK_FOO_BAR` -> `foo-bar`
 - `MDBOOK_FOO_bar__baz` -> `foo-bar.baz`
 
-So by setting the `MDBOOK_BOOK__TITLE` environment variable you can override the
-book's title without needing to touch your `book.toml`.
+因此，通过设置 `MDBOOK_BOOK__TITLE` 环境变量，您可以覆盖书名而无需修改您的 `book.toml`。
 
-> **Note:** To facilitate setting more complex config items, the value of an
-> environment variable is first parsed as JSON, falling back to a string if the
-> parse fails.
+> **备注:** 为了方便设置更复杂的配置项，环境变量的值首先被解析为 JSON，如果解析失败则回退到字符串。
 >
-> This means, if you so desired, you could override all book metadata when
-> building the book with something like
+> 这意味着，如果您愿意，您可以在构建书籍时覆盖所有书籍元数据，例如
 >
 > ```shell
 > $ export MDBOOK_BOOK="{'title': 'My Awesome Book', authors: ['Michael-F-Bryan']}"
 > $ mdbook build
 > ```
 
-The latter case may be useful in situations where `mdbook` is invoked from a
-script or CI, where it sometimes isn't possible to update the `book.toml` before
-building.
+后一种情况在从脚本或 CI 调用 `mdbook` 的情况下可能很有用，适用情况为，有时无法在构建之前更新 `book.toml`。

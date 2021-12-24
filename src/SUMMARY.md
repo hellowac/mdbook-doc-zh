@@ -21,7 +21,7 @@
     - [草稿章节]()
   - [配置](zh-cn/format/configuration/README.md)
     - [常规](zh-cn/format/configuration/general.md)
-    - [预处理器](zh-cn/format/configuration/preprocessors.md)
+    - [预处理](zh-cn/format/configuration/preprocessors.md)
     - [渲染](zh-cn/format/configuration/renderers.md)
     - [环境变量](zh-cn/format/configuration/environment-variables.md)
   - [主题](zh-cn/format/theme/README.md)
@@ -34,7 +34,7 @@
 - [持续集成](zh-cn/continuous-integration.md)
 - [开发者](zh-cn/zh-cn/for_developers/README.md)
   - [预处理器](zh-cn/for_developers/preprocessors.md)
-  - [选择后端](zh-cn/for_developers/backends.md)
+  - [替换后端](zh-cn/for_developers/backends.md)
 - [贡献列表](zh-cn/misc/contributors.md)
 
 ----

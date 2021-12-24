@@ -1,8 +1,8 @@
-# General Configuration
+# 常规配置
 
-You can configure the parameters for your book in the ***book.toml*** file.
+您可以在 ***book.toml*** 文件中为您的书配置参数。
 
-Here is an example of what a ***book.toml*** file might look like:
+下面是一个 ***book.toml*** 文件的示例：
 
 ```toml
 [book]
@@ -28,26 +28,22 @@ additional-css = ["custom.css"]
 limit-results = 15
 ```
 
-## Supported configuration options
+## 支持的配置选项
 
-It is important to note that **any** relative path specified in the
-configuration will always be taken relative from the root of the book where the
-configuration file is located.
+需要注意的是，配置中指定的**任何**相对路径将始终相对于配置文件所在的书的根目录。
 
 ### General metadata
 
-This is general information about your book.
+这是关于您的书的常规信息。
 
-- **title:** The title of the book
-- **authors:** The author(s) of the book
-- **description:** A description for the book, which is added as meta
-  information in the html `<head>` of each page
-- **src:** By default, the source directory is found in the directory named
-  `src` directly under the root folder. But this is configurable with the `src`
-  key in the configuration file.
-- **language:** The main language of the book, which is used as a language attribute `<html lang="en">` for example.
+- **title:** 书名
+- **authors:** 本书的作者
+- **description:** 这本书的描述，作为元信息添加到每个页面的html`<head>`中
+- **src:** 默认情况下，源目录位于根文件夹下名`src`的目录中。 但这可以使用配置文件中的 `src` 键进行配置。
+- **language:** 本书的主要语言，例如用作语言属性`<html lang="en">`。
 
-**book.toml**
+**book.toml**&nbsp;
+
 ```toml
 [book]
 title = "Example book"
@@ -57,41 +53,29 @@ src = "my-src"  # the source files will be found in `root/my-src` instead of `ro
 language = "en"
 ```
 
-### Rust options
+### Rust 选项
 
-Options for the Rust language, relevant to running tests and playground
-integration.
+Rust 语言的选项，与运行测试和运行环境集成相关。
 
-- **edition**: Rust edition to use by default for the code snippets. Default
-  is "2015". Individual code blocks can be controlled with the `edition2015`, 
-  `edition2018` or `edition2021` annotations, such as:
+- **edition**: 默认情况下用于代码片段的 Rust 版本。 默认值为“2015”。 可以使用`edition2015`、`edition2018`或`edition2021`注释来控制单个代码块，例如：
 
-  ~~~text
-  ```rust,edition2015
-  // This only works in 2015.
-  let try = true;
-  ```
-  ~~~
+~~~text
+```rust,edition2015
+// This only works in 2015.
+let try = true;
+```
+~~~
 
-### Build options
+### build 选项
 
-This controls the build process of your book.
+这控制着书的构建过程。
 
-- **build-dir:** The directory to put the rendered book in. By default this is
-  `book/` in the book's root directory.
-- **create-missing:** By default, any missing files specified in `SUMMARY.md`
-  will be created when the book is built (i.e. `create-missing = true`). If this
-  is `false` then the build process will instead exit with an error if any files
-  do not exist.
-- **use-default-preprocessors:** Disable the default preprocessors of (`links` &
-  `index`) by setting this option to `false`.
+- **build-dir:** 放置渲染书籍的目录。默认情况下，这是书籍根目录中的`book/`。
+- **create-missing:** 默认情况下，在构建本书时将创建在`SUMMARY.md`中指定的任何缺失文件（即`create-missing = true`）。 如果值是`false`，那么如果任何文件不存在，构建过程将改为退出并显示错误。
+- **use-default-preprocessors:** 通过将此选项设置为`false`来禁用（`links` 和`index`）默认的预处理器。
 
-  If you have the same, and/or other preprocessors declared via their table
-  of configuration, they will run instead.
+  如果您通过其配置表声明了相同的和/或其他预处理器，它们将替换默认的预处理运行。
 
-  - For clarity, with no preprocessor configuration, the default `links` and
-    `index` will run.
-  - Setting `use-default-preprocessors = false` will disable these
-    default preprocessors from running.
-  - Adding `[preprocessor.links]`, for example, will ensure, regardless of
-    `use-default-preprocessors` that `links` it will run.
+  - 为清楚起见，在没有预处理器配置的情况下，将运行默认的 `links` 和 `index`。
+  - 设置 `use-default-preprocessors = false` 将禁止这些默认预处理器运行。
+  - 例如，添加 `[preprocessor.links]` 将确保无论 `use-default-preprocessors` 如何， `links` 都将运行。

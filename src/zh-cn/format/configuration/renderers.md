@@ -1,122 +1,70 @@
-# Configuring Renderers
+# 渲染配置
 
-### HTML renderer options
+## HTML 渲染选项
 
-The HTML renderer has a couple of options as well. All the options for the
-renderer need to be specified under the TOML table `[output.html]`.
+HTML 渲染器也有几个选项。 渲染器的所有选项都需要在 TOML 表 `[output.html]` 下指定。
 
-The following configuration options are available:
+以下配置选项可用：
 
-- **theme:** mdBook comes with a default theme and all the resource files needed
-  for it. But if this option is set, mdBook will selectively overwrite the theme
-  files with the ones found in the specified folder.
-- **default-theme:** The theme color scheme to select by default in the
-  'Change Theme' dropdown. Defaults to `light`.
-- **preferred-dark-theme:** The default dark theme. This theme will be used if
-  the browser requests the dark version of the site via the
-  ['prefers-color-scheme'](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme)
-  CSS media query. Defaults to `navy`.
-- **curly-quotes:** Convert straight quotes to curly quotes, except for those
-  that occur in code blocks and code spans. Defaults to `false`.
-- **mathjax-support:** Adds support for [MathJax](../mathjax.md). Defaults to
-  `false`.
-- **copy-fonts:** Copies fonts.css and respective font files to the output directory and use them in the default theme. Defaults to `true`.
-- **google-analytics:** This field has been deprecated and will be removed in a future release.
-  Use the `theme/head.hbs` file to add the appropriate Google Analytics code instead.
-- **additional-css:** If you need to slightly change the appearance of your book
-  without overwriting the whole style, you can specify a set of stylesheets that
-  will be loaded after the default ones where you can surgically change the
-  style.
-- **additional-js:** If you need to add some behaviour to your book without
-  removing the current behaviour, you can specify a set of JavaScript files that
-  will be loaded alongside the default one.
-- **print:** A subtable for configuration print settings. mdBook by default adds
-  support for printing out the book as a single page. This is accessed using the
-  print icon on the top right of the book.
-- **no-section-label:** mdBook by defaults adds section label in table of
-  contents column. For example, "1.", "2.1". Set this option to true to disable
-  those labels. Defaults to `false`.
-- **fold:** A subtable for configuring sidebar section-folding behavior.
-- **playground:** A subtable for configuring various playground settings.
-- **search:** A subtable for configuring the in-browser search functionality.
-  mdBook must be compiled with the `search` feature enabled (on by default).
-- **git-repository-url:**  A url to the git repository for the book. If provided
-  an icon link will be output in the menu bar of the book.
-- **git-repository-icon:** The FontAwesome icon class to use for the git
-  repository link. Defaults to `fa-github`.
-- **edit-url-template:** Edit url template, when provided shows a
-  "Suggest an edit" button for directly jumping to editing the currently
-  viewed page. For e.g. GitHub projects set this to
-  `https://github.com/<owner>/<repo>/edit/master/{path}` or for
-  Bitbucket projects set it to
-  `https://bitbucket.org/<owner>/<repo>/src/master/{path}?mode=edit`
-  where {path} will be replaced with the full path of the file in the
-  repository.
-- **redirect:** A subtable used for generating redirects when a page is moved.
-  The table contains key-value pairs where the key is where the redirect file
-  needs to be created, as an absolute path from the build directory, (e.g.
-  `/appendices/bibliography.html`). The value can be any valid URI the
-  browser should navigate to (e.g. `https://rust-lang.org/`,
-  `/overview.html`, or `../bibliography.html`).
-- **input-404:** The name of the markdown file used for missing files.
-  The corresponding output file will be the same, with the extension replaced with `html`.
-  Defaults to `404.md`.
-- **site-url:** The url where the book will be hosted. This is required to ensure
-  navigation links and script/css imports in the 404 file work correctly, even when accessing
-  urls in subdirectories. Defaults to `/`.
-- **cname:** The DNS subdomain or apex domain at which your book will be hosted.
-  This string will be written to a file named CNAME in the root of your site, as
-  required by GitHub Pages (see [*Managing a custom domain for your GitHub Pages
-  site*][custom domain]).
+[prefers-color-scheme]: https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme "color scheme"
 
-[custom domain]: https://docs.github.com/en/github/working-with-github-pages/managing-a-custom-domain-for-your-github-pages-site
+- **theme:** mdBook 带有一个默认主题和它所需的所有资源文件。 但是如果设置了这个选项，mdBook 将有选择性地用在指定文件夹中找到主题文件并覆盖默认主题文件。
+- **default-theme:** 在“更改主题”下拉菜单中默认选择的主题配色方案。 默认为`light`。
+- **preferred-dark-theme:** 默认的深色主题。 如果浏览器通过['prefers-color-scheme'][prefers-color-scheme]CSS 媒体查询请求网站的深色版本，则将使用此主题。 默认为`navy`。
+- **curly-quotes:** 将直引号转换为卷引号，但出现在代码块和代码跨度中的引号除外。 默认为`false`。
+- **mathjax-support:** 添加对 [MathJax](../mathjax.md) 的支持。 默认为`false`。
+- **copy-fonts:** 将 fonts.css 和相应的字体文件复制到输出目录并在默认主题中使用它们。 默认为`true`。
+- **google-analytics:** 此字段已被弃用，并将在未来版本中删除。 使用`theme/head.hbs` 文件添加适当的谷歌分析代码。
+- **additional-css:** 如果您需要在不覆盖整个样式的情况下稍微更改书籍的外观，您可以指定一组样式表，这些样式表将在默认样式表之后加载，您可以在其中更改样式。
+- **additional-js:** 如果您需要在不删除当前行为的情况下向书中添加一些行为，您可以指定一组 JavaScript 文件，这些文件将与默认文件一起加载。
+- **print:** 配置打印选项的子表。 默认情况下，mdBook 添加了对将书籍打印为单页的支持。 这可以使用书右上角的打印图标访问。
+- **no-section-label:** mdBook 默认在目录列中添加节标签。 例如，“1.”、“2.1”。 将此选项设置为 `true` 以禁用这些标签。 默认为`false`。
+- **fold:** 用于配置侧边栏部分折叠行为的子表。
+- **playground:** 用于配置各种运行环境设置的子表。
+- **search:** 用于配置浏览器内搜索功能的子表。 mdBook 必须在启用`search`(搜索)功能的情况下编译（默认情况下启用）。
+- **git-repository-url:**  该书的 git 仓库的 url。 如果提供了图标链接，将在书的菜单栏中输出。
+- **git-repository-icon:** 用于 git 仓库链接的 FontAwesome 图标类。 默认为`fa-github`。
+- **edit-url-template:** 编辑 url 模板，当提供时显示“建议编辑”按钮，用于直接跳转到编辑当前查看的页面。 例如 GitHub 项目将此设置为 `https://github.com/<owner>/<repo>/edit/master/{path}` 或对于 Bitbucket 项目将其设置为 `https://bitbucket.org/<owner>/ <repo>/src/master/{path}?mode=edit` 其中 {path} 将替换为仓库中文件的完整路径。
+- **redirect:** 用于生成重定向到已迁移页面的子表。 该表包含键值对，其中键是需要创建重定向的文件位置，以相对于构建目录的绝对路径表示，（例如 `/appendices/bibliography.html`）。 该值可以是浏览器应导航到的任何有效 URI（例如 `https://rust-lang.org/`、`/overview.html` 或 `../bibliography.html`）。
+- **input-404:** 用于丢失文件的 Markdown 文件的名称。 相应的输出文件将相同，扩展名替换为 `html`。 默认为 `404.md`。
+- **site-url:** 将托管图书的网址。 这是确保 404 文件中的导航链接和 脚本/css 导入正常工作所必需的，即使在访问子目录中的 url 时也是如此。 默认为 `/`。 The url where the book will be hosted. This is required to ensure
+- **cname:** 将托管您的图书的 DNS 子域或顶级域。 根据 GitHub Pages 的要求，此字符串将写入站点根目录中名为 CNAME 的文件（请参阅[管理 GitHub Pages 站点的自定义域][custom domain]）。
 
-Available configuration options for the `[output.html.print]` table:
+[custom domain]: https://docs.github.com/en/github/working-with-github-pages/managing-a-custom-domain-for-your-github-pages-site "adf"
 
-- **enable:** Enable print support. When `false`, all print support will not be
-  rendered. Defaults to `true`.
+`[output.html.print]` 表的可用配置选项：
 
-Available configuration options for the `[output.html.fold]` table:
+- **enable:** 启用打印支持。 当为`false`时，将不会呈现所有打印支持。 默认为`true`。
 
-- **enable:** Enable section-folding. When off, all folds are open.
-  Defaults to `false`.
-- **level:** The higher the more folded regions are open. When level is 0, all
-  folds are closed. Defaults to `0`.
+`[output.html.fold]` 表的可用配置选项：
 
-Available configuration options for the `[output.html.playground]` table:
+- **enable:** 启用部分折叠。 关闭时，所有折叠都打开。 默认为`false`。
+- **level:** 越高折叠区域越开放。 当 level 为 0 时，所有折叠都关闭。 默认为`0`。
 
-- **editable:** Allow editing the source code. Defaults to `false`.
-- **copyable:** Display the copy button on code snippets. Defaults to `true`.
-- **copy-js:** Copy JavaScript files for the editor to the output directory.
-  Defaults to `true`.
-- **line-numbers** Display line numbers on editable sections of code. Requires both `editable` and `copy-js` to be `true`. Defaults to `false`.
+`[output.html.playground]` 表的可用配置选项：
+
+- **editable:** 允许编辑源代码。 默认为 `false`.
+- **copyable:** 在代码片段上显示复制按钮。 默认为 `true`.
+- **copy-js:** 将编辑器的 JavaScript 文件复制到输出目录。默认为 `true`.
+- **line-numbers** 在可编辑的代码部分显示行号。 `editable` 和 `copy-js` 都必须设置为 `true`. 默认为 `false`.
 
 [Ace]: https://ace.c9.io/
 
-Available configuration options for the `[output.html.search]` table:
+`[output.html.search]` 表的可用配置选项：
 
-- **enable:** Enables the search feature. Defaults to `true`.
-- **limit-results:** The maximum number of search results. Defaults to `30`.
-- **teaser-word-count:** The number of words used for a search result teaser.
-  Defaults to `30`.
-- **use-boolean-and:** Define the logical link between multiple search words. If
-  true, all search words must appear in each result. Defaults to `false`.
-- **boost-title:** Boost factor for the search result score if a search word
-  appears in the header. Defaults to `2`.
-- **boost-hierarchy:** Boost factor for the search result score if a search word
-  appears in the hierarchy. The hierarchy contains all titles of the parent
-  documents and all parent headings. Defaults to `1`.
-- **boost-paragraph:** Boost factor for the search result score if a search word
-  appears in the text. Defaults to `1`.
-- **expand:** True if search should match longer results e.g. search `micro`
-  should match `microwave`. Defaults to `true`.
-- **heading-split-level:** Search results will link to a section of the document
-  which contains the result. Documents are split into sections by headings this
-  level or less. Defaults to `3`. (`### This is a level 3 heading`)
-- **copy-js:** Copy JavaScript files for the search implementation to the output
-  directory. Defaults to `true`.
+- **enable:** 启用搜索功能。 默认为 `true`.
+- **limit-results:** 搜索结果的最大数量。 默认为 `30`.
+- **teaser-word-count:** 用于搜索结果预览的字数。
+  默认为 `30`.
+- **use-boolean-and:** 定义多个搜索词之间的逻辑链接。 如果为 true，则所有搜索词都必须出现在每个结果中。 默认为 `false`.
+- **boost-title:** 如果搜索词出现在标题中，则搜索结果分数的提升因子。 默认为 `2`.
+- **boost-hierarchy:** 如果搜索词出现在层次结构中，则搜索结果分数的提升因子。 层次结构包含父文档的所有标题和所有父标题。 默认为 `1`.
+- **boost-paragraph:** 如果搜索词出现在文本中，则搜索结果分数的提升因子。 默认为 `1`.
+- **expand:** 如果搜索应该匹配更长的结果，则为真，例如 搜索 `micro` 应该匹配 `microwave`。默认为 `true`.
+- **heading-split-level:** 搜索结果将链接到包含结果的文档部分。 文档按此级别或更低级别的标题分成多个部分。 默认为 `3`. (`### This is a level 3 heading`)
+- **copy-js:** 将搜索实现的 JavaScript 文件复制到输出目录。 默认为 `true`.
 
-This shows all available HTML output options in the **book.toml**:
+这显示了 **book.toml** 中所有可用的 HTML 输出选项：
 
 ```toml
 [book]
@@ -170,39 +118,28 @@ copy-js = true
 "/other-installation-methods.html" = "../infra/other-installation-methods.html"
 ```
 
-### Markdown Renderer
+## Markdown 渲染
 
-The Markdown renderer will run preprocessors and then output the resulting
-Markdown. This is mostly useful for debugging preprocessors, especially in
-conjunction with `mdbook test` to see the Markdown that `mdbook` is passing
-to `rustdoc`.
+Markdown渲染器 将运行预处理器，然后持续输出Markdown解析结果 。 这对于调试预处理器非常有用，尤其是与 `mdbook test` 结合使用以查看 `mdbook` 传递给 `rustdoc` 的 Markdown文本。
 
-The Markdown renderer is included with `mdbook` but disabled by default.
-Enable it by adding an empty table to your `book.toml` as follows:
+Markdown渲染器 包含在 `mdbook` 中，但默认情况下禁用。 通过向 `book.toml` 添加一个空表来启用它，如下所示：
 
 ```toml
 [output.markdown]
 ```
 
-There are no configuration options for the Markdown renderer at this time;
-only whether it is enabled or disabled.
+Markdown渲染器 目前没有配置选项； 仅是启用还是禁用。
 
-See [the preprocessors documentation](preprocessors.md) for how to
-specify which preprocessors should run before the Markdown renderer.
+请参阅 [预处理](preprocessors.md) 了解如何指定哪些预处理器应在 Markdown 渲染器之前运行。
 
-### Custom Renderers
+## 自定义渲染
 
-A custom renderer can be enabled by adding a `[output.foo]` table to your
-`book.toml`. Similar to [preprocessors](preprocessors.md) this will
-instruct `mdbook` to pass a representation of the book to `mdbook-foo` for
-rendering. See the [alternative backends] chapter for more detail.
+可以通过将 [output.foo] 表添加到 `book.toml` 来启用自定义渲染器。
+与[预处理](preprocessors.md)类似，这将指示 `mdbook` 将书的表示传递给 `mdbook-foo` 以进行渲染。 有关更多详细信息，请参阅[替换后端][alternative backends]一章。
 
-The custom renderer has access to all the fields within its table (i.e.
-anything under `[output.foo]`). mdBook checks for two common fields:
+自定义渲染器可以访问其表中的所有字段（即`[output.foo]` 下的任何内容）。 mdBook 检查两个常见字段：
 
-- **command:** The command to execute for this custom renderer. Defaults to
-  the name of the renderer with the `mdbook-` prefix (such as `mdbook-foo`).
-- **optional:** If `true`, then the command will be ignored if it is not
-  installed, otherwise mdBook will fail with an error. Defaults to `false`.
+- **command:** 自定义渲染器执行的命令。 默认为带有 `mdbook-` 前缀的渲染器名称（例如 `mdbook-foo`）。
+- **optional:** 如果为`true`，则如果未安装该命令将被忽略，否则 mdBook 将失败并显示错误。 默认为`false`。
 
 [alternative backends]: ../../for_developers/backends.md
