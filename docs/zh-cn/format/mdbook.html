@@ -151,10 +151,9 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="mdbook-specific-features"><a class="header" href="#mdbook-specific-features">mdBook-specific features</a></h1>
-<h2 id="hiding-code-lines"><a class="header" href="#hiding-code-lines">Hiding code lines</a></h2>
-<p>There is a feature in mdBook that lets you hide code lines by prepending them
-with a <code>#</code> <a href="https://doc.rust-lang.org/stable/rustdoc/documentation-tests.html#hiding-portions-of-the-example">like you would with Rustdoc</a>.</p>
+                        <h1 id="mdbook-特定功能"><a class="header" href="#mdbook-特定功能">mdBook 特定功能</a></h1>
+<h2 id="隐藏代码行"><a class="header" href="#隐藏代码行">隐藏代码行</a></h2>
+<p>mdBook 中有一个功能可以让你通过在代码行前面加上 <code>#</code> 来隐藏代码行，就像你在 <a href="https://doc.rust-lang.org/stable/rustdoc/documentation-tests.html#hiding-portions-of-the-example">Rustdoc</a> 中所做的那样。</p>
 <pre><code class="language-bash"># fn main() {
     let x = 5;
     let y = 6;
@@ -162,7 +161,7 @@ with a <code>#</code> <a href="https://doc.rust-lang.org/stable/rustdoc/document
     println!(&quot;{}&quot;, x + y);
 # }
 </code></pre>
-<p>Will render as</p>
+<p>会渲染成</p>
 <pre><pre class="playground"><code class="language-rust edition2018"><span class="boring">fn main() {
 </span>    let x = 5;
     let y = 6;
@@ -170,39 +169,32 @@ with a <code>#</code> <a href="https://doc.rust-lang.org/stable/rustdoc/document
     println!(&quot;{}&quot;, x + y);
 <span class="boring">}
 </span></code></pre></pre>
-<h2 id="including-files"><a class="header" href="#including-files">Including files</a></h2>
-<p>With the following syntax, you can include files into your book:</p>
+<h2 id="包含文件"><a class="header" href="#包含文件">包含文件</a></h2>
+<p>使用以下语法，您可以将文件包含到您的书中：</p>
 <pre><code class="language-hbs">{{#include file.rs}}
 </code></pre>
-<p>The path to the file has to be relative from the current source file.</p>
-<p>mdBook will interpret included files as Markdown. Since the include command
-is usually used for inserting code snippets and examples, you will often
-wrap the command with <code>```</code> to display the file contents without
-interpreting them.</p>
+<p>文件路径必须相对于当前源文件。</p>
+<p>mdBook 会将包含的文件解释为 Markdown。
+由于 include 命令通常用于插入代码片段和示例，因此您通常会用 <code>```</code> 包裹该命令以显示文件内容而不解释它们。</p>
 <pre><code class="language-hbs">```
 {{#include file.rs}}
 ```
 </code></pre>
-<h2 id="including-portions-of-a-file"><a class="header" href="#including-portions-of-a-file">Including portions of a file</a></h2>
-<p>Often you only need a specific part of the file, e.g. relevant lines for an
-example. We support four different modes of partial includes:</p>
+<h2 id="包含文件的一部分"><a class="header" href="#包含文件的一部分">包含文件的一部分</a></h2>
+<p>通常您只需要文件的特定部分，例如 相关行举例。 我们支持四种不同的部分模式包括：</p>
 <pre><code class="language-hbs">{{#include file.rs:2}}
 {{#include file.rs::10}}
 {{#include file.rs:2:}}
 {{#include file.rs:2:10}}
 </code></pre>
-<p>The first command only includes the second line from file <code>file.rs</code>. The second
-command includes all lines up to line 10, i.e. the lines from 11 till the end of
-the file are omitted. The third command includes all lines from line 2, i.e. the
-first line is omitted. The last command includes the excerpt of <code>file.rs</code>
-consisting of lines 2 to 10.</p>
-<p>To avoid breaking your book when modifying included files, you can also
-include a specific section using anchors instead of line numbers.
-An anchor is a pair of matching lines. The line beginning an anchor must
-match the regex <code>ANCHOR:\s*[\w_-]+</code> and similarly the ending line must match
-the regex <code>ANCHOR_END:\s*[\w_-]+</code>. This allows you to put anchors in
-any kind of commented line.</p>
-<p>Consider the following file to include:</p>
+<p>第一个命令只包含文件 <code>file.rs</code> 的第二行。
+第二个命令包括到第 10 行的所有行，即从 11 到文件末尾的行被省略。
+第三个命令包括第 2 行的所有行，即省略第一行。
+最后一个命令包括 <code>file.rs</code> 的摘录，由第 2 行到第 10 行组成。</p>
+<p>为了避免在修改包含的文件时破坏您的书籍，您还可以使用锚点而不是行号来包含特定部分。
+锚点是一对匹配的线。 锚点开始的行必须与正则表达式 <code>ANCHOR:\s*[\w_-]+</code> 匹配，类似地，结束行必须与正则表达式 <code>ANCHOR_END:\s*[\w_-]+</code> 匹配。
+这允许您在任何类型的注释行中放置锚点。</p>
+<p>考虑包含以下文件：</p>
 <pre><code class="language-rs">/* ANCHOR: all */
 
 // ANCHOR: component
@@ -217,7 +209,7 @@ impl System for MySystem { ... }
 
 /* ANCHOR_END: all */
 </code></pre>
-<p>Then in the book, all you have to do is:</p>
+<p>然后在书中，你所要做的就是：</p>
 <pre><code class="language-hbs">Here is a component:
 ```rust,no_run,noplayground
 {{#include file.rs:component}}
@@ -233,15 +225,11 @@ This is the full file.
 {{#include file.rs:all}}
 ```
 </code></pre>
-<p>Lines containing anchor patterns inside the included anchor are ignored.</p>
-<h2 id="including-a-file-but-initially-hiding-all-except-specified-lines"><a class="header" href="#including-a-file-but-initially-hiding-all-except-specified-lines">Including a file but initially hiding all except specified lines</a></h2>
-<p>The <code>rustdoc_include</code> helper is for including code from external Rust files that contain complete
-examples, but only initially showing particular lines specified with line numbers or anchors in the
-same way as with <code>include</code>.</p>
-<p>The lines not in the line number range or between the anchors will still be included, but they will
-be prefaced with <code>#</code>. This way, a reader can expand the snippet to see the complete example, and
-Rustdoc will use the complete example when you run <code>mdbook test</code>.</p>
-<p>For example, consider a file named <code>file.rs</code> that contains this Rust program:</p>
+<p>包含在锚点内的锚点匹配模式的行将被忽略。</p>
+<h2 id="包含一个文件但隐藏最初指定行之外的所有内容"><a class="header" href="#包含一个文件但隐藏最初指定行之外的所有内容">包含一个文件，但隐藏最初指定行之外的所有内容</a></h2>
+<p><code>rustdoc_include</code> helper 用于包含来自外部 Rust 文件的代码，这些文件包含完整的示例，但最初仅以与 <code>include</code> 相同的方式显示用行号或锚点指定的特定行。</p>
+<p>不在行号范围内或锚点之间的行仍将包含在内，但它们将以 <code>#</code> 开头。 这样，读者可以展开代码片段以查看完整示例，而 Rustdoc 将在您运行 <code>mdbook test</code> 时使用完整示例。</p>
+<p>例如，考虑一个名为 <code>file.rs</code> 的文件，其中包含这个 Rust 程序：</p>
 <pre><pre class="playground"><code class="language-rust edition2018">fn main() {
     let x = add_one(2);
     assert_eq!(x, 3);
@@ -251,16 +239,15 @@ fn add_one(num: i32) -&gt; i32 {
     num + 1
 }
 </code></pre></pre>
-<p>We can include a snippet that initially shows only line 2 by using this syntax:</p>
-<pre><code class="language-hbs">To call the `add_one` function, we pass it an `i32` and bind the returned value to `x`:
+<p>我们可以使用以下语法包含一个最初仅显示第 2 行的代码段：</p>
+<pre><code class="language-hbs">调用 `add_one` 函数, 我们传入一个 `i32` 并且将返回值赋值给 `x`:
 
 ```rust
 {{#rustdoc_include file.rs:2}}
 ```
 </code></pre>
-<p>This would have the same effect as if we had manually inserted the code and hidden all but line 2
-using <code>#</code>:</p>
-<pre><code class="language-hbs">To call the `add_one` function, we pass it an `i32` and bind the returned value to `x`:
+<p>这与我们手动插入代码并使用<code>#</code>隐藏除第 2 行之外的所有代码具有相同的效果：</p>
+<pre><code class="language-hbs">调用 `add_one` 函数, 我们传入一个 `i32` 并且将返回值赋值给 `x`:
 
 ```rust
 # fn main() {
@@ -273,7 +260,7 @@ using <code>#</code>:</p>
 # }
 ```
 </code></pre>
-<p>That is, it looks like this (click the &quot;expand&quot; icon to see the rest of the file):</p>
+<p>也就是说，它看起来像这样（单击“expand”图标以查看文件的其余部分）：</p>
 <pre><pre class="playground"><code class="language-rust edition2018"><span class="boring">fn main() {
 </span>    let x = add_one(2);
 <span class="boring">    assert_eq!(x, 3);
@@ -283,15 +270,13 @@ using <code>#</code>:</p>
 </span><span class="boring">    num + 1
 </span><span class="boring">}
 </span></code></pre></pre>
-<h2 id="inserting-runnable-rust-files"><a class="header" href="#inserting-runnable-rust-files">Inserting runnable Rust files</a></h2>
-<p>With the following syntax, you can insert runnable Rust files into your book:</p>
+<h2 id="插入可运行的-rust-文件"><a class="header" href="#插入可运行的-rust-文件">插入可运行的 Rust 文件</a></h2>
+<p>使用以下语法，您可以将可运行的 Rust 文件插入到您的书中：</p>
 <pre><code class="language-hbs">{{#playground file.rs}}
 </code></pre>
-<p>The path to the Rust file has to be relative from the current source file.</p>
-<p>When play is clicked, the code snippet will be sent to the <a href="https://play.rust-lang.org/">Rust Playground</a> to be
-compiled and run. The result is sent back and displayed directly underneath the
-code.</p>
-<p>Here is what a rendered code snippet looks like:</p>
+<p>Rust 文件的路径必须<strong>相对于当前源文件</strong>。</p>
+<p>当点击 play 时，代码片段将被发送到 <a href="https://play.rust-lang.org/">Rust Playground</a> 进行编译和运行。 结果被送回并直接显示在代码下方。</p>
+<p>下面是渲染的代码片段的样子：</p>
 <pre><pre class="playground"><code class="language-rust edition2018">fn main() {
     println!(&quot;Hello World!&quot;);
 <span class="boring">
@@ -299,9 +284,9 @@ code.</p>
 </span><span class="boring">    println!(&quot;I am hidden! Expand the code snippet to see me&quot;);
 </span>}
 </code></pre></pre>
-<h2 id="controlling-page-title"><a class="header" href="#controlling-page-title">Controlling page &lt;title&gt;</a></h2>
-<p>A chapter can set a &lt;title&gt; that is different from its entry in the table of
-contents (sidebar) by including a <code>{{#title ...}}</code> near the top of the page.</p>
+<h2 id="控制页面-title"><a class="header" href="#控制页面-title">控制页面 &lt;title&gt;</a></h2>
+<p>A chapter can set a &lt;title&gt; that is different from its entry in the table of contents (sidebar) by including a <code>{{#title ...}}</code> near the top of the page.</p>
+<p>通过在页面顶部附近包含一个<code>{{#title ...}}</code>，章节可以设置一个&lt;title&gt;，该&lt;title&gt; 与其在目录（侧边栏）中的条目不同。</p>
 <pre><code class="language-hbs">{{#title My Title}}
 </code></pre>
 

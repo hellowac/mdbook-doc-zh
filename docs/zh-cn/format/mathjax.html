@@ -151,35 +151,24 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="mathjax-support"><a class="header" href="#mathjax-support">MathJax Support</a></h1>
-<p>mdBook has optional support for math equations through
-<a href="https://www.mathjax.org/">MathJax</a>.</p>
-<p>To enable MathJax, you need to add the <code>mathjax-support</code> key to your <code>book.toml</code>
-under the <code>output.html</code> section.</p>
+                        <h1 id="mathjax-支持"><a class="header" href="#mathjax-支持">MathJax 支持</a></h1>
+<p>mdBook 通过 <a href="https://www.mathjax.org/">MathJax</a> 选择性地支持数学方程式。</p>
+<p>要启用 MathJax，您需要在 <code>output.html</code> 部分下的 <code>book.toml</code> 中添加 <code>mathjax-support</code> 键。</p>
 <pre><code class="language-toml">[output.html]
 mathjax-support = true
 </code></pre>
 <blockquote>
-<p><strong>Note:</strong> The usual delimiters MathJax uses are not yet supported. You can't
-currently use <code>$$ ... $$</code> as delimiters and the <code>\[ ... \]</code> delimiters need an
-extra backslash to work. Hopefully this limitation will be lifted soon.</p>
+<p><strong>注意:</strong> 尚不支持 MathJax 使用的常用分隔符。 您目前不能使用 <code>$$ ... $$</code> 作为分隔符，并且 <code>\[ ... \]</code> 分隔符需要额外的反斜杠才能工作。 希望这个限制很快就会解除。</p>
+<p><strong>注意:</strong> 当您在 MathJax 块中使用双反斜杠（例如 <code>\begin{cases} \frac 1 2 \\ \frac 3 4 \end{cases}</code> 等命令中）时，您需要添加<em>两个额外的反斜杠</em>（例如，<code>\begin{cases} \frac 1 2 \\\\ \frac 3 4 \end{cases}</code>)。</p>
 </blockquote>
-<blockquote>
-<p><strong>Note:</strong> When you use double backslashes in MathJax blocks (for example in
-commands such as <code>\begin{cases} \frac 1 2 \\ \frac 3 4 \end{cases}</code>) you need
-to add <em>two extra</em> backslashes (e.g., <code>\begin{cases} \frac 1 2 \\\\ \frac 3 4 \end{cases}</code>).</p>
-</blockquote>
-<h3 id="inline-equations"><a class="header" href="#inline-equations">Inline equations</a></h3>
-<p>Inline equations are delimited by <code>\\(</code> and <code>\\)</code>. So for example, to render the
-following inline equation \( \int x dx = \frac{x^2}{2} + C \) you would write
-the following:</p>
-<pre><code>\\( \int x dx = \frac{x^2}{2} + C \\)
+<h2 id="内联方程式"><a class="header" href="#内联方程式">内联方程式</a></h2>
+<p>内联方程由 <code>\\(</code> 和 <code>\\)</code> 分隔。 例如，要渲染以下内联方程 \( \int x dx = \frac{x^2}{2} + C \)，您可以编写以下内容：</p>
+<pre><code class="language-text">\\( \int x dx = \frac{x^2}{2} + C \\)
 </code></pre>
-<h3 id="block-equations"><a class="header" href="#block-equations">Block equations</a></h3>
-<p>Block equations are delimited by <code>\\[</code> and <code>\\]</code>. To render the following
-equation</p>
+<h3 id="块方程式"><a class="header" href="#块方程式">块方程式</a></h3>
+<p>块方程由 <code>\\[</code> 和 <code>\\]</code> 分隔。 渲染以下等式</p>
 <p>\[ \mu = \frac{1}{N} \sum_{i=0} x_i \]</p>
-<p>you would write:</p>
+<p>你会写：</p>
 <pre><code class="language-bash">\\[ \mu = \frac{1}{N} \sum_{i=0} x_i \\]
 </code></pre>
 

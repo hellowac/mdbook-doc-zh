@@ -1,9 +1,8 @@
-# mdBook-specific features
+# mdBook 特定功能
 
-## Hiding code lines
+## 隐藏代码行
 
-There is a feature in mdBook that lets you hide code lines by prepending them
-with a `#` [like you would with Rustdoc][rustdoc-hide].
+mdBook 中有一个功能可以让你通过在代码行前面加上 `#` 来隐藏代码行，就像你在 [Rustdoc][rustdoc-hide] 中所做的那样。
 
 [rustdoc-hide]: https://doc.rust-lang.org/stable/rustdoc/documentation-tests.html#hiding-portions-of-the-example
 
@@ -16,7 +15,7 @@ with a `#` [like you would with Rustdoc][rustdoc-hide].
 # }
 ```
 
-Will render as
+会渲染成
 
 ```rust
 # fn main() {
@@ -27,20 +26,18 @@ Will render as
 # }
 ```
 
-## Including files
+## 包含文件
 
-With the following syntax, you can include files into your book:
+使用以下语法，您可以将文件包含到您的书中：
 
 ```hbs
 \{{#include file.rs}}
 ```
 
-The path to the file has to be relative from the current source file.
+文件路径必须相对于当前源文件。
 
-mdBook will interpret included files as Markdown. Since the include command
-is usually used for inserting code snippets and examples, you will often
-wrap the command with ```` ``` ```` to display the file contents without
-interpreting them.
+mdBook 会将包含的文件解释为 Markdown。
+由于 include 命令通常用于插入代码片段和示例，因此您通常会用 ```` ``` ```` 包裹该命令以显示文件内容而不解释它们。
 
 ````hbs
 ```
@@ -48,9 +45,9 @@ interpreting them.
 ```
 ````
 
-## Including portions of a file
-Often you only need a specific part of the file, e.g. relevant lines for an
-example. We support four different modes of partial includes:
+## 包含文件的一部分
+
+通常您只需要文件的特定部分，例如 相关行举例。 我们支持四种不同的部分模式包括：
 
 ```hbs
 \{{#include file.rs:2}}
@@ -59,20 +56,17 @@ example. We support four different modes of partial includes:
 \{{#include file.rs:2:10}}
 ```
 
-The first command only includes the second line from file `file.rs`. The second
-command includes all lines up to line 10, i.e. the lines from 11 till the end of
-the file are omitted. The third command includes all lines from line 2, i.e. the
-first line is omitted. The last command includes the excerpt of `file.rs`
-consisting of lines 2 to 10.
+第一个命令只包含文件 `file.rs` 的第二行。
+第二个命令包括到第 10 行的所有行，即从 11 到文件末尾的行被省略。
+第三个命令包括第 2 行的所有行，即省略第一行。
+最后一个命令包括 `file.rs` 的摘录，由第 2 行到第 10 行组成。
 
-To avoid breaking your book when modifying included files, you can also
-include a specific section using anchors instead of line numbers.
-An anchor is a pair of matching lines. The line beginning an anchor must
-match the regex `ANCHOR:\s*[\w_-]+` and similarly the ending line must match
-the regex `ANCHOR_END:\s*[\w_-]+`. This allows you to put anchors in
-any kind of commented line.
+为了避免在修改包含的文件时破坏您的书籍，您还可以使用锚点而不是行号来包含特定部分。
+锚点是一对匹配的线。 锚点开始的行必须与正则表达式 `ANCHOR:\s*[\w_-]+` 匹配，类似地，结束行必须与正则表达式 `ANCHOR_END:\s*[\w_-]+` 匹配。
+这允许您在任何类型的注释行中放置锚点。
 
-Consider the following file to include:
+考虑包含以下文件：
+
 ```rs
 /* ANCHOR: all */
 
@@ -89,7 +83,8 @@ impl System for MySystem { ... }
 /* ANCHOR_END: all */
 ```
 
-Then in the book, all you have to do is:
+然后在书中，你所要做的就是：
+
 ````hbs
 Here is a component:
 ```rust,no_run,noplayground
@@ -107,19 +102,15 @@ This is the full file.
 ```
 ````
 
-Lines containing anchor patterns inside the included anchor are ignored.
+包含在锚点内的锚点匹配模式的行将被忽略。
 
-## Including a file but initially hiding all except specified lines
+## 包含一个文件，但隐藏最初指定行之外的所有内容
 
-The `rustdoc_include` helper is for including code from external Rust files that contain complete
-examples, but only initially showing particular lines specified with line numbers or anchors in the
-same way as with `include`.
+`rustdoc_include` helper 用于包含来自外部 Rust 文件的代码，这些文件包含完整的示例，但最初仅以与 `include` 相同的方式显示用行号或锚点指定的特定行。
 
-The lines not in the line number range or between the anchors will still be included, but they will
-be prefaced with `#`. This way, a reader can expand the snippet to see the complete example, and
-Rustdoc will use the complete example when you run `mdbook test`.
+不在行号范围内或锚点之间的行仍将包含在内，但它们将以 `#` 开头。 这样，读者可以展开代码片段以查看完整示例，而 Rustdoc 将在您运行 `mdbook test` 时使用完整示例。
 
-For example, consider a file named `file.rs` that contains this Rust program:
+例如，考虑一个名为 `file.rs` 的文件，其中包含这个 Rust 程序：
 
 ```rust
 fn main() {
@@ -132,21 +123,20 @@ fn add_one(num: i32) -> i32 {
 }
 ```
 
-We can include a snippet that initially shows only line 2 by using this syntax:
+我们可以使用以下语法包含一个最初仅显示第 2 行的代码段：
 
 ````hbs
-To call the `add_one` function, we pass it an `i32` and bind the returned value to `x`:
+调用 `add_one` 函数, 我们传入一个 `i32` 并且将返回值赋值给 `x`:
 
 ```rust
 \{{#rustdoc_include file.rs:2}}
 ```
 ````
 
-This would have the same effect as if we had manually inserted the code and hidden all but line 2
-using `#`:
+这与我们手动插入代码并使用`#`隐藏除第 2 行之外的所有代码具有相同的效果：
 
 ````hbs
-To call the `add_one` function, we pass it an `i32` and bind the returned value to `x`:
+调用 `add_one` 函数, 我们传入一个 `i32` 并且将返回值赋值给 `x`:
 
 ```rust
 # fn main() {
@@ -160,7 +150,7 @@ To call the `add_one` function, we pass it an `i32` and bind the returned value 
 ```
 ````
 
-That is, it looks like this (click the "expand" icon to see the rest of the file):
+也就是说，它看起来像这样（单击“expand”图标以查看文件的其余部分）：
 
 ```rust
 # fn main() {
@@ -173,30 +163,29 @@ That is, it looks like this (click the "expand" icon to see the rest of the file
 # }
 ```
 
-## Inserting runnable Rust files
+## 插入可运行的 Rust 文件
 
-With the following syntax, you can insert runnable Rust files into your book:
+使用以下语法，您可以将可运行的 Rust 文件插入到您的书中：
 
 ```hbs
 \{{#playground file.rs}}
 ```
 
-The path to the Rust file has to be relative from the current source file.
+Rust 文件的路径必须**相对于当前源文件**。
 
-When play is clicked, the code snippet will be sent to the [Rust Playground] to be
-compiled and run. The result is sent back and displayed directly underneath the
-code.
+当点击 play 时，代码片段将被发送到 [Rust Playground] 进行编译和运行。 结果被送回并直接显示在代码下方。
 
-Here is what a rendered code snippet looks like:
+下面是渲染的代码片段的样子：
 
 {{#playground example.rs}}
 
 [Rust Playground]: https://play.rust-lang.org/
 
-## Controlling page \<title\>
+## 控制页面 \<title\>
 
-A chapter can set a \<title\> that is different from its entry in the table of
-contents (sidebar) by including a `\{{#title ...}}` near the top of the page.
+A chapter can set a \<title\> that is different from its entry in the table of contents (sidebar) by including a `\{{#title ...}}` near the top of the page.
+
+通过在页面顶部附近包含一个`\{{#title ...}}`，章节可以设置一个\<title\>，该\<title\> 与其在目录（侧边栏）中的条目不同。
 
 ```hbs
 \{{#title My Title}}
