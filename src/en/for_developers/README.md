@@ -14,7 +14,6 @@ The two main ways a developer can hook into the book's build process is via,
 - [Preprocessors](preprocessors.md)
 - [Alternative Backends](backends.md)
 
-
 ## The Build Process
 
 The process of rendering a book project goes through several steps.
@@ -27,7 +26,6 @@ The process of rendering a book project goes through several steps.
 2. Run the preprocessors
 3. Call each backend in turn
 
-
 ## Using `mdbook` as a Library
 
 The `mdbook` binary is just a wrapper around the `mdbook` crate, exposing its
@@ -39,7 +37,6 @@ The easiest way to find out how to use the `mdbook` crate is by looking at the
 [API Docs]. The top level documentation explains how one would use the
 [`MDBook`] type to load and build a book, while the [config] module gives a good
 explanation on the configuration system.
-
 
 [`MDBook`]: https://docs.rs/mdbook/*/mdbook/book/struct.MDBook.html
 [API Docs]: https://docs.rs/mdbook/*/mdbook/

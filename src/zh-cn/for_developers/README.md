@@ -1,45 +1,31 @@
-# For Developers
+# 开发者
 
-While `mdbook` is mainly used as a command line tool, you can also import the
-underlying library directly and use that to manage a book. It also has a fairly
-flexible plugin mechanism, allowing you to create your own custom tooling and
-consumers (often referred to as *backends*) if you need to do some analysis of
-the book or render it in a different format.
+虽然 `mdbook` 主要用作命令行工具，但您也可以直接导入底层库并使用它来管理书籍。
+它还具有相当灵活的插件机制，如果您需要对本书进行一些分析或以不同的格式呈现它，则允许您创建自己的自定义工具和使用者（通常称为**后端**）。
 
-The *For Developers* chapters are here to show you the more advanced usage of
-`mdbook`.
+*开发者* 章节在这里向您展示 `mdbook` 的更高级用法。
 
-The two main ways a developer can hook into the book's build process is via,
+开发人员可以通过两种主要方式与本书的构建过程挂钩，
 
-- [Preprocessors](preprocessors.md)
-- [Alternative Backends](backends.md)
+- [预处理器](preprocessors.md)
+- [替换后端](backends.md)
 
+## 构建过程
 
-## The Build Process
+渲染书籍项目的过程需要经过几个步骤。
 
-The process of rendering a book project goes through several steps.
+1. 加载 book
+    - 解析 `book.toml`, 如果不存在，则回退到默认的 `Config`
+    - 加载 book 章节到内存
+    - 发现应该使用哪些预处理器/后端
+2. 运行预处理器
+3. 依次调用各个后端
 
-1. Load the book
-    - Parse the `book.toml`, falling back to the default `Config` if it doesn't
-       exist
-    - Load the book chapters into memory
-    - Discover which preprocessors/backends should be used
-2. Run the preprocessors
-3. Call each backend in turn
+## 使用 `mdbook` 作为库
 
+`mdbook` 二进制文件只是 `mdbook crate` 的包装器，将其功能作为命令行程序公开。 因此，很容易创建自己的程序，在内部使用 `mdbook` ，添加自己的功能（例如自定义预处理器）或调整构建过程。
 
-## Using `mdbook` as a Library
-
-The `mdbook` binary is just a wrapper around the `mdbook` crate, exposing its
-functionality as a command-line program. As such it is quite easy to create your
-own programs which use `mdbook` internally, adding your own functionality (e.g.
-a custom preprocessor) or tweaking the build process.
-
-The easiest way to find out how to use the `mdbook` crate is by looking at the
-[API Docs]. The top level documentation explains how one would use the
-[`MDBook`] type to load and build a book, while the [config] module gives a good
-explanation on the configuration system.
-
+了解如何使用 `mdbook crate` 的最简单方法是查看 [API 文档][API Docs]。 顶级文档解释了如何使用 [`MDBook`] 类型加载和构建一本书，而 [config] 模块对配置系统给出了很好的解释。
 
 [`MDBook`]: https://docs.rs/mdbook/*/mdbook/book/struct.MDBook.html
 [API Docs]: https://docs.rs/mdbook/*/mdbook/

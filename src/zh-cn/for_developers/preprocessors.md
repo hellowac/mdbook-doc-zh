@@ -1,25 +1,18 @@
-# Preprocessors
+# 预处理器
 
-A *preprocessor* is simply a bit of code which gets run immediately after the
-book is loaded and before it gets rendered, allowing you to update and mutate
-the book. Possible use cases are:
+**预处理器**只是一小段代码，它在书籍加载后和渲染之前立即运行，允许您更新和修改书籍。 可能的用例是：
 
-- Creating custom helpers like `\{{#include /path/to/file.md}}`
-- Updating links so `[some chapter](some_chapter.md)` is automatically changed
-  to `[some chapter](some_chapter.html)` for the HTML renderer
-- Substituting in latex-style expressions (`$$ \frac{1}{3} $$`) with their
-  mathjax equivalents
+- 创建一个自定义 helpers 例如 `\{{#include /path/to/file.md}}`
+- 更新链接，以便HTML渲染器渲染时将 `[部分章节1](some_chapter1.md)` 自动更改为 `[部分章节2](some_chapter2.html)`
+- 替换 latex 风格的表达式 (`$$ \frac{1}{3} $$`) 为 等价的 mathjax 表达式
 
-## Hooking Into MDBook
+## 连接到 MDBook
 
-MDBook uses a fairly simple mechanism for discovering third party plugins.
-A new table is added to `book.toml` (e.g. `preprocessor.foo` for the `foo`
-preprocessor) and then `mdbook` will try to invoke the `mdbook-foo` program as
-part of the build process.
+MDBook 使用一种相当简单的机制来发现第三方插件。
+一个新表被添加到 `book.toml`（例如 `foo` 预处理器的 `preprocessor.foo`），
+然后 `mdbook` 将尝试调用 `mdbook-foo` 程序作为构建过程的一部分。
 
-A preprocessor can be hard-coded to specify which backend(s) it should be run
-for with the `preprocessor.foo.renderer` key. For example, it doesn't make sense for
-[MathJax](../format/mathjax.md) to be used for non-HTML renderers.
+预处理器可以硬编码来指定`preprocessor.foo.renderer` 键, 指定他应该运行那些后端。 例如，将 [MathJax](../format/mathjax.md) 用于非 HTML 渲染器是没有意义的。
 
 ```toml
 [book]
@@ -33,24 +26,24 @@ command = "python3 /path/to/foo.py"
 renderer = ["html", "epub"]
 ```
 
-Once the preprocessor has been defined and the build process starts, mdBook executes the command defined in the `preprocessor.foo.command` key twice.
-The first time it runs the preprocessor to determine if it supports the given renderer.
-mdBook passes two arguments to the process: the first argument is the string `supports` and the second argument is the renderer name.
-The preprocessor should exit with a status code 0 if it supports the given renderer, or return a non-zero exit code if it does not.
+一旦定义了预处理器并开始构建过程，mdBook 将执行 `preprocessor.foo.command` 键中定义的命令两次。
 
-If the preprocessor supports the renderer, then mdbook runs it a second time, passing JSON data into stdin.
-The JSON consists of an array of `[context, book]` where `context` is the serialized object [`PreprocessorContext`] and `book` is a [`Book`] object containing the content of the book.
+它第一次运行为预处理器确定它是否支持给定的渲染器。
 
-The preprocessor should return the JSON format of the [`Book`] object to stdout, with any modifications it wishes to perform.
+mdBook 向进程传递两个参数：第一个参数是字符串`supports`，第二个参数是渲染器名称。
 
-The easiest way to get started is by creating your own implementation of the
-`Preprocessor` trait (e.g. in `lib.rs`) and then creating a shell binary which
-translates inputs to the correct `Preprocessor` method. For convenience, there
-is [an example no-op preprocessor] in the `examples/` directory which can easily
-be adapted for other preprocessors.
+如果预处理器支持给定的渲染器，则它应该以状态代码 `0` 退出，如果不支持，则返回非零退出代码。
+
+如果预处理器支持渲染器，则 mdbook 将第二次运行它，且将 JSON 数据传递到 stdin。 JSON 包含一个 `[context, book]` 数组，其中 `context` 是序列化的对象 `PreprocessorContext`，而 `book` 是包含书籍内容的 [`Book`] 对象。
+
+预处理器应该将 [`Book`] 对象的 JSON 格式返回到标准输出，并带有它希望执行的任何修改。
+
+最简单的入门方法是创建您自己的 `Preprocessor` trait 实现（例如在 `lib.rs` 中），
+然后创建一个 shell 二进制文件，将输入转换为正确的 `Preprocessor` 方法。
+为方便起见，`examples/` 目录中有一个示例 `no-op` 预处理器，它可以很容易地适用于其他预处理器。
 
 <details>
-<summary>Example no-op preprocessor</summary>
+<summary>示例预处理器 no-op </summary>
 
 ```rust
 // nop-preprocessors.rs
@@ -163,29 +156,17 @@ mod nop_lib {
 
 </details>
 
-## Hints For Implementing A Preprocessor
+## 实现预处理器的提示
 
-By pulling in `mdbook` as a library, preprocessors can have access to the
-existing infrastructure for dealing with books.
+通过将 `mdbook` 作为库引入，预处理器可以访问现有的基础架构来处理书籍。
 
-For example, a custom preprocessor could use the
-[`CmdPreprocessor::parse_input()`] function to deserialize the JSON written to
-`stdin`. Then each chapter of the `Book` can be mutated in-place via
-[`Book::for_each_mut()`], and then written to `stdout` with the `serde_json`
-crate.
+例如，自定义预处理器可以使用 [`CmdPreprocessor::parse_input()`] 函数反序列化写入`stdin`的 JSON。 然后可以通过 [`Book::for_each_mut()`] 就地修改 `Book` 的每一章，然后使用 `serde_json` crate 写入 `stdout` 。
 
-Chapters can be accessed either directly (by recursively iterating over
-chapters) or via the `Book::for_each_mut()` convenience method.
+章节可以直接访问（通过递归迭代章节）或通过 [`Book::for_each_mut()`] 便捷方法访问。
 
-The `chapter.content` is just a string which happens to be markdown. While it's
-entirely possible to use regular expressions or do a manual find & replace,
-you'll probably want to process the input into something more computer-friendly.
-The [`pulldown-cmark`][pc] crate implements a production-quality event-based
-Markdown parser, with the [`pulldown-cmark-to-cmark`][pctc] allowing you to
-translate events back into markdown text.
+该 `chapter.content` 只是一个字符串，恰好是 Markdown。 虽然完全可以使用正则表达式或进行手动查找和替换，但您可能希望将输入处理为对计算机更友好的内容。 [`pulldown-cmark`][pc] crate 实现了一个生产质量的基于事件的 Markdown 解析器，使用 [`pulldown-cmark-to-cmark`][pctc] 允许您将事件转换回 Markdown 文本。
 
-The following code block shows how to remove all emphasis from markdown,
-without accidentally breaking the document.
+以下代码块显示了如何从 Markdown 中删除所有强调，而不会意外破坏文档。
 
 ```rust
 fn remove_emphasis(
@@ -214,13 +195,15 @@ fn remove_emphasis(
 }
 ```
 
-For everything else, have a look [at the complete example][example].
+对于其他所有内容，请查看[完整示例][example]。
 
-## Implementing a preprocessor with a different language
+## 用不同的语言实现预处理器
 
-The fact that mdBook utilizes stdin and stdout to communicate with the preprocessors makes it easy to implement them in a language other than Rust.
-The following code shows how to implement a simple preprocessor in Python, which will modify the content of the first chapter.
-The example below follows the configuration shown above with `preprocessor.foo.command` actually pointing to a Python script.
+mdBook 利用 `stdin` 和 `stdout` 与预处理器通信的事实使得用 Rust 以外的语言实现它们变得容易。
+
+下面的代码展示了如何在Python中实现一个简单的预处理器，将修改第一章的内容。
+
+下面的示例遵循上面显示的配置，其中 `preprocessor.foo.command` 实际上指向一个 Python 脚本。
 
 ```python
 import json
@@ -228,16 +211,16 @@ import sys
 
 
 if __name__ == '__main__':
-    if len(sys.argv) > 1: # we check if we received any argument
+    if len(sys.argv) > 1: # 我们检查我们是否收到任何参数
         if sys.argv[1] == "supports": 
-            # then we are good to return an exit status code of 0, since the other argument will just be the renderer's name
+            # 那么我们最好返回 0 的退出状态代码，因为另一个参数将只是渲染器的名称
             sys.exit(0)
 
-    # load both the context and the book representations from stdin
+    # 从标准输入加载上下文和书籍表示
     context, book = json.load(sys.stdin)
-    # and now, we can just modify the content of the first chapter
+    # 现在，我们可以修改第一章的内容
     book['sections'][0]['Chapter']['content'] = '# Hello'
-    # we are done with the book's modification, we can just print it to stdout, 
+    # 我们完成了本书的修改，我们可以将它打印到标准输出，
     print(json.dumps(book))
 ```
 

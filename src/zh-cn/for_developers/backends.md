@@ -1,41 +1,31 @@
-# Alternative Backends
+# 替换后端
 
-A "backend" is simply a program which `mdbook` will invoke during the book
-rendering process. This program is passed a JSON representation of the book and
-configuration information via `stdin`. Once the backend receives this
-information it is free to do whatever it wants.
+“后端”只是一个 `mdbook` 在渲染过程中调用的程序。
+该程序通过`stdin`传递书籍和配置信息的 JSON 表示。
+一旦后端收到此信息，它就可以自由地做任何想做的事。
 
-There are already several alternative backends on GitHub which can be used as a
-rough example of how this is accomplished in practice.
+GitHub 上已经有几个替代后端，可以用作在实践中如何完成的大概示例。
 
-- [mdbook-linkcheck] - a simple program for verifying the book doesn't contain
-  any broken links
-- [mdbook-epub] - an EPUB renderer
-- [mdbook-test] - a program to run the book's contents through [rust-skeptic] to
-  verify everything compiles and runs correctly (similar to `rustdoc --test`)
-- [mdbook-man] - generate manual pages from the book
+- [mdbook-linkcheck] - 一个用于验证这本书不包含任何损坏的链接的简单程序
+- [mdbook-epub] - 一个 EPUB 渲染器
+- [mdbook-test] - 一个通过 [rust-skeptic] 运行本书内容的程序，以验证所有内容是否正确编译和运行（类似于 `rustdoc --test`）
+- [mdbook-man] - 从书中生成手册页
 
-This page will step you through creating your own alternative backend in the form
-of a simple word counting program. Although it will be written in Rust, there's
-no reason why it couldn't be accomplished using something like Python or Ruby.
+此页面将引导您以简单的字数统计程序的形式创建您自己的替代后端。 虽然它将用 Rust 编写，但没有理由不能使用 Python 或 Ruby 之类的其他编程语言来完成。
 
+## 起步
 
-## Setting Up
-
-First you'll want to create a new binary program and add `mdbook` as a
-dependency.
+首先，您需要创建一个新的二进制程序并添加 `mdbook` 作为依赖项。
 
 ```shell
-$ cargo new --bin mdbook-wordcount
-$ cd mdbook-wordcount
-$ cargo add mdbook
+>$ cargo new --bin mdbook-wordcount
+>$ cd mdbook-wordcount
+>$ cargo add mdbook
 ```
 
-When our `mdbook-wordcount` plugin is invoked, `mdbook` will send it a JSON
-version of [`RenderContext`] via our plugin's `stdin`. For convenience, there's
-a [`RenderContext::from_json()`] constructor which will load a `RenderContext`.
+当我们的 `mdbook-wordcount` 插件被调用时，`mdbook` 将通过我们插件的 `stdin` 向它发送 [`RenderContext`] 的 JSON 版本。 为方便起见，有一个 [`RenderContext::from_json()`] 构造函数，它将加载一个 `RenderContext`。
 
-This is all the boilerplate necessary for our backend to load the book.
+这是我们的后端加载本书所需的所有样板。
 
 ```rust
 // src/main.rs
@@ -50,23 +40,15 @@ fn main() {
 }
 ```
 
-> **Note:** The `RenderContext` contains a `version` field. This lets backends
-  figure out whether they are compatible with the version of `mdbook` it's being
-  called by. This `version` comes directly from the corresponding field in
-  `mdbook`'s `Cargo.toml`.
+> **注意:** `RenderContext` 包含一个`version`字段。 这让后端可以确定它们是否与它正在调用的 `mdbook` 版本兼容。 该`version`直接来自 mdbook 的 `Cargo.toml` 中的相应字段。
 
-  It is recommended that backends use the [`semver`] crate to inspect this field
-  and emit a warning if there may be a compatibility issue.
+建议后端使用 `semver` crate 检查此字段，并在可能存在兼容性问题时发出警告。
 
+## 核查 Book
 
-## Inspecting the Book
+现在我们的后端有这本书的副本，让我们数一数每章有多少字！
 
-Now our backend has a copy of the book, lets count how many words are in each
-chapter!
-
-Because the `RenderContext` contains a [`Book`] field (`book`), and a `Book` has
-the [`Book::iter()`] method for iterating over all items in a `Book`, this step
-turns out to be just as easy as the first.
+因为 `RenderContext` 包含一个[`Book`] 字段（`book`），并且`Book` 具有[`Book::iter()`] 方法来迭代`Book` 中的所有项目，这一步 结果证明和第一个一样容易。
 
 ```rust
 
@@ -87,18 +69,15 @@ fn count_words(ch: &Chapter) -> usize {
 }
 ```
 
+## 启用后端
 
-## Enabling the Backend
-
-Now we've got the basics running, we want to actually use it. First, install the
-program.
+现在我们已经有了基础运行代码，我们想要实际使用它。 首先，安装程序。
 
 ```shell
-$ cargo install --path .
+cargo install --path .
 ```
 
-Then `cd` to the particular book you'd like to count the words of and update its
-`book.toml` file.
+然后`cd`到你想要计算单词数的特定书籍目录. 并更新它的`book.toml`文件。
 
 ```diff
   [book]
@@ -164,7 +143,6 @@ arguments or be an interpreted script), you can use the `command` field.
 + command = "python /path/to/wordcount.py"
 ```
 
-
 ## Configuration
 
 Now imagine you don't want to count the number of words on a particular chapter
@@ -183,7 +161,7 @@ which will encapsulate all configuration for this backend.
 First add `serde` and `serde_derive` to your `Cargo.toml`,
 
 ```
-$ cargo add serde serde_derive
+cargo add serde serde_derive
 ```
 
 And then you can create the config struct,
@@ -225,7 +203,6 @@ and then add a check to make sure we skip ignored chapters.
       }
   }
 ```
-
 
 ## Output and Signalling Failure
 
@@ -362,7 +339,6 @@ The command was not found, but was marked as optional.
     Command: wordcount
 ```
 
-
 ## Wrapping Up
 
 Although contrived, hopefully this example was enough to show how you'd create
@@ -373,7 +349,6 @@ guide.
 The existing backends mentioned towards the start of this chapter should serve
 as a good example of how it's done in real life, so feel free to skim through
 the source code or ask questions.
-
 
 [mdbook-linkcheck]: https://github.com/Michael-F-Bryan/mdbook-linkcheck
 [mdbook-epub]: https://github.com/Michael-F-Bryan/mdbook-epub

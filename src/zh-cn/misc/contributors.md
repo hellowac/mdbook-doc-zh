@@ -1,7 +1,6 @@
-# Contributors
+# 贡献者
 
-Here is a list of the contributors who have helped improving mdBook. Big
-shout-out to them!
+以下是帮助改进 mdBook 的贡献者列表。 向他们欢呼！
 
 - [mdinger](https://github.com/mdinger)
 - Kevin ([kbknapp](https://github.com/kbknapp))
@@ -21,4 +20,4 @@ shout-out to them!
 - Eric Huss ([ehuss](https://github.com/ehuss))
 - Josh Rotenberg ([joshrotenberg](https://github.com/joshrotenberg))
 
-If you feel you're missing from this list, feel free to add yourself in a PR.
+如果您觉得自己不在此列表中，请随时将自己添加到仓库中。
