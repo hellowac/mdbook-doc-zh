@@ -90,15 +90,11 @@ cargo install --path .
 + [output.wordcount]
 ```
 
-When it loads a book into memory, `mdbook` will inspect your `book.toml` file to
-try and figure out which backends to use by looking for all `output.*` tables.
-If none are provided it'll fall back to using the default HTML renderer.
+当它将一本书加载到内存中时，`mdbook` 将检查您的 `book.toml` 文件，以通过查找所有 `output.*` 表来尝试找出要使用的后端。 如果没有提供，它将回退到使用默认的 HTML 渲染器。
 
-Notably, this means if you want to add your own custom backend you'll also need
-to make sure to add the HTML backend, even if its table just stays empty.
+值得注意的是，这意味着如果您想添加自己的自定义后端，您还需要确保添加 HTML 后端，即使它的表只是为空。
 
-Now you just need to build your book like normal, and everything should *Just
-Work*.
+现在你只需要像往常一样构建你的书，一切都应该*正常工作*。
 
 ```shell
 $ mdbook build
@@ -124,12 +120,9 @@ Alternative Backends: 710
 Contributors: 85
 ```
 
-The reason we didn't need to specify the full name/path of our `wordcount`
-backend is because `mdbook` will try to *infer* the program's name via
-convention. The executable for the `foo` backend is typically called
-`mdbook-foo`, with an associated `[output.foo]` entry in the `book.toml`. To
-explicitly tell `mdbook` what command to invoke (it may require command-line
-arguments or be an interpreted script), you can use the `command` field.
+我们不需要指定 `wordcount` 后端的全名/路径的原因是因为 `mdbook` 将尝试通过约定推断程序的名称。
+`foo` 后端的可执行文件通常称为 `mdbook-foo`，在 `book.toml` 中有一个关联的 `[output.foo]` 条目。
+要明确告诉 `mdbook` 调用什么命令（它可能需要命令行参数或解释脚本），您可以使用`command`字段。
 
 ```diff
   [book]
@@ -143,28 +136,21 @@ arguments or be an interpreted script), you can use the `command` field.
 + command = "python /path/to/wordcount.py"
 ```
 
-## Configuration
+## 配置
 
-Now imagine you don't want to count the number of words on a particular chapter
-(it might be generated text/code, etc). The canonical way to do this is via the
-usual `book.toml` configuration file by adding items to your `[output.foo]`
-table.
+现在假设您不想计算特定章节的字数（它可能是生成的文本/代码等）。 执行此操作的规范方法是通过配置文件`book.toml` ， 将项目添加到配置文件的 [output.foo] 表中。
 
-The `Config` can be treated roughly as a nested hashmap which lets you call
-methods like `get()` to access the config's contents, with a
-`get_deserialized()` convenience method for retrieving a value and automatically
-deserializing to some arbitrary type `T`.
+`Config` 可以粗略地视为一个嵌套的 **hashmap**，它允许您调用 `get()` 之类的方法来访问配置的内容，使用 `get_deserialized()` 便捷方法检索值并自动反序列化为某个任意类型 `T`。
 
-To implement this, we'll create our own serializable `WordcountConfig` struct
-which will encapsulate all configuration for this backend.
+为了实现这一点，我们将创建我们自己的可序列化 `WordcountConfig` 结构，它将封装此后端的所有配置。
 
-First add `serde` and `serde_derive` to your `Cargo.toml`,
+首先将 `serde` 和 `serde_derive` 添加到 `Cargo.toml`，
 
-```
+```bash
 cargo add serde serde_derive
 ```
 
-And then you can create the config struct,
+然后你可以创建配置结构，
 
 ```rust
 extern crate serde;
@@ -180,8 +166,7 @@ pub struct WordcountConfig {
 }
 ```
 
-Now we just need to deserialize the `WordcountConfig` from our `RenderContext`
-and then add a check to make sure we skip ignored chapters.
+现在我们只需要从我们的 `RenderContext` 反序列化 `WordcountConfig`，然后添加一个检查以确保跳过被我们忽略的章节。
 
 ```diff
   fn main() {
@@ -204,12 +189,9 @@ and then add a check to make sure we skip ignored chapters.
   }
 ```
 
-## Output and Signalling Failure
+## 输出和信令故障
 
-While it's nice to print word counts to the terminal when a book is built, it
-might also be a good idea to output them to a file somewhere. `mdbook` tells a
-backend where it should place any generated output via the `destination` field
-in [`RenderContext`].
+虽然在构建一本书时将字数打印到终端是很好的，但将它们输出到某个文件中也可能是一个好主意。 `mdbook` 告诉后端它应该通过 `RenderContext` 中的`destination`字段将任何生成的输出放置在哪里。
 
 ```diff
 + use std::fs::{self, File};
@@ -236,21 +218,13 @@ in [`RenderContext`].
   }
 ```
 
-> **Note:** There is no guarantee that the destination directory exists or is
-> empty (`mdbook` may leave the previous contents to let backends do caching),
-> so it's always a good idea to create it with `fs::create_dir_all()`.
+> **注意:** 无法保证目标目录存在或为空（`mdbook` 可能会保留之前的内容让后端进行缓存），因此使用 `fs::create_dir_all()` 创建它总是一个好主意。
 >
-> If the destination directory already exists, don't assume it will be empty.
-> To allow backends to cache the results from previous runs, `mdbook` may leave
-> old content in the directory.
+> 如果目标目录已经存在，不要假设它是空的。 为了允许后端缓存先前运行的结果，`mdbook` 可能会在目录中保留旧内容。
 
-There's always the possibility that an error will occur while processing a book
-(just look at all the `unwrap()`'s we've written already), so `mdbook` will
-interpret a non-zero exit code as a rendering failure.
+处理书籍时总是有可能发生错误（只需查看我们已经编写的所有 `unwrap()` ），因此 `mdbook` 会将非零退出代码解释为渲染失败。
 
-For example, if we wanted to make sure all chapters have an *even* number of
-words, erroring out if an odd number is encountered, then you may do something
-like this:
+例如，如果我们想确保所有章节都有偶数个单词，如果遇到奇数就出错，那么你可以这样做：
 
 ```diff
 + use std::process;
@@ -283,7 +257,7 @@ like this:
   }
 ```
 
-Now, if we reinstall the backend and build a book,
+现在，如果我们重新安装后端并构建一本书，
 
 ```shell
 $ cargo install --path . --force
@@ -299,17 +273,13 @@ init has an odd number of words!
 2018-01-16 21:21:39 [ERROR] (mdbook::utils):    Caused By: The "mdbook-wordcount" renderer failed
 ```
 
-As you've probably already noticed, output from the plugin's subprocess is
-immediately passed through to the user. It is encouraged for plugins to follow
-the "rule of silence" and only generate output when necessary (e.g. an error in
-generation or a warning).
+您可能已经注意到，插件子进程的输出会立即传递给用户。 鼓励插件遵循“沉默规则”，仅在必要时生成输出（例如生成错误或警告）。
 
-All environment variables are passed through to the backend, allowing you to use
-the usual `RUST_LOG` to control logging verbosity.
+所有环境变量都传递到后端，允许您使用通常的`RUST_LOG`来控制日志记录的详细程度。
 
-## Handling missing backends
+## 处理缺失的后端
 
-If you enable a backend that isn't installed, the default behavior is to throw an error:
+如果启用未安装的后端，默认行为是抛出错误：
 
 ```text
 The command `mdbook-wordcount` wasn't found, is the "wordcount" backend installed?
@@ -317,7 +287,7 @@ If you want to ignore this error when the "wordcount" backend is not installed,
 set `optional = true` in the `[output.wordcount]` section of the book.toml configuration file.
 ```
 
-This behavior can be changed by marking the backend as optional.
+可以通过将后端标记为可选来更改此行为。
 
 ```diff
   [book]
@@ -332,7 +302,7 @@ This behavior can be changed by marking the backend as optional.
 + optional = true
 ```
 
-This demotes the error to a warning, and it will instead look like this:
+这会将错误降级为警告，而是如下所示：
 
 ```text
 The command was not found, but was marked as optional.
@@ -341,14 +311,9 @@ The command was not found, but was marked as optional.
 
 ## Wrapping Up
 
-Although contrived, hopefully this example was enough to show how you'd create
-an alternative backend for `mdbook`. If you feel it's missing something, don't
-hesitate to create an issue in the [issue tracker] so we can improve the user
-guide.
+虽然人为设计，但希望这个例子足以展示您如何为 `mdbook` 创建替换后端。 如果您觉得缺少某些内容，请不要犹豫在问题跟踪器中[创建问题][issue tracker]，以便我们改进用户指南。
 
-The existing backends mentioned towards the start of this chapter should serve
-as a good example of how it's done in real life, so feel free to skim through
-the source code or ask questions.
+本章开头提到的现有后端应该作为它在现实生活中如何完成的一个很好的例子，所以请随意浏览源代码或提出问题。
 
 [mdbook-linkcheck]: https://github.com/Michael-F-Bryan/mdbook-linkcheck
 [mdbook-epub]: https://github.com/Michael-F-Bryan/mdbook-epub
