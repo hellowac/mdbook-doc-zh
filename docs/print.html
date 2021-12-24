@@ -729,102 +729,76 @@ $ mdbook build
 </code></pre>
 </blockquote>
 <p>后一种情况在从脚本或 CI 调用 <code>mdbook</code> 的情况下可能很有用，适用情况为，有时无法在构建之前更新 <code>book.toml</code>。</p>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="theme"><a class="header" href="#theme">Theme</a></h1>
-<p>The default renderer uses a <a href="http://handlebarsjs.com/">handlebars</a> template to
-render your markdown files and comes with a default theme included in the mdBook
-binary.</p>
-<p>The theme is totally customizable, you can selectively replace every file from
-the theme by your own by adding a <code>theme</code> directory next to <code>src</code> folder in your
-project root. Create a new file with the name of the file you want to override
-and now that file will be used instead of the default file.</p>
-<p>Here are the files you can override:</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="主题"><a class="header" href="#主题">主题</a></h1>
+<p>默认渲染器使用一个<a href="http://handlebarsjs.com/">handlebars</a>模板来渲染你的markdown文件，并带有一个包含在 mdBook 二进制文件中的默认主题。</p>
+<p>主题是完全可定制的，您可以通过在项目根目录的 <code>src</code> 文件夹旁边添加一个<code>theme</code>目录，有选择地替换主题中的每个文件。 使用要覆盖的文件的名称创建一个新文件，现在将使用该文件而不是默认文件。</p>
+<p>以下是您可以覆盖的文件：</p>
 <ul>
-<li><strong><em>index.hbs</em></strong> is the handlebars template.</li>
-<li><strong><em>head.hbs</em></strong> is appended to the HTML <code>&lt;head&gt;</code> section.</li>
-<li><strong><em>header.hbs</em></strong> content is appended on top of every book page.</li>
-<li><strong><em>css/</em></strong> contains the CSS files for styling the book.
+<li><strong><em>index.hbs</em></strong> <a href="http://handlebarsjs.com/">handlebars</a> 模板.</li>
+<li><strong><em>head.hbs</em></strong> 附加到 HTML <code>&lt;head&gt;</code> 部分。</li>
+<li><strong><em>header.hbs</em></strong> 内容附加在每个书页的顶部。</li>
+<li><strong><em>css/</em></strong> 包含用于设计样式的 CSS 文件。
 <ul>
-<li><strong><em>css/chrome.css</em></strong> is for UI elements.</li>
-<li><strong><em>css/general.css</em></strong> is the base styles.</li>
-<li><strong><em>css/print.css</em></strong> is the style for printer output.</li>
-<li><strong><em>css/variables.css</em></strong> contains variables used in other CSS files.</li>
+<li><strong><em>css/chrome.css</em></strong> 用于 UI 元素。</li>
+<li><strong><em>css/general.css</em></strong> 是基本样式。</li>
+<li><strong><em>css/print.css</em></strong> 是打印机输出的样式。</li>
+<li><strong><em>css/variables.css</em></strong> 包含在其他 CSS 文件中使用的变量。</li>
 </ul>
 </li>
-<li><strong><em>book.js</em></strong> is mostly used to add client side functionality, like hiding /
-un-hiding the sidebar, changing the theme, ...</li>
-<li><strong><em>highlight.js</em></strong> is the JavaScript that is used to highlight code snippets,
-you should not need to modify this.</li>
-<li><strong><em>highlight.css</em></strong> is the theme used for the code highlighting.</li>
-<li><strong><em>favicon.svg</em></strong> and <strong><em>favicon.png</em></strong> the favicon that will be used. The SVG
-version is used by <a href="https://caniuse.com/#feat=link-icon-svg">newer browsers</a>.</li>
+<li><strong><em>book.js</em></strong> 主要用于添加客户端功能，例如隐藏/取消隐藏侧边栏，更改主题，...</li>
+<li><strong><em>highlight.js</em></strong> 是用于突出显示代码片段的 JavaScript，您不需要修改它。</li>
+<li><strong><em>highlight.css</em></strong> 是用于代码突出显示的主题。</li>
+<li><strong><em>favicon.svg</em></strong> 和 <strong><em>favicon.png</em></strong> 使用的图标。 SVG 版本由<a href="https://caniuse.com/#feat=link-icon-svg">较新的浏览器</a>使用。</li>
 </ul>
-<p>Generally, when you want to tweak the theme, you don't need to override all the
-files. If you only need changes in the stylesheet, there is no point in
-overriding all the other files. Because custom files take precedence over
-built-in ones, they will not get updated with new fixes / features.</p>
-<p><strong>Note:</strong> When you override a file, it is possible that you break some
-functionality. Therefore I recommend to use the file from the default theme as
-template and only add / modify what you need. You can copy the default theme
-into your source directory automatically by using <code>mdbook init --theme</code> and just
-remove the files you don't want to override.</p>
-<p>If you completely replace all built-in themes, be sure to also set
-<a href="zh-cn/format/theme/../configuration/renderers.html#html-renderer-options"><code>output.html.preferred-dark-theme</code></a> in the config, which defaults to the
-built-in <code>navy</code> theme.</p>
+<p>通常，当您想要调整主题时，您不需要覆盖所有文件。
+如果您只需要更改样式表，则覆盖所有其他文件没有意义。
+因为自定义文件优先于内置文件，所以它们不会随着新的修复程序/功能而更新。</p>
+<p><strong>注意:</strong> 覆盖文件时，可能会破坏某些功能。 因此，我建议使用默认主题中的文件作为模板，并且只添加/修改您需要的内容。 您可以使用 <code>mdbook init --theme</code> 自动将默认主题复制到源目录中，然后删除不想覆盖的文件。</p>
+<p>如果完全替换所有内置主题，请务必在配置中设置 <a href="zh-cn/format/theme/../configuration/renderers.html#html-renderer-options"><code>output.html.preferred-dark-theme</code></a>，默认为内置<code>navy</code>主题。</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="indexhbs"><a class="header" href="#indexhbs">index.hbs</a></h1>
-<p><code>index.hbs</code> is the handlebars template that is used to render the book. The
-markdown files are processed to html and then injected in that template.</p>
-<p>If you want to change the layout or style of your book, chances are that you
-will have to modify this template a little bit. Here is what you need to know.</p>
+<p><code>index.hbs</code> 是用于渲染book的<a href="http://handlebarsjs.com/">handlebars</a>模板。 Markdown 文件被处理为 html，然后注入到该模板中。</p>
+<p>如果您想更改书籍的布局或样式，您可能需要稍微修改此模板。 本节是您需要了解的内容。</p>
 <h2 id="data"><a class="header" href="#data">Data</a></h2>
-<p>A lot of data is exposed to the handlebars template with the &quot;context&quot;. In the
-handlebars template you can access this information by using</p>
+<p>许多数据通过&quot;context&quot;(上下文)暴露给<a href="http://handlebarsjs.com/">handlebars</a>模板。 在<a href="http://handlebarsjs.com/">handlebars</a>模板中，您可以使用这些数据。</p>
 <pre><code class="language-handlebars">{{name_of_property}}
 </code></pre>
-<p>Here is a list of the properties that are exposed:</p>
+<p>以下是公开的属性列表：</p>
 <ul>
 <li>
-<p><em><strong>language</strong></em> Language of the book in the form <code>en</code>, as specified in <code>book.toml</code> (if not specified, defaults to <code>en</code>). To use in <code
-  class="language-html">&lt;html lang=&quot;{{ language }}&quot;&gt;</code> for example.</p>
+<p><em><strong>language</strong></em> 书的语言采用 <code>en</code> 形式，如 <code>book.toml</code> 中指定（如果未指定，默认为 <code>en</code>）。 例如在 <code class="language-html">&lt;html lang=&quot;{{ language }}&quot;&gt;</code> 中使用。</p>
 </li>
 <li>
-<p><em><strong>title</strong></em> Title used for the current page. This is identical to <code>{{ chapter_title }} - {{ book_title }}</code> unless <code>book_title</code> is not set in which case it just defaults to the <code>chapter_title</code>.</p>
+<p><em><strong>title</strong></em> 用于当前页面的标题。 这与 <code>{{chapter_title }} - {{ book_title }}</code> 相同，除非没有设置 <code>book_title</code>，在这种情况下它只是默认为 <code>chapter_title</code>。</p>
 </li>
 <li>
-<p><em><strong>book_title</strong></em> Title of the book, as specified in <code>book.toml</code></p>
+<p><em><strong>book_title</strong></em> 书名，在<code>book.toml</code>中指定</p>
 </li>
 <li>
-<p><em><strong>chapter_title</strong></em> Title of the current chapter, as listed in <code>SUMMARY.md</code></p>
+<p><em><strong>chapter_title</strong></em> 当前章节的标题，如<code>SUMMARY.md</code>中所列</p>
 </li>
 <li>
-<p><em><strong>path</strong></em> Relative path to the original markdown file from the source
-directory</p>
+<p><em><strong>path</strong></em> 从源目录到原始 Markdown 文件的相对路径</p>
 </li>
 <li>
-<p><em><strong>content</strong></em> This is the rendered markdown.</p>
+<p><em><strong>content</strong></em> 这是渲染过的Markdown。</p>
 </li>
 <li>
-<p><em><strong>path_to_root</strong></em> This is a path containing exclusively <code>../</code>'s that points
-to the root of the book from the current file. Since the original directory
-structure is maintained, it is useful to prepend relative links with this
-<code>path_to_root</code>.</p>
+<p><em><strong>path_to_root</strong></em> 这是一个只包含 <code>../</code> 的路径，它指向根目录。 由于保留了原始目录结构，因此使用此 <code>path_to_root</code> 预先添加相关链接很有用。</p>
 </li>
 <li>
-<p><em><strong>chapters</strong></em> Is an array of dictionaries of the form</p>
+<p><em><strong>chapters</strong></em> 是一个形式为字典的数组</p>
 <pre><code class="language-json">{&quot;section&quot;: &quot;1.2.1&quot;, &quot;name&quot;: &quot;name of this chapter&quot;, &quot;path&quot;: &quot;dir/markdown.md&quot;}
 </code></pre>
-<p>containing all the chapters of the book. It is used for example to construct
-the table of contents (sidebar).</p>
+<p>包含本书的所有章节。 例如，它用于构建目录（侧边栏）。</p>
 </li>
 </ul>
 <h2 id="handlebars-helpers"><a class="header" href="#handlebars-helpers">Handlebars Helpers</a></h2>
-<p>In addition to the properties you can access, there are some handlebars helpers
-at your disposal.</p>
+<p>除了您可以访问的属性外，还有一些<a href="http://handlebarsjs.com/">handlebars</a> helpers可供您使用。</p>
 <h3 id="1-toc"><a class="header" href="#1-toc">1. toc</a></h3>
-<p>The toc helper is used like this</p>
+<p>toc helper 是这样使用的</p>
 <pre><code class="language-handlebars">{{#toc}}{{/toc}}
 </code></pre>
-<p>and outputs something that looks like this, depending on the structure of your
-book</p>
+<p>并输出看起来像这样的东西，这取决于你的书的结构</p>
 <pre><code class="language-html">&lt;ul class=&quot;chapter&quot;&gt;
     &lt;li&gt;&lt;a href=&quot;link/to/file.html&quot;&gt;Some chapter&lt;/a&gt;&lt;/li&gt;
     &lt;li&gt;
@@ -834,44 +808,35 @@ book</p>
     &lt;/li&gt;
 &lt;/ul&gt;
 </code></pre>
-<p>If you would like to make a toc with another structure, you have access to the
-chapters property containing all the data. The only limitation at the moment
-is that you would have to do it with JavaScript instead of with a handlebars
-helper.</p>
+<p>如果你想用另一种结构制作目录，你可以访问包含所有数据的章节属性。 目前唯一的限制是您必须使用 JavaScript 而不是使用<a href="http://handlebarsjs.com/">handlebars</a> helpers来完成。</p>
 <pre><code class="language-html">&lt;script&gt;
 var chapters = {{chapters}};
 // Processing here
 &lt;/script&gt;
 </code></pre>
 <h3 id="2-previous--next"><a class="header" href="#2-previous--next">2. previous / next</a></h3>
-<p>The previous and next helpers expose a <code>link</code> and <code>name</code> property to the
-previous and next chapters.</p>
-<p>They are used like this</p>
+<p><code>previous</code> 和 <code>next</code> 的helpers公开了指向前一章和下一章的<code>link</code>(链接)和<code>name</code>(名称)属性。</p>
+<p>它们是这样使用的</p>
 <pre><code class="language-handlebars">{{#previous}}
     &lt;a href=&quot;{{link}}&quot; class=&quot;nav-chapters previous&quot;&gt;
         &lt;i class=&quot;fa fa-angle-left&quot;&gt;&lt;/i&gt;
     &lt;/a&gt;
 {{/previous}}
 </code></pre>
-<p>The inner html will only be rendered if the previous / next chapter exists.
-Of course the inner html can be changed to your liking.</p>
+<p>仅在上一章/下一章存在时才会渲染 inner html。 当然，可以根据自己的喜好更改 inner html。</p>
 <hr />
-<p><em>If you would like other properties or helpers exposed, please <a href="https://github.com/rust-lang/mdBook/issues">create a new
-issue</a></em></p>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="syntax-highlighting"><a class="header" href="#syntax-highlighting">Syntax Highlighting</a></h1>
-<p>mdBook uses <a href="https://highlightjs.org">Highlight.js</a> with a custom theme
-for syntax highlighting.</p>
-<p>Automatic language detection has been turned off, so you will probably want to
-specify the programming language you use like this:</p>
+<p><em>如果您想公开其他属性或helpers，请<a href="https://github.com/rust-lang/mdBook/issues">创建一个新issue</a></em></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="语法高亮"><a class="header" href="#语法高亮">语法高亮</a></h1>
+<p>mdBook 使用具有自定义主题的 <a href="https://highlightjs.org">Highlight.js</a> 来突出显示语法。</p>
+<p>自动语言检测已关闭，因此您可能希望像这样指定您使用的编程语言：</p>
 <pre><code class="language-markdown">```rust
 fn main() {
     // Some code
 }
 ```
 </code></pre>
-<h2 id="supported-languages"><a class="header" href="#supported-languages">Supported languages</a></h2>
-<p>These languages are supported by default, but you can add more by supplying
-your own <code>highlight.js</code> file:</p>
+<h2 id="支持的语言"><a class="header" href="#支持的语言">支持的语言</a></h2>
+<p>默认情况下支持这些语言，但您可以通过提供自己的 <code>highlight.js</code> 文件来添加更多语言：</p>
 <ul>
 <li>apache</li>
 <li>armasm</li>
@@ -918,20 +883,15 @@ your own <code>highlight.js</code> file:</p>
 <li>yaml</li>
 </ul>
 <h2 id="custom-theme"><a class="header" href="#custom-theme">Custom theme</a></h2>
-<p>Like the rest of the theme, the files used for syntax highlighting can be
-overridden with your own.</p>
+<p>与主题的其余部分一样，用于语法突出显示的文件可以用您自己的文件覆盖。</p>
 <ul>
-<li><em><strong>highlight.js</strong></em> normally you shouldn't have to overwrite this file, unless
-you want to use a more recent version.</li>
-<li><em><strong>highlight.css</strong></em> theme used by highlight.js for syntax highlighting.</li>
+<li><em><strong>highlight.js</strong></em> 通常您不必覆盖此文件，除非您想使用更新的版本。</li>
+<li><em><strong>highlight.css</strong></em> highlight.js 用于语法高亮显示的主题。</li>
 </ul>
-<p>If you want to use another theme for <code>highlight.js</code> download it from their
-website, or make it yourself, rename it to <code>highlight.css</code> and put it in
-the <code>theme</code> folder of your book.</p>
-<p>Now your theme will be used instead of the default theme.</p>
-<h2 id="hiding-code-lines"><a class="header" href="#hiding-code-lines">Hiding code lines</a></h2>
-<p>There is a feature in mdBook that lets you hide code lines by prepending them
-with a <code>#</code>.</p>
+<p>如果你想为 <code>highlight.js</code> 使用另一个主题，请从他们的网站下载它，或者自己制作，将其重命名为 <code>highlight.css</code> 并将其放在你的书的 <code>theme</code> 文件夹中。</p>
+<p>现在将使用您的主题而不是默认主题。</p>
+<h2 id="隐藏代码行"><a class="header" href="#隐藏代码行">隐藏代码行</a></h2>
+<p>mdBook 中有一项功能可以让您通过在代码行前加上 <code>#</code> 来隐藏代码行。</p>
 <pre><code class="language-bash"># fn main() {
     let x = 5;
     let y = 6;
@@ -939,7 +899,7 @@ with a <code>#</code>.</p>
     println!(&quot;{}&quot;, x + y);
 # }
 </code></pre>
-<p>Will render as</p>
+<p>将渲染为</p>
 <pre><pre class="playground"><code class="language-rust edition2018"><span class="boring">fn main() {
 </span>    let x = 5;
     let y = 7;
@@ -947,49 +907,37 @@ with a <code>#</code>.</p>
     println!(&quot;{}&quot;, x + y);
 <span class="boring">}
 </span></code></pre></pre>
-<p><strong>At the moment, this only works for code examples that are annotated with
-<code>rust</code>. Because it would collide with semantics of some programming languages.
-In the future, we want to make this configurable through the <code>book.toml</code> so that
-everyone can benefit from it.</strong></p>
-<h2 id="improve-default-theme"><a class="header" href="#improve-default-theme">Improve default theme</a></h2>
-<p>If you think the default theme doesn't look quite right for a specific language,
-or could be improved, feel free to <a href="https://github.com/rust-lang/mdBook/issues">submit a new
-issue</a> explaining what you
-have in mind and I will take a look at it.</p>
-<p>You could also create a pull-request with the proposed improvements.</p>
-<p>Overall the theme should be light and sober, without too many flashy colors.</p>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="editor"><a class="header" href="#editor">Editor</a></h1>
-<p>In addition to providing runnable code playgrounds, mdBook optionally allows them
-to be editable. In order to enable editable code blocks, the following needs to
-be added to the <em><strong>book.toml</strong></em>:</p>
+<p><strong>目前，这只适用于使用 <code>rust</code> 注释的代码示例。 因为它会与某些编程语言的语义发生冲突。 将来，我们希望通过 <code>book.toml</code> 使其可配置，以便每个人都可以从中受益。</strong></p>
+<h2 id="改进默认主题"><a class="header" href="#改进默认主题">改进默认主题</a></h2>
+<p>如果您认为默认主题对于特定语言来说看起来不太合适，或者可以改进，请随时<a href="https://github.com/rust-lang/mdBook/issues">提交一个新issue</a>来解释您的想法，我会查看它。</p>
+<p>您还可以创建pull-request来建议需要改进的地方。</p>
+<p>总体而言，主题应该是轻松而清醒的，没有太多华丽的色彩。</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="编辑器"><a class="header" href="#编辑器">编辑器</a></h1>
+<p>除了提供可运行的代码环境外，<code>mdBook</code> 还允许它们可编辑。 为了启用可编辑的代码块，需要在 <code>book.toml</code> 中添加以下内容：</p>
 <pre><code class="language-toml">[output.html.playground]
 editable = true
 </code></pre>
-<p>To make a specific block available for editing, the attribute <code>editable</code> needs
-to be added to it:</p>
+<p>要使特定块可用于编辑，需要向其添加属性<code>editable</code>：</p>
 <pre><code class="language-markdown">```rust,editable
 fn main() {
     let number = 5;
     print!("{}", number);
 }
 ```</code></pre>
-<p>The above will result in this editable playground:</p>
+<p>以上将导致这个可编辑和运行的代码块：</p>
 <pre><pre class="playground"><code class="language-rust editable edition2018">fn main() {
     let number = 5;
     print!(&quot;{}&quot;, number);
 }
 </code></pre></pre>
-<p>Note the new <code>Undo Changes</code> button in the editable playgrounds.</p>
-<h2 id="customizing-the-editor"><a class="header" href="#customizing-the-editor">Customizing the Editor</a></h2>
-<p>By default, the editor is the <a href="https://ace.c9.io/">Ace</a> editor, but, if desired,
-the functionality may be overridden by providing a different folder:</p>
+<p>请注意代码块中的 <code>撤销更改</code> 按钮。</p>
+<h2 id="自定义编辑器"><a class="header" href="#自定义编辑器">自定义编辑器</a></h2>
+<p>默认情况下，编辑器是 <a href="https://ace.c9.io/">Ace</a> 编辑器，但如果需要，可以通过提供不同的文件夹来覆盖该功能：</p>
 <pre><code class="language-toml">[output.html.playground]
 editable = true
 editor = &quot;/path/to/editor&quot;
 </code></pre>
-<p>Note that for the editor changes to function correctly, the <code>book.js</code> inside of
-the <code>theme</code> folder will need to be overridden as it has some couplings with the
-default Ace editor.</p>
+<p>请注意，为了使编辑器更改正常运行，需要覆盖 <code>theme</code> 文件夹内的 <code>book.js</code>，因为它与默认的 Ace 编辑器有一些耦合。</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="mathjax-support"><a class="header" href="#mathjax-support">MathJax Support</a></h1>
 <p>mdBook has optional support for math equations through
 <a href="https://www.mathjax.org/">MathJax</a>.</p>
@@ -1022,7 +970,7 @@ equation</p>
 <pre><code class="language-bash">\\[ \mu = \frac{1}{N} \sum_{i=0} x_i \\]
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="mdbook-specific-features"><a class="header" href="#mdbook-specific-features">mdBook-specific features</a></h1>
-<h2 id="hiding-code-lines-1"><a class="header" href="#hiding-code-lines-1">Hiding code lines</a></h2>
+<h2 id="hiding-code-lines"><a class="header" href="#hiding-code-lines">Hiding code lines</a></h2>
 <p>There is a feature in mdBook that lets you hide code lines by prepending them
 with a <code>#</code> <a href="https://doc.rust-lang.org/stable/rustdoc/documentation-tests.html#hiding-portions-of-the-example">like you would with Rustdoc</a>.</p>
 <pre><code class="language-bash"># fn main() {
@@ -2738,7 +2686,7 @@ $ mdbook build
 <p>The latter case may be useful in situations where <code>mdbook</code> is invoked from a
 script or CI, where it sometimes isn't possible to update the <code>book.toml</code> before
 building.</p>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="theme-1"><a class="header" href="#theme-1">Theme</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="theme"><a class="header" href="#theme">Theme</a></h1>
 <p>The default renderer uses a <a href="http://handlebarsjs.com/">handlebars</a> template to
 render your markdown files and comes with a default theme included in the mdBook
 binary.</p>
@@ -2867,7 +2815,7 @@ Of course the inner html can be changed to your liking.</p>
 <hr />
 <p><em>If you would like other properties or helpers exposed, please <a href="https://github.com/rust-lang/mdBook/issues">create a new
 issue</a></em></p>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="syntax-highlighting-1"><a class="header" href="#syntax-highlighting-1">Syntax Highlighting</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="syntax-highlighting"><a class="header" href="#syntax-highlighting">Syntax Highlighting</a></h1>
 <p>mdBook uses <a href="https://highlightjs.org">Highlight.js</a> with a custom theme
 for syntax highlighting.</p>
 <p>Automatic language detection has been turned off, so you will probably want to
@@ -2878,7 +2826,7 @@ fn main() {
 }
 ```
 </code></pre>
-<h2 id="supported-languages-1"><a class="header" href="#supported-languages-1">Supported languages</a></h2>
+<h2 id="supported-languages"><a class="header" href="#supported-languages">Supported languages</a></h2>
 <p>These languages are supported by default, but you can add more by supplying
 your own <code>highlight.js</code> file:</p>
 <ul>
@@ -2938,7 +2886,7 @@ you want to use a more recent version.</li>
 website, or make it yourself, rename it to <code>highlight.css</code> and put it in
 the <code>theme</code> folder of your book.</p>
 <p>Now your theme will be used instead of the default theme.</p>
-<h2 id="hiding-code-lines-2"><a class="header" href="#hiding-code-lines-2">Hiding code lines</a></h2>
+<h2 id="hiding-code-lines-1"><a class="header" href="#hiding-code-lines-1">Hiding code lines</a></h2>
 <p>There is a feature in mdBook that lets you hide code lines by prepending them
 with a <code>#</code>.</p>
 <pre><code class="language-bash"># fn main() {
@@ -2960,14 +2908,14 @@ with a <code>#</code>.</p>
 <code>rust</code>. Because it would collide with semantics of some programming languages.
 In the future, we want to make this configurable through the <code>book.toml</code> so that
 everyone can benefit from it.</strong></p>
-<h2 id="improve-default-theme-1"><a class="header" href="#improve-default-theme-1">Improve default theme</a></h2>
+<h2 id="improve-default-theme"><a class="header" href="#improve-default-theme">Improve default theme</a></h2>
 <p>If you think the default theme doesn't look quite right for a specific language,
 or could be improved, feel free to <a href="https://github.com/rust-lang/mdBook/issues">submit a new
 issue</a> explaining what you
 have in mind and I will take a look at it.</p>
 <p>You could also create a pull-request with the proposed improvements.</p>
 <p>Overall the theme should be light and sober, without too many flashy colors.</p>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="editor-1"><a class="header" href="#editor-1">Editor</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="editor"><a class="header" href="#editor">Editor</a></h1>
 <p>In addition to providing runnable code playgrounds, mdBook optionally allows them
 to be editable. In order to enable editable code blocks, the following needs to
 be added to the <em><strong>book.toml</strong></em>:</p>
@@ -2989,7 +2937,7 @@ fn main() {
 }
 </code></pre></pre>
 <p>Note the new <code>Undo Changes</code> button in the editable playgrounds.</p>
-<h2 id="customizing-the-editor-1"><a class="header" href="#customizing-the-editor-1">Customizing the Editor</a></h2>
+<h2 id="customizing-the-editor"><a class="header" href="#customizing-the-editor">Customizing the Editor</a></h2>
 <p>By default, the editor is the <a href="https://ace.c9.io/">Ace</a> editor, but, if desired,
 the functionality may be overridden by providing a different folder:</p>
 <pre><code class="language-toml">[output.html.playground]
@@ -3031,7 +2979,7 @@ equation</p>
 <pre><code class="language-bash">\\[ \mu = \frac{1}{N} \sum_{i=0} x_i \\]
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="mdbook-specific-features-1"><a class="header" href="#mdbook-specific-features-1">mdBook-specific features</a></h1>
-<h2 id="hiding-code-lines-3"><a class="header" href="#hiding-code-lines-3">Hiding code lines</a></h2>
+<h2 id="hiding-code-lines-2"><a class="header" href="#hiding-code-lines-2">Hiding code lines</a></h2>
 <p>There is a feature in mdBook that lets you hide code lines by prepending them
 with a <code>#</code> <a href="https://doc.rust-lang.org/stable/rustdoc/documentation-tests.html#hiding-portions-of-the-example">like you would with Rustdoc</a>.</p>
 <pre><code class="language-bash"># fn main() {

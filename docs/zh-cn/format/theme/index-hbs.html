@@ -152,60 +152,49 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="indexhbs"><a class="header" href="#indexhbs">index.hbs</a></h1>
-<p><code>index.hbs</code> is the handlebars template that is used to render the book. The
-markdown files are processed to html and then injected in that template.</p>
-<p>If you want to change the layout or style of your book, chances are that you
-will have to modify this template a little bit. Here is what you need to know.</p>
+<p><code>index.hbs</code> 是用于渲染book的<a href="http://handlebarsjs.com/">handlebars</a>模板。 Markdown 文件被处理为 html，然后注入到该模板中。</p>
+<p>如果您想更改书籍的布局或样式，您可能需要稍微修改此模板。 本节是您需要了解的内容。</p>
 <h2 id="data"><a class="header" href="#data">Data</a></h2>
-<p>A lot of data is exposed to the handlebars template with the &quot;context&quot;. In the
-handlebars template you can access this information by using</p>
+<p>许多数据通过&quot;context&quot;(上下文)暴露给<a href="http://handlebarsjs.com/">handlebars</a>模板。 在<a href="http://handlebarsjs.com/">handlebars</a>模板中，您可以使用这些数据。</p>
 <pre><code class="language-handlebars">{{name_of_property}}
 </code></pre>
-<p>Here is a list of the properties that are exposed:</p>
+<p>以下是公开的属性列表：</p>
 <ul>
 <li>
-<p><em><strong>language</strong></em> Language of the book in the form <code>en</code>, as specified in <code>book.toml</code> (if not specified, defaults to <code>en</code>). To use in <code
-  class="language-html">&lt;html lang=&quot;{{ language }}&quot;&gt;</code> for example.</p>
+<p><em><strong>language</strong></em> 书的语言采用 <code>en</code> 形式，如 <code>book.toml</code> 中指定（如果未指定，默认为 <code>en</code>）。 例如在 <code class="language-html">&lt;html lang=&quot;{{ language }}&quot;&gt;</code> 中使用。</p>
 </li>
 <li>
-<p><em><strong>title</strong></em> Title used for the current page. This is identical to <code>{{ chapter_title }} - {{ book_title }}</code> unless <code>book_title</code> is not set in which case it just defaults to the <code>chapter_title</code>.</p>
+<p><em><strong>title</strong></em> 用于当前页面的标题。 这与 <code>{{chapter_title }} - {{ book_title }}</code> 相同，除非没有设置 <code>book_title</code>，在这种情况下它只是默认为 <code>chapter_title</code>。</p>
 </li>
 <li>
-<p><em><strong>book_title</strong></em> Title of the book, as specified in <code>book.toml</code></p>
+<p><em><strong>book_title</strong></em> 书名，在<code>book.toml</code>中指定</p>
 </li>
 <li>
-<p><em><strong>chapter_title</strong></em> Title of the current chapter, as listed in <code>SUMMARY.md</code></p>
+<p><em><strong>chapter_title</strong></em> 当前章节的标题，如<code>SUMMARY.md</code>中所列</p>
 </li>
 <li>
-<p><em><strong>path</strong></em> Relative path to the original markdown file from the source
-directory</p>
+<p><em><strong>path</strong></em> 从源目录到原始 Markdown 文件的相对路径</p>
 </li>
 <li>
-<p><em><strong>content</strong></em> This is the rendered markdown.</p>
+<p><em><strong>content</strong></em> 这是渲染过的Markdown。</p>
 </li>
 <li>
-<p><em><strong>path_to_root</strong></em> This is a path containing exclusively <code>../</code>'s that points
-to the root of the book from the current file. Since the original directory
-structure is maintained, it is useful to prepend relative links with this
-<code>path_to_root</code>.</p>
+<p><em><strong>path_to_root</strong></em> 这是一个只包含 <code>../</code> 的路径，它指向根目录。 由于保留了原始目录结构，因此使用此 <code>path_to_root</code> 预先添加相关链接很有用。</p>
 </li>
 <li>
-<p><em><strong>chapters</strong></em> Is an array of dictionaries of the form</p>
+<p><em><strong>chapters</strong></em> 是一个形式为字典的数组</p>
 <pre><code class="language-json">{&quot;section&quot;: &quot;1.2.1&quot;, &quot;name&quot;: &quot;name of this chapter&quot;, &quot;path&quot;: &quot;dir/markdown.md&quot;}
 </code></pre>
-<p>containing all the chapters of the book. It is used for example to construct
-the table of contents (sidebar).</p>
+<p>包含本书的所有章节。 例如，它用于构建目录（侧边栏）。</p>
 </li>
 </ul>
 <h2 id="handlebars-helpers"><a class="header" href="#handlebars-helpers">Handlebars Helpers</a></h2>
-<p>In addition to the properties you can access, there are some handlebars helpers
-at your disposal.</p>
+<p>除了您可以访问的属性外，还有一些<a href="http://handlebarsjs.com/">handlebars</a> helpers可供您使用。</p>
 <h3 id="1-toc"><a class="header" href="#1-toc">1. toc</a></h3>
-<p>The toc helper is used like this</p>
+<p>toc helper 是这样使用的</p>
 <pre><code class="language-handlebars">{{#toc}}{{/toc}}
 </code></pre>
-<p>and outputs something that looks like this, depending on the structure of your
-book</p>
+<p>并输出看起来像这样的东西，这取决于你的书的结构</p>
 <pre><code class="language-html">&lt;ul class=&quot;chapter&quot;&gt;
     &lt;li&gt;&lt;a href=&quot;link/to/file.html&quot;&gt;Some chapter&lt;/a&gt;&lt;/li&gt;
     &lt;li&gt;
@@ -215,30 +204,24 @@ book</p>
     &lt;/li&gt;
 &lt;/ul&gt;
 </code></pre>
-<p>If you would like to make a toc with another structure, you have access to the
-chapters property containing all the data. The only limitation at the moment
-is that you would have to do it with JavaScript instead of with a handlebars
-helper.</p>
+<p>如果你想用另一种结构制作目录，你可以访问包含所有数据的章节属性。 目前唯一的限制是您必须使用 JavaScript 而不是使用<a href="http://handlebarsjs.com/">handlebars</a> helpers来完成。</p>
 <pre><code class="language-html">&lt;script&gt;
 var chapters = {{chapters}};
 // Processing here
 &lt;/script&gt;
 </code></pre>
 <h3 id="2-previous--next"><a class="header" href="#2-previous--next">2. previous / next</a></h3>
-<p>The previous and next helpers expose a <code>link</code> and <code>name</code> property to the
-previous and next chapters.</p>
-<p>They are used like this</p>
+<p><code>previous</code> 和 <code>next</code> 的helpers公开了指向前一章和下一章的<code>link</code>(链接)和<code>name</code>(名称)属性。</p>
+<p>它们是这样使用的</p>
 <pre><code class="language-handlebars">{{#previous}}
     &lt;a href=&quot;{{link}}&quot; class=&quot;nav-chapters previous&quot;&gt;
         &lt;i class=&quot;fa fa-angle-left&quot;&gt;&lt;/i&gt;
     &lt;/a&gt;
 {{/previous}}
 </code></pre>
-<p>The inner html will only be rendered if the previous / next chapter exists.
-Of course the inner html can be changed to your liking.</p>
+<p>仅在上一章/下一章存在时才会渲染 inner html。 当然，可以根据自己的喜好更改 inner html。</p>
 <hr />
-<p><em>If you would like other properties or helpers exposed, please <a href="https://github.com/rust-lang/mdBook/issues">create a new
-issue</a></em></p>
+<p><em>如果您想公开其他属性或helpers，请<a href="https://github.com/rust-lang/mdBook/issues">创建一个新issue</a></em></p>
 
                     </main>
 

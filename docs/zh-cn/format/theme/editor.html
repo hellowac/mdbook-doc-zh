@@ -151,38 +151,32 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="editor"><a class="header" href="#editor">Editor</a></h1>
-<p>In addition to providing runnable code playgrounds, mdBook optionally allows them
-to be editable. In order to enable editable code blocks, the following needs to
-be added to the <em><strong>book.toml</strong></em>:</p>
+                        <h1 id="编辑器"><a class="header" href="#编辑器">编辑器</a></h1>
+<p>除了提供可运行的代码环境外，<code>mdBook</code> 还允许它们可编辑。 为了启用可编辑的代码块，需要在 <code>book.toml</code> 中添加以下内容：</p>
 <pre><code class="language-toml">[output.html.playground]
 editable = true
 </code></pre>
-<p>To make a specific block available for editing, the attribute <code>editable</code> needs
-to be added to it:</p>
+<p>要使特定块可用于编辑，需要向其添加属性<code>editable</code>：</p>
 <pre><code class="language-markdown">```rust,editable
 fn main() {
     let number = 5;
     print!("{}", number);
 }
 ```</code></pre>
-<p>The above will result in this editable playground:</p>
+<p>以上将导致这个可编辑和运行的代码块：</p>
 <pre><pre class="playground"><code class="language-rust editable edition2018">fn main() {
     let number = 5;
     print!(&quot;{}&quot;, number);
 }
 </code></pre></pre>
-<p>Note the new <code>Undo Changes</code> button in the editable playgrounds.</p>
-<h2 id="customizing-the-editor"><a class="header" href="#customizing-the-editor">Customizing the Editor</a></h2>
-<p>By default, the editor is the <a href="https://ace.c9.io/">Ace</a> editor, but, if desired,
-the functionality may be overridden by providing a different folder:</p>
+<p>请注意代码块中的 <code>撤销更改</code> 按钮。</p>
+<h2 id="自定义编辑器"><a class="header" href="#自定义编辑器">自定义编辑器</a></h2>
+<p>默认情况下，编辑器是 <a href="https://ace.c9.io/">Ace</a> 编辑器，但如果需要，可以通过提供不同的文件夹来覆盖该功能：</p>
 <pre><code class="language-toml">[output.html.playground]
 editable = true
 editor = &quot;/path/to/editor&quot;
 </code></pre>
-<p>Note that for the editor changes to function correctly, the <code>book.js</code> inside of
-the <code>theme</code> folder will need to be overridden as it has some couplings with the
-default Ace editor.</p>
+<p>请注意，为了使编辑器更改正常运行，需要覆盖 <code>theme</code> 文件夹内的 <code>book.js</code>，因为它与默认的 Ace 编辑器有一些耦合。</p>
 
                     </main>
 
