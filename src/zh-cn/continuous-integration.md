@@ -1,14 +1,11 @@
-# Running `mdbook` in Continuous Integration
+# 在持续集成中运行 `mdbook`
 
-While the following examples use Travis CI, their principles should
-straightforwardly transfer to other continuous integration providers as well.
+虽然以下示例使用 Travis CI，但它们的原则也应该直接转移到其他持续集成提供者。
 
-## Ensuring Your Book Builds and Tests Pass
+## 确保您的图书 build 和 test 通过
 
-Here is a sample Travis CI `.travis.yml` configuration that ensures `mdbook
-build` and `mdbook test` run successfully. The key to fast CI turnaround times
-is caching `mdbook` installs, so that you aren't compiling `mdbook` on every CI
-run.
+这是一个示例 Travis CI `.travis.yml` 配置，可确保 `mdbook build` 和 `mdbook test` 成功运行。
+快速 CI 运转时间的关键是缓存 `mdbook` 安装，这样您就不会在每次 CI 运行时编译 `mdbook`。
 
 ```yaml
 language: rust
@@ -29,21 +26,15 @@ script:
   - mdbook build && mdbook test # In case of custom book path: mdbook build path/to/mybook && mdbook test path/to/mybook
 ```
 
-## Deploying Your Book to GitHub Pages
+## 将您的书部署到 GitHub Pages
 
-Following these instructions will result in your book being published to GitHub
-pages after a successful CI run on your repository's `master` branch.
+遵循这些说明将导致在您仓库的`master`分支上成功运行 CI 后，您的书将被发布到 GitHub pages。
 
-First, create a new GitHub "Personal Access Token" with the "public_repo"
-permissions (or "repo" for private repositories). Go to your repository's Travis
-CI settings page and add an environment variable named `GITHUB_TOKEN` that is
-marked secure and *not* shown in the logs.
+首先，使用“public_repo”权限（或“repo”用于私有仓库）创建一个新的 GitHub “Personal Access Token”(个人访问令牌)。 转到仓库的 Travis CI 设置页面并添加名为 `GITHUB_TOKEN` 的环境变量，该变量标记为安全且未显示在日志中。
 
-Whilst still in your repository's settings page, navigate to Options and change the 
-Source on GitHub pages to `gh-pages`.
+在您仓库的设置页面中，导航到 Options 并将 GitHub Pages 上的 Source 更改为 `gh-pages`。
 
-Then, append this snippet to your `.travis.yml` and update the path to the
-`book` directory:
+然后，将此代码段附加到您的 `.travis.yml` 并更新 `book` 目录的路径：
 
 ```yaml
 deploy:
@@ -56,9 +47,11 @@ deploy:
     branch: main
 ```
 
-That's it!
+仅此而已!
 
-Note: Travis has a new [dplv2](https://blog.travis-ci.com/2019-08-27-deployment-tooling-dpl-v2-preview-release) configuration that is currently in beta. To use this new format, update your `.travis.yml` file to:
+注意: Travis 有一个新的 [dplv2] 配置，目前处于测试阶段。 要使用这种新格式，请将 `.travis.yml` 文件更新为：
+
+[dplv2]: https://blog.travis-ci.com/2019-08-27-deployment-tooling-dpl-v2-preview-release
 
 ```yaml
 language: rust
@@ -92,11 +85,11 @@ deploy:
   target_branch: gh-pages
 ```
 
-### Deploying to GitHub Pages manually
+### 手动部署到 GitHub Pages
 
-If your CI doesn't support GitHub pages, or you're deploying somewhere else
-with integrations such as Github Pages:
- *note: you may want to use different tmp dirs*:
+如果您的 CI 不支持 GitHub Pages，或者您正在使用 Github Pages 等集成部署到其他地方：
+
+*注意: 您可能想要使用不同的 tmp 目录*:
 
 ```console
 $> git worktree add /tmp/book gh-pages
@@ -110,23 +103,25 @@ $> git push origin gh-pages
 $> cd -
 ```
 
-Or put this into a Makefile rule:
+或者将其放入 Makefile 规则中：
 
 ```makefile
 .PHONY: deploy
 deploy: book
-	@echo "====> deploying to github"
-	git worktree add /tmp/book gh-pages
-	rm -rf /tmp/book/*
-	cp -rp book/* /tmp/book/
-	cd /tmp/book && \
-		git add -A && \
-		git commit -m "deployed on $(shell date) by ${USER}" && \
-		git push origin gh-pages
+ @echo "====> deploying to github"
+ git worktree add /tmp/book gh-pages
+ rm -rf /tmp/book/*
+ cp -rp book/* /tmp/book/
+ cd /tmp/book && \
+  git add -A && \
+  git commit -m "deployed on $(shell date) by ${USER}" && \
+  git push origin gh-pages
 ```
 
-## Deploying Your Book to GitLab Pages
-Inside your repository's project root, create a file named `.gitlab-ci.yml` with the following contents:
+## 部署你的书到 GitLab Pages
+
+在仓库的项目根目录中，创建一个名为 `.gitlab-ci.yml` 的文件，其中包含以下内容：
+
 ```yml
 stages:
     - deploy
@@ -151,4 +146,4 @@ pages:
       - $CARGO_HOME/bin
 ```
 
-After you commit and push this new file, GitLab CI will run and your book will be available!
+在您提交并推送这个新文件后，GitLab CI 将自动运行并且您的书将可用！

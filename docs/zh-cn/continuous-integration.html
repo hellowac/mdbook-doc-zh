@@ -151,13 +151,11 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="running-mdbook-in-continuous-integration"><a class="header" href="#running-mdbook-in-continuous-integration">Running <code>mdbook</code> in Continuous Integration</a></h1>
-<p>While the following examples use Travis CI, their principles should
-straightforwardly transfer to other continuous integration providers as well.</p>
-<h2 id="ensuring-your-book-builds-and-tests-pass"><a class="header" href="#ensuring-your-book-builds-and-tests-pass">Ensuring Your Book Builds and Tests Pass</a></h2>
-<p>Here is a sample Travis CI <code>.travis.yml</code> configuration that ensures <code>mdbook build</code> and <code>mdbook test</code> run successfully. The key to fast CI turnaround times
-is caching <code>mdbook</code> installs, so that you aren't compiling <code>mdbook</code> on every CI
-run.</p>
+                        <h1 id="在持续集成中运行-mdbook"><a class="header" href="#在持续集成中运行-mdbook">在持续集成中运行 <code>mdbook</code></a></h1>
+<p>虽然以下示例使用 Travis CI，但它们的原则也应该直接转移到其他持续集成提供者。</p>
+<h2 id="确保您的图书-build-和-test-通过"><a class="header" href="#确保您的图书-build-和-test-通过">确保您的图书 build 和 test 通过</a></h2>
+<p>这是一个示例 Travis CI <code>.travis.yml</code> 配置，可确保 <code>mdbook build</code> 和 <code>mdbook test</code> 成功运行。
+快速 CI 运转时间的关键是缓存 <code>mdbook</code> 安装，这样您就不会在每次 CI 运行时编译 <code>mdbook</code>。</p>
 <pre><code class="language-yaml">language: rust
 sudo: false
 
@@ -175,17 +173,11 @@ before_script:
 script:
   - mdbook build &amp;&amp; mdbook test # In case of custom book path: mdbook build path/to/mybook &amp;&amp; mdbook test path/to/mybook
 </code></pre>
-<h2 id="deploying-your-book-to-github-pages"><a class="header" href="#deploying-your-book-to-github-pages">Deploying Your Book to GitHub Pages</a></h2>
-<p>Following these instructions will result in your book being published to GitHub
-pages after a successful CI run on your repository's <code>master</code> branch.</p>
-<p>First, create a new GitHub &quot;Personal Access Token&quot; with the &quot;public_repo&quot;
-permissions (or &quot;repo&quot; for private repositories). Go to your repository's Travis
-CI settings page and add an environment variable named <code>GITHUB_TOKEN</code> that is
-marked secure and <em>not</em> shown in the logs.</p>
-<p>Whilst still in your repository's settings page, navigate to Options and change the 
-Source on GitHub pages to <code>gh-pages</code>.</p>
-<p>Then, append this snippet to your <code>.travis.yml</code> and update the path to the
-<code>book</code> directory:</p>
+<h2 id="将您的书部署到-github-pages"><a class="header" href="#将您的书部署到-github-pages">将您的书部署到 GitHub Pages</a></h2>
+<p>遵循这些说明将导致在您仓库的<code>master</code>分支上成功运行 CI 后，您的书将被发布到 GitHub pages。</p>
+<p>首先，使用“public_repo”权限（或“repo”用于私有仓库）创建一个新的 GitHub “Personal Access Token”(个人访问令牌)。 转到仓库的 Travis CI 设置页面并添加名为 <code>GITHUB_TOKEN</code> 的环境变量，该变量标记为安全且未显示在日志中。</p>
+<p>在您仓库的设置页面中，导航到 Options 并将 GitHub Pages 上的 Source 更改为 <code>gh-pages</code>。</p>
+<p>然后，将此代码段附加到您的 <code>.travis.yml</code> 并更新 <code>book</code> 目录的路径：</p>
 <pre><code class="language-yaml">deploy:
   provider: pages
   skip-cleanup: true
@@ -195,8 +187,8 @@ Source on GitHub pages to <code>gh-pages</code>.</p>
   on:
     branch: main
 </code></pre>
-<p>That's it!</p>
-<p>Note: Travis has a new <a href="https://blog.travis-ci.com/2019-08-27-deployment-tooling-dpl-v2-preview-release">dplv2</a> configuration that is currently in beta. To use this new format, update your <code>.travis.yml</code> file to:</p>
+<p>仅此而已!</p>
+<p>注意: Travis 有一个新的 <a href="https://blog.travis-ci.com/2019-08-27-deployment-tooling-dpl-v2-preview-release">dplv2</a> 配置，目前处于测试阶段。 要使用这种新格式，请将 <code>.travis.yml</code> 文件更新为：</p>
 <pre><code class="language-yaml">language: rust
 os: linux
 dist: xenial
@@ -227,10 +219,9 @@ deploy:
     branch: main
   target_branch: gh-pages
 </code></pre>
-<h3 id="deploying-to-github-pages-manually"><a class="header" href="#deploying-to-github-pages-manually">Deploying to GitHub Pages manually</a></h3>
-<p>If your CI doesn't support GitHub pages, or you're deploying somewhere else
-with integrations such as Github Pages:
-<em>note: you may want to use different tmp dirs</em>:</p>
+<h3 id="手动部署到-github-pages"><a class="header" href="#手动部署到-github-pages">手动部署到 GitHub Pages</a></h3>
+<p>如果您的 CI 不支持 GitHub Pages，或者您正在使用 Github Pages 等集成部署到其他地方：</p>
+<p><em>注意: 您可能想要使用不同的 tmp 目录</em>:</p>
 <pre><code class="language-console">$&gt; git worktree add /tmp/book gh-pages
 $&gt; mdbook build
 $&gt; rm -rf /tmp/book/* # this won't delete the .git directory
@@ -241,20 +232,20 @@ $&gt; git commit 'new book message'
 $&gt; git push origin gh-pages
 $&gt; cd -
 </code></pre>
-<p>Or put this into a Makefile rule:</p>
+<p>或者将其放入 Makefile 规则中：</p>
 <pre><code class="language-makefile">.PHONY: deploy
 deploy: book
-	@echo &quot;====&gt; deploying to github&quot;
-	git worktree add /tmp/book gh-pages
-	rm -rf /tmp/book/*
-	cp -rp book/* /tmp/book/
-	cd /tmp/book &amp;&amp; \
-		git add -A &amp;&amp; \
-		git commit -m &quot;deployed on $(shell date) by ${USER}&quot; &amp;&amp; \
-		git push origin gh-pages
+ @echo &quot;====&gt; deploying to github&quot;
+ git worktree add /tmp/book gh-pages
+ rm -rf /tmp/book/*
+ cp -rp book/* /tmp/book/
+ cd /tmp/book &amp;&amp; \
+  git add -A &amp;&amp; \
+  git commit -m &quot;deployed on $(shell date) by ${USER}&quot; &amp;&amp; \
+  git push origin gh-pages
 </code></pre>
-<h2 id="deploying-your-book-to-gitlab-pages"><a class="header" href="#deploying-your-book-to-gitlab-pages">Deploying Your Book to GitLab Pages</a></h2>
-<p>Inside your repository's project root, create a file named <code>.gitlab-ci.yml</code> with the following contents:</p>
+<h2 id="部署你的书到-gitlab-pages"><a class="header" href="#部署你的书到-gitlab-pages">部署你的书到 GitLab Pages</a></h2>
+<p>在仓库的项目根目录中，创建一个名为 <code>.gitlab-ci.yml</code> 的文件，其中包含以下内容：</p>
 <pre><code class="language-yml">stages:
     - deploy
 
@@ -277,7 +268,7 @@ pages:
     paths:
       - $CARGO_HOME/bin
 </code></pre>
-<p>After you commit and push this new file, GitLab CI will run and your book will be available!</p>
+<p>在您提交并推送这个新文件后，GitLab CI 将自动运行并且您的书将可用！</p>
 
                     </main>
 
