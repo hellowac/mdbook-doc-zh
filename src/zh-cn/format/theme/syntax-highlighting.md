@@ -1,10 +1,10 @@
-# Syntax Highlighting
+# 语法高亮
 
-mdBook uses [Highlight.js](https://highlightjs.org) with a custom theme
-for syntax highlighting.
+mdBook 使用具有自定义主题的 [Highlight.js] 来突出显示语法。
 
-Automatic language detection has been turned off, so you will probably want to
-specify the programming language you use like this:
+[Highlight.js]: https://highlightjs.org
+
+自动语言检测已关闭，因此您可能希望像这样指定您使用的编程语言：
 
 ~~~markdown
 ```rust
@@ -14,10 +14,9 @@ fn main() {
 ```
 ~~~
 
-## Supported languages
+## 支持的语言
 
-These languages are supported by default, but you can add more by supplying
-your own `highlight.js` file:
+默认情况下支持这些语言，但您可以通过提供自己的 `highlight.js` 文件来添加更多语言：
 
 - apache
 - armasm
@@ -64,24 +63,19 @@ your own `highlight.js` file:
 - yaml
 
 ## Custom theme
-Like the rest of the theme, the files used for syntax highlighting can be
-overridden with your own.
 
-- ***highlight.js*** normally you shouldn't have to overwrite this file, unless
-  you want to use a more recent version.
-- ***highlight.css*** theme used by highlight.js for syntax highlighting.
+与主题的其余部分一样，用于语法突出显示的文件可以用您自己的文件覆盖。
 
-If you want to use another theme for `highlight.js` download it from their
-website, or make it yourself, rename it to `highlight.css` and put it in
-the `theme` folder of your book.
+- ***highlight.js*** 通常您不必覆盖此文件，除非您想使用更新的版本。
+- ***highlight.css*** highlight.js 用于语法高亮显示的主题。
 
-Now your theme will be used instead of the default theme.
+如果你想为 `highlight.js` 使用另一个主题，请从他们的网站下载它，或者自己制作，将其重命名为 `highlight.css` 并将其放在你的书的 `theme` 文件夹中。
 
-## Hiding code lines
+现在将使用您的主题而不是默认主题。
 
-There is a feature in mdBook that lets you hide code lines by prepending them
-with a `#`.
+## 隐藏代码行
 
+mdBook 中有一项功能可以让您通过在代码行前加上 `#` 来隐藏代码行。
 
 ```bash
 # fn main() {
@@ -92,7 +86,7 @@ with a `#`.
 # }
 ```
 
-Will render as
+将渲染为
 
 ```rust
 # fn main() {
@@ -103,19 +97,12 @@ Will render as
 # }
 ```
 
-**At the moment, this only works for code examples that are annotated with
-`rust`. Because it would collide with semantics of some programming languages.
-In the future, we want to make this configurable through the `book.toml` so that
-everyone can benefit from it.**
+**目前，这只适用于使用 `rust` 注释的代码示例。 因为它会与某些编程语言的语义发生冲突。 将来，我们希望通过 `book.toml` 使其可配置，以便每个人都可以从中受益。**
 
+## 改进默认主题
 
-## Improve default theme
+如果您认为默认主题对于特定语言来说看起来不太合适，或者可以改进，请随时[提交一个新issue](https://github.com/rust-lang/mdBook/issues)来解释您的想法，我会查看它。
 
-If you think the default theme doesn't look quite right for a specific language,
-or could be improved, feel free to [submit a new
-issue](https://github.com/rust-lang/mdBook/issues) explaining what you
-have in mind and I will take a look at it.
+您还可以创建pull-request来建议需要改进的地方。
 
-You could also create a pull-request with the proposed improvements.
-
-Overall the theme should be light and sober, without too many flashy colors.
+总体而言，主题应该是轻松而清醒的，没有太多华丽的色彩。

@@ -1,46 +1,33 @@
-# Theme
+# 主题
 
-The default renderer uses a [handlebars](http://handlebarsjs.com/) template to
-render your markdown files and comes with a default theme included in the mdBook
-binary.
+默认渲染器使用一个[handlebars]模板来渲染你的markdown文件，并带有一个包含在 mdBook 二进制文件中的默认主题。
 
-The theme is totally customizable, you can selectively replace every file from
-the theme by your own by adding a `theme` directory next to `src` folder in your
-project root. Create a new file with the name of the file you want to override
-and now that file will be used instead of the default file.
+[handlebars]: http://handlebarsjs.com/
 
-Here are the files you can override:
+主题是完全可定制的，您可以通过在项目根目录的 `src` 文件夹旁边添加一个`theme`目录，有选择地替换主题中的每个文件。 使用要覆盖的文件的名称创建一个新文件，现在将使用该文件而不是默认文件。
 
-- **_index.hbs_** is the handlebars template.
-- **_head.hbs_** is appended to the HTML `<head>` section.
-- **_header.hbs_** content is appended on top of every book page.
-- **_css/_** contains the CSS files for styling the book.
-    - **_css/chrome.css_** is for UI elements.
-    - **_css/general.css_** is the base styles.
-    - **_css/print.css_** is the style for printer output.
-    - **_css/variables.css_** contains variables used in other CSS files.
-- **_book.js_** is mostly used to add client side functionality, like hiding /
-  un-hiding the sidebar, changing the theme, ...
-- **_highlight.js_** is the JavaScript that is used to highlight code snippets,
-  you should not need to modify this.
-- **_highlight.css_** is the theme used for the code highlighting.
-- **_favicon.svg_** and **_favicon.png_** the favicon that will be used. The SVG
-  version is used by [newer browsers].
+以下是您可以覆盖的文件：
 
-Generally, when you want to tweak the theme, you don't need to override all the
-files. If you only need changes in the stylesheet, there is no point in
-overriding all the other files. Because custom files take precedence over
-built-in ones, they will not get updated with new fixes / features.
+- **_index.hbs_** [handlebars] 模板.
+- **_head.hbs_** 附加到 HTML `<head>` 部分。
+- **_header.hbs_** 内容附加在每个书页的顶部。
+- **_css/_** 包含用于设计样式的 CSS 文件。
+  - **_css/chrome.css_** 用于 UI 元素。
+  - **_css/general.css_** 是基本样式。
+  - **_css/print.css_** 是打印机输出的样式。
+  - **_css/variables.css_** 包含在其他 CSS 文件中使用的变量。
+- **_book.js_** 主要用于添加客户端功能，例如隐藏/取消隐藏侧边栏，更改主题，...
+- **_highlight.js_** 是用于突出显示代码片段的 JavaScript，您不需要修改它。
+- **_highlight.css_** 是用于代码突出显示的主题。
+- **_favicon.svg_** 和 **_favicon.png_** 使用的图标。 SVG 版本由[较新的浏览器][newer browsers]使用。
 
-**Note:** When you override a file, it is possible that you break some
-functionality. Therefore I recommend to use the file from the default theme as
-template and only add / modify what you need. You can copy the default theme
-into your source directory automatically by using `mdbook init --theme` and just
-remove the files you don't want to override.
+通常，当您想要调整主题时，您不需要覆盖所有文件。
+如果您只需要更改样式表，则覆盖所有其他文件没有意义。
+因为自定义文件优先于内置文件，所以它们不会随着新的修复程序/功能而更新。
 
-If you completely replace all built-in themes, be sure to also set
-[`output.html.preferred-dark-theme`] in the config, which defaults to the
-built-in `navy` theme.
+**注意:** 覆盖文件时，可能会破坏某些功能。 因此，我建议使用默认主题中的文件作为模板，并且只添加/修改您需要的内容。 您可以使用 `mdbook init --theme` 自动将默认主题复制到源目录中，然后删除不想覆盖的文件。
+
+如果完全替换所有内置主题，请务必在配置中设置 [`output.html.preferred-dark-theme`]，默认为内置`navy`主题。
 
 [`output.html.preferred-dark-theme`]: ../configuration/renderers.md#html-renderer-options
 [newer browsers]: https://caniuse.com/#feat=link-icon-svg

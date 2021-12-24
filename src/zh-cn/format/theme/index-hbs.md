@@ -1,58 +1,51 @@
 # index.hbs
 
-`index.hbs` is the handlebars template that is used to render the book. The
-markdown files are processed to html and then injected in that template.
+`index.hbs` 是用于渲染book的[handlebars]模板。 Markdown 文件被处理为 html，然后注入到该模板中。
 
-If you want to change the layout or style of your book, chances are that you
-will have to modify this template a little bit. Here is what you need to know.
+[handlebars]: http://handlebarsjs.com/
+
+如果您想更改书籍的布局或样式，您可能需要稍微修改此模板。 本节是您需要了解的内容。
 
 ## Data
 
-A lot of data is exposed to the handlebars template with the "context". In the
-handlebars template you can access this information by using
+许多数据通过"context"(上下文)暴露给[handlebars]模板。 在[handlebars]模板中，您可以使用这些数据。
 
 ```handlebars
 {{name_of_property}}
 ```
 
-Here is a list of the properties that are exposed:
+以下是公开的属性列表：
 
-- ***language*** Language of the book in the form `en`, as specified in `book.toml` (if not specified, defaults to `en`). To use in <code
-  class="language-html">\<html lang="{{ language }}"></code> for example.
-- ***title*** Title used for the current page. This is identical to `{{ chapter_title }} - {{ book_title }}` unless `book_title` is not set in which case it just defaults to the `chapter_title`.
-- ***book_title*** Title of the book, as specified in `book.toml`
-- ***chapter_title*** Title of the current chapter, as listed in `SUMMARY.md`
+- ***language*** 书的语言采用 `en` 形式，如 `book.toml` 中指定（如果未指定，默认为 `en`）。 例如在 <code class="language-html">\<html lang="{{ language }}"></code> 中使用。
+- ***title*** 用于当前页面的标题。 这与 `{{chapter_title }} - {{ book_title }}` 相同，除非没有设置 `book_title`，在这种情况下它只是默认为 `chapter_title`。
+- ***book_title*** 书名，在`book.toml`中指定
+- ***chapter_title*** 当前章节的标题，如`SUMMARY.md`中所列
 
-- ***path*** Relative path to the original markdown file from the source
-  directory
-- ***content*** This is the rendered markdown.
-- ***path_to_root*** This is a path containing exclusively `../`'s that points
-  to the root of the book from the current file. Since the original directory
-  structure is maintained, it is useful to prepend relative links with this
-  `path_to_root`.
+- ***path*** 从源目录到原始 Markdown 文件的相对路径
+- ***content*** 这是渲染过的Markdown。
+- ***path_to_root*** 这是一个只包含 `../` 的路径，它指向根目录。 由于保留了原始目录结构，因此使用此 `path_to_root` 预先添加相关链接很有用。
 
-- ***chapters*** Is an array of dictionaries of the form
+- ***chapters*** 是一个形式为字典的数组
+
   ```json
   {"section": "1.2.1", "name": "name of this chapter", "path": "dir/markdown.md"}
   ```
-  containing all the chapters of the book. It is used for example to construct
-  the table of contents (sidebar).
+
+  包含本书的所有章节。 例如，它用于构建目录（侧边栏）。
 
 ## Handlebars Helpers
 
-In addition to the properties you can access, there are some handlebars helpers
-at your disposal.
+除了您可以访问的属性外，还有一些[handlebars] helpers可供您使用。
 
 ### 1. toc
 
-The toc helper is used like this
+toc helper 是这样使用的
 
 ```handlebars
 {{#toc}}{{/toc}}
 ```
 
-and outputs something that looks like this, depending on the structure of your
-book
+并输出看起来像这样的东西，这取决于你的书的结构
 
 ```html
 <ul class="chapter">
@@ -65,10 +58,7 @@ book
 </ul>
 ```
 
-If you would like to make a toc with another structure, you have access to the
-chapters property containing all the data. The only limitation at the moment
-is that you would have to do it with JavaScript instead of with a handlebars
-helper.
+如果你想用另一种结构制作目录，你可以访问包含所有数据的章节属性。 目前唯一的限制是您必须使用 JavaScript 而不是使用[handlebars] helpers来完成。
 
 ```html
 <script>
@@ -79,10 +69,9 @@ var chapters = {{chapters}};
 
 ### 2. previous / next
 
-The previous and next helpers expose a `link` and `name` property to the
-previous and next chapters.
+`previous` 和 `next` 的helpers公开了指向前一章和下一章的`link`(链接)和`name`(名称)属性。
 
-They are used like this
+它们是这样使用的
 
 ```handlebars
 {{#previous}}
@@ -92,10 +81,8 @@ They are used like this
 {{/previous}}
 ```
 
-The inner html will only be rendered if the previous / next chapter exists.
-Of course the inner html can be changed to your liking.
+仅在上一章/下一章存在时才会渲染 inner html。 当然，可以根据自己的喜好更改 inner html。
 
 ------
 
-*If you would like other properties or helpers exposed, please [create a new
-issue](https://github.com/rust-lang/mdBook/issues)*
+*如果您想公开其他属性或helpers，请[创建一个新issue](https://github.com/rust-lang/mdBook/issues)*
