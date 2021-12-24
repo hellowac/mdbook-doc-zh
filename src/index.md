@@ -1,6 +1,6 @@
 # 说明
 
-此项目为 mdbook 文档中文翻译
+此项目为 mdbook 文档中文翻译, 自 2021-12-24 23:08:14， mdbook版本：`v0.4.14`
 
 * 原文档地址: <https://rust-lang.github.io/mdBook/>
 * 项目地址: <https://github.com/rust-lang/mdBook>
